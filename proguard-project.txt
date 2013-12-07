@@ -11,6 +11,7 @@
 -keep class com.baidu.**{*;}
 -keep class vi.com.gdi.bgl.**{*;}
 -keep class com.handmark.pulltorefresh.**{*;}
+-keep class com.xynxs.main.bean.**{*;}
 
 
 -keepattributes *Annotation*

@@ -9,6 +9,8 @@ import com.baidu.sharesdk.SocialShareLogger;
 import com.baidu.sharesdk.Utility;
 import com.google.gson.Gson;
 import com.xynxs.main.bean.User;
+import com.xynxs.main.util.Const;
+import com.xynxs.main.util.DBHelper;
 import com.xynxs.main.util.SocialShareConfig;
 import com.xynxs.main.util.ToastUtil;
 
@@ -17,6 +19,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -40,8 +43,14 @@ public class BaseActivity extends Activity {
 			intent.addCategory(Intent.CATEGORY_HOME);
 			startActivity(intent);
 			finish();
-			System.exit(0);// 使虚拟机停止运行并退出程序
-
+			
+			new Handler().postDelayed(new Runnable() {
+				
+				@Override
+				public void run() {
+					System.exit(0);// 使虚拟机停止运行并退出程序
+				}
+			}, 1500);
 		} else {
 			isExit = true;
 			toast("再按一次退出");
@@ -172,7 +181,6 @@ public class BaseActivity extends Activity {
 	 * 以下是关于数据的读取也保存
 	 */
 	private static final String DATA_ROOT_KEY = "DATA_ROOT";
-	public static final String USER_KEY = "USER_INFO_KEY";
 
 	public void cleanAllData() {
 		// 清除所有数据
@@ -190,11 +198,17 @@ public class BaseActivity extends Activity {
 	}
 
 	public boolean saveDataString(String key, String val) {
-		return getPreference().edit().putString(key, val).commit();
+		DBHelper db = getDbhelper();
+		if(val==null){
+			val="";
+		}
+		db.updateKeyVal(key, val);
+		return true;
 	}
 
 	public String getDataString(String key) {
-		return getPreference().getString(key, "");
+		DBHelper db = getDbhelper();
+		return db.getVal(key);
 	}
 
 	public boolean saveDataInt(String key, int val) {
@@ -213,28 +227,32 @@ public class BaseActivity extends Activity {
 		return getPreference().getLong(key, -1L);
 	}
 
-	public boolean saveDataBoolean(String key, boolean val) {
-		return getPreference().edit().putBoolean(key, val).commit();
-	}
-
-	public boolean getDataBoolean(String key) {
-		return getPreference().getBoolean(key, false);
-	}
-
 	public User getUser() {
-		String val = getDataString(USER_KEY);
+		DBHelper helper = getDbhelper();
+		String val = helper.getVal(Const.LOGIN_USER_INFO);
 		return (User) convert(val, User.class);
 	}
 
 	public void saveUser(String userStr) {
-		saveDataString(USER_KEY, userStr);
+		DBHelper helper = getDbhelper();
+		helper.updateKeyVal(Const.LOGIN_USER_INFO, userStr);
 	}
+	
+	private static DBHelper dbHelper;
+	
+	private DBHelper getDbhelper(){
+		if(dbHelper ==null){
+			dbHelper = new DBHelper(this);
+		}
+		return dbHelper;
+	}
+	
 
 	/**
 	 * 数据转换成对象
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Object convert(Object data, Class target) {
-		return new Gson().fromJson(data.toString(), target);
+	public Object convert(String data, Class target) {
+		return new Gson().fromJson(data, target);
 	}
 }

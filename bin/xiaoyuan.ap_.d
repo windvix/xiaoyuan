@@ -16,6 +16,7 @@ D:\Android_project\xiaoyuan2\res\anim\start_zoomin.xml \
 D:\Android_project\xiaoyuan2\res\anim\start_zoomout.xml \
 D:\Android_project\xiaoyuan2\res\anim\toast_dimiss.xml \
 D:\Android_project\xiaoyuan2\res\anim\toast_show.xml \
+D:\Android_project\xiaoyuan2\res\drawable\bg_dialog_user_toast.xml \
 D:\Android_project\xiaoyuan2\res\drawable\blue_btn.xml \
 D:\Android_project\xiaoyuan2\res\drawable\blue_btn_click.xml \
 D:\Android_project\xiaoyuan2\res\drawable\blue_btn_default.xml \
@@ -143,6 +144,9 @@ D:\Android_project\xiaoyuan2\res\layout\activity_user_info.xml \
 D:\Android_project\xiaoyuan2\res\layout\activity_welcome.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_confirm.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_loading.xml \
+D:\Android_project\xiaoyuan2\res\layout\dialog_msg.xml \
+D:\Android_project\xiaoyuan2\res\layout\dialog_update.xml \
+D:\Android_project\xiaoyuan2\res\layout\dialog_user_toast.xml \
 D:\Android_project\xiaoyuan2\res\layout\login_01.xml \
 D:\Android_project\xiaoyuan2\res\layout\login_02.xml \
 D:\Android_project\xiaoyuan2\res\layout\login_03.xml \

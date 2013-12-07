@@ -1508,14 +1508,11 @@ com.tencent.stat.event.PageView
 com.tencent.stat.event.SessionEnv
 com.xynxs.main.BaseActivity:
     private static final java.lang.String DATA_ROOT_KEY
-    public static final java.lang.String USER_KEY
-    71:77:protected java.lang.String getHeadImgDir()
-    101:101:public int getScreenHeight()
-    109:109:public int getScreenWidth()
-    209:209:public boolean saveDataLong(java.lang.String,long)
-    213:213:public long getDataLong(java.lang.String)
-    217:217:public boolean saveDataBoolean(java.lang.String,boolean)
-    221:221:public boolean getDataBoolean(java.lang.String)
+    80:86:protected java.lang.String getHeadImgDir()
+    110:110:public int getScreenHeight()
+    118:118:public int getScreenWidth()
+    223:223:public boolean saveDataLong(java.lang.String,long)
+    227:227:public long getDataLong(java.lang.String)
 com.xynxs.main.BuildConfig
 com.xynxs.main.MyInfoActivity$LoadHeadImgTask:
     private boolean forceRefresh
@@ -1523,7 +1520,7 @@ com.xynxs.main.MyInfoActivity$LoadHeadImgTask:
     final synthetic com.xynxs.main.MyInfoActivity this$0
     154:160:public MyInfoActivity$LoadHeadImgTask(com.xynxs.main.MyInfoActivity,com.xynxs.main.BaseActivity,android.widget.ImageView,boolean,java.lang.String)
 com.xynxs.main.R:
-    10:576:public R()
+    10:582:public R()
 com.xynxs.main.R$anim
 com.xynxs.main.R$array
 com.xynxs.main.R$attr
@@ -1535,134 +1532,11 @@ com.xynxs.main.R$layout
 com.xynxs.main.R$string
 com.xynxs.main.R$style
 com.xynxs.main.R$styleable:
-    576:576:public R$styleable()
-com.xynxs.main.bean.Post
-com.xynxs.main.bean.Reply:
-    private java.lang.String id
-    private java.lang.String owner_id
-    private java.lang.String quote
-    private java.lang.String quote_id
-    private java.lang.String content
-    private java.lang.String post_id
-    private long createDate
-    private int isNoname
-    private int isQuoterRead
-    private java.lang.String owner_name
-    private java.lang.String owner_college_name
-    private java.lang.String owner_head_img
-    private java.lang.Long owner_score
-    private java.lang.String post_topic
-    private java.lang.String post_content
-    private java.lang.Integer post_hasImg
-    private java.lang.String post_Owner_id
-    private java.lang.Integer post_Owner_gender
-    private java.lang.Integer owner_gender
-    private int state
-    58:58:public int getIsQuoterRead()
-    62:63:public void setIsQuoterRead(int)
-    81:81:public java.lang.Integer getOwner_gender()
-    84:84:public java.lang.Long getOwner_score()
-    88:89:public void setOwner_score(java.lang.Long)
-    92:93:public void setOwner_gender(java.lang.Integer)
-    96:96:public java.lang.Integer getPost_Owner_gender()
-    100:101:public void setPost_Owner_gender(java.lang.Integer)
-    104:104:public java.lang.String getPost_topic()
-    108:109:public void setPost_topic(java.lang.String)
-    112:112:public java.lang.String getPost_content()
-    116:117:public void setPost_content(java.lang.String)
-    120:120:public java.lang.Integer getPost_hasImg()
-    124:125:public void setPost_hasImg(java.lang.Integer)
-    128:128:public java.lang.String getPost_Owner_id()
-    132:133:public void setPost_Owner_id(java.lang.String)
-    136:136:public java.lang.String getOwner_head_img()
-    140:141:public void setOwner_head_img(java.lang.String)
-    144:144:public java.lang.String getOwner_name()
-    148:149:public void setOwner_name(java.lang.String)
-    152:152:public java.lang.String getOwner_college_name()
-    156:157:public void setOwner_college_name(java.lang.String)
-    160:160:public int getIsNoname()
-    164:165:public void setIsNoname(int)
-    173:173:public java.lang.String getId()
-    177:178:public void setId(java.lang.String)
-    181:181:public java.lang.String getOwner_id()
-    185:186:public void setOwner_id(java.lang.String)
-    189:189:public java.lang.String getQuote()
-    193:194:public void setQuote(java.lang.String)
-    197:197:public java.lang.String getQuote_id()
-    201:202:public void setQuote_id(java.lang.String)
-    205:205:public java.lang.String getContent()
-    209:210:public void setContent(java.lang.String)
-    213:213:public java.lang.String getPost_id()
-    217:218:public void setPost_id(java.lang.String)
-    221:221:public long getCreateDate()
-    225:226:public void setCreateDate(long)
-    229:229:public int getState()
-    233:234:public void setState(int)
-com.xynxs.main.bean.User:
-    private java.lang.String city_name
-    private java.lang.String head_img
-    private int state
-    private long post_count
-    private java.lang.String password
-    private long avaibleDate
-    private java.lang.String email
-    private java.lang.String tel
-    private java.lang.String address
-    private java.lang.String department
-    private java.lang.Integer height
-    private java.lang.String media_type
-    private java.lang.String media_id
-    private long lastLoginTime
-    private int todayPostScore
-    private int todayReplyScore
-    private long balance
-    147:147:public long getBalance()
-    151:152:public void setBalance(long)
-    155:155:public long getLastLoginTime()
-    159:160:public void setLastLoginTime(long)
-    163:163:public int getTodayPostScore()
-    167:168:public void setTodayPostScore(int)
-    171:171:public int getTodayReplyScore()
-    175:176:public void setTodayReplyScore(int)
-    179:179:public java.lang.Integer getHeight()
-    183:184:public void setHeight(java.lang.Integer)
-    191:192:public void setRealName(java.lang.String)
-    195:195:public java.lang.String getDepartment()
-    199:200:public void setDepartment(java.lang.String)
-    203:203:public java.lang.String getAddress()
-    207:208:public void setAddress(java.lang.String)
-    211:211:public java.lang.String getTel()
-    215:216:public void setTel(java.lang.String)
-    219:219:public java.lang.String getEmail()
-    223:224:public void setEmail(java.lang.String)
-    231:232:public void setQQ(java.lang.String)
-    239:240:public void setBirthDay(java.lang.String)
-    243:243:public long getAvaibleDate()
-    247:248:public void setAvaibleDate(long)
-    251:251:public java.lang.String getPassword()
-    255:256:public void setPassword(java.lang.String)
-    263:264:public void setId(java.lang.String)
-    271:272:public void setName(java.lang.String)
-    279:280:public void setCollege_name(java.lang.String)
-    287:288:public void setGender(int)
-    291:291:public java.lang.String getCity_name()
-    295:296:public void setCity_name(java.lang.String)
-    303:304:public void setScore(long)
-    307:307:public java.lang.String getHead_img()
-    311:312:public void setHead_img(java.lang.String)
-    319:319:public java.lang.String getMedia_type()
-    323:324:public void setMedia_type(java.lang.String)
-    327:327:public java.lang.String getMedia_id()
-    331:332:public void setMedia_id(java.lang.String)
-    335:336:public void setRegisterDate(long)
-    343:344:public void setEntranceYear(int)
-    347:347:public int getState()
-    351:352:public void setState(int)
-    355:355:public long getPost_count()
-    359:360:public void setPost_count(long)
-    367:368:public void setLabel(java.lang.String)
-    375:376:public void setSign(java.lang.String)
+    582:582:public R$styleable()
 com.xynxs.main.util.Const
+com.xynxs.main.util.DBHelper:
+    private static final java.lang.String DATABASE_NAME
+    private static final int DATABASE_VERSION
 com.xynxs.main.util.LevelUtil:
     8:8:public LevelUtil()
 com.xynxs.main.util.ServerHelper:
@@ -1674,7 +1548,6 @@ com.xynxs.main.util.ServerHelper:
     private static final java.lang.String bucket
     private static final java.lang.String object
     private static final java.lang.String SCODE
-    163:172:public java.lang.Object getUser(java.lang.String,boolean)
     205:215:public java.lang.Object publishPost(java.lang.String,java.lang.String,int,java.lang.String,int,int)
     222:232:public java.lang.Object listPost(int,java.lang.String,int,java.lang.String,int,int,java.lang.String)
     236:243:public java.lang.Object postDetail(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
@@ -1685,7 +1558,6 @@ com.xynxs.main.util.ServerHelper:
     291:297:public java.lang.Object addFeedback(java.lang.String,java.lang.String,java.lang.String)
     301:306:public java.lang.Object updateUserLabel(java.lang.String,java.lang.String)
     310:376:public java.lang.Object updateUserInfo(java.lang.String,java.lang.String,int,java.lang.String,java.lang.String,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-    383:403:public java.lang.Object getNewestVersion()
     407:413:public java.lang.Object listMsg(java.lang.String,int,int)
     417:424:public java.lang.Object listUserPost(java.lang.String,java.lang.String,int,int)
     428:433:public java.lang.Object delMyPost(java.lang.String,java.lang.String)

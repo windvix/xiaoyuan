@@ -10,6 +10,7 @@ import com.baidu.sharesdk.BaiduSocialShare;
 import com.baidu.sharesdk.ShareContent;
 import com.baidu.sharesdk.ShareListener;
 import com.baidu.sharesdk.Utility;
+import com.tencent.stat.common.User;
 import com.xynxs.main.component.MyTextViewAdapter;
 import com.xynxs.main.component.MyViewPager;
 import com.xynxs.main.dialog.LoadingDialog;
@@ -41,9 +42,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class LoginActivity extends BaseActivity{
+/**
+ * 登录界面
+ */
+public class LoginActivity extends BaseActivity {
 
-	private String type;
+	/**
+	 * 登录类型(新浪，QQ，人人)
+	 */
+	private String login_type;
 	private String msg;
 
 	private MyViewPager viewpager = null;
@@ -54,18 +61,31 @@ public class LoginActivity extends BaseActivity{
 	private View yearView;
 	private View intrView;
 
+	private Handler handler;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.activity_login);
-
+		handler = new Handler();
 		viewpager = (MyViewPager) findViewById(R.id.login_tabpager);
 		List<View> list = new ArrayList<View>();
 
+		// 登录界面
 		loginView = createView(R.layout.login_01);
+
+		// 登录等待界面
 		waitingView = createView(R.layout.login_02);
+
+		// 省份选择界面
 		provView = createView(R.layout.login_03);
+
+		// 大学选择界面
 		collegeView = createView(R.layout.login_04);
+
+		// 入学年份选择界面
 		yearView = createView(R.layout.login_05);
+
+		// 兴趣界面
 		intrView = createView(R.layout.login_06);
 
 		list.add(loginView);
@@ -84,9 +104,11 @@ public class LoginActivity extends BaseActivity{
 				return true;
 			}
 		});
+
 		loginView.findViewById(R.id.sina_login_btn).setOnClickListener(new LoginBtnClickListener(Utility.SHARE_TYPE_SINA_WEIBO));
 		loginView.findViewById(R.id.qzone_login_btn).setOnClickListener(new LoginBtnClickListener(Utility.SHARE_TYPE_QZONE));
 		loginView.findViewById(R.id.renren_login_btn).setOnClickListener(new LoginBtnClickListener(Utility.SHARE_TYPE_RENREN));
+
 		super.onCreate(savedInstanceState);
 	}
 
@@ -99,13 +121,18 @@ public class LoginActivity extends BaseActivity{
 
 		@Override
 		public void onClick(View v) {
-			LoginActivity.this.type = t;
+			LoginActivity.this.login_type = t;
 			showWaitingView();
 		}
 	}
 
+	/**
+	 * 显示等待界面（用于判断用户是否是第一次登录）
+	 */
 	private void showWaitingView() {
 		viewpager.setCurrentItem(1);
+
+		// 点击返回按钮。返回登录界面
 		waitingView.findViewById(R.id.title_bar_left_btn).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -113,18 +140,20 @@ public class LoginActivity extends BaseActivity{
 			}
 		});
 		final BaiduSocialShare share = getSocailShare();
+
+		// 当前share不为空，则要进行清空，（保证能看到登录界面，必须是未登录状态）
 		if (share != null) {
 			share.cleanAllAccessToken();
-			share.cleanAccessToken(type);
+			share.cleanAccessToken(login_type);
 		}
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
 				if (share != null) {
-					if(share.isAccessTokenValid(type)){
-						share.getUserInfoWithShareType(getApplicationContext(), type, new UserInfoListener());
-					}else{
-						share.authorize(LoginActivity.this, type, new UserInfoListener());
+					if (share.isAccessTokenValid(login_type)) {
+						share.getUserInfoWithShareType(getApplicationContext(), login_type, new UserInfoListener());
+					} else {
+						share.authorize(LoginActivity.this, login_type, new UserInfoListener());
 					}
 				} else {
 					toast("无法初始化分享组件");
@@ -132,9 +161,6 @@ public class LoginActivity extends BaseActivity{
 			}
 		}, 150);
 	}
-	
-	
-
 
 	private void showProvView() {
 		final EditText provEt = (EditText) provView.findViewById(R.id.prov_search_et);
@@ -205,7 +231,7 @@ public class LoginActivity extends BaseActivity{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				String select_college = view.getTag().toString();
-				showYearView(select_college,prov);
+				showYearView(select_college, prov);
 			}
 		});
 	}
@@ -219,7 +245,7 @@ public class LoginActivity extends BaseActivity{
 			}
 		});
 		List<String> yearList = new ArrayList<String>();
-		int newestYear = StringUtil.getCurrentYear()+3;
+		int newestYear = StringUtil.getCurrentYear() + 3;
 		for (int i = newestYear; i > (newestYear - 20); i--) {
 			yearList.add(i + "");
 		}
@@ -235,13 +261,13 @@ public class LoginActivity extends BaseActivity{
 			}
 		});
 	}
-	
-	private void showIntrView(final String college, final String year, final String prov){
+
+	private void showIntrView(final String college, final String year, final String prov) {
 		intrView.findViewById(R.id.title_bar_left_btn).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				if(registerTask!=null){
+				if (registerTask != null) {
 					registerTask.stopTask();
 				}
 				viewpager.setCurrentItem(4);
@@ -249,50 +275,47 @@ public class LoginActivity extends BaseActivity{
 		});
 		viewpager.setCurrentItem(5);
 		OnClickListener finisher = new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				String intr = getInterest();
 				register(college, prov, year, intr, msg);
-				
+
 			}
 		};
 		intrView.findViewById(R.id.title_bar_right_btn).setOnClickListener(finisher);
 		intrView.findViewById(R.id.interest_finish).setOnClickListener(finisher);
 	}
-	
 
 	private RegisterTask registerTask;
-	
-	private void register(String college,String prov, String year, String intr, String msg ){
+
+	private void register(String college, String prov, String year, String intr, String msg) {
 		intrView.findViewById(R.id.title_bar_right_btn).setClickable(false);
 		intrView.findViewById(R.id.interest_finish).setClickable(false);
-		if(registerTask!=null){
+		if (registerTask != null) {
 			registerTask.stopTask();
 		}
 		registerTask = new RegisterTask(this, college, prov, msg, year, intr);
 		loadingDialog = new LoadingDialog(this, registerTask, "正在登录");
 		loadingDialog.show();
 	}
-	
 
-	
-	private class RegisterTask extends BaseTask{
+	private class RegisterTask extends BaseTask {
 
 		private String college;
 		private String year;
 		private String city;
 		private String msg;
 		private String label;
-		
+
 		private String result;
-		
+
 		@Override
 		public void cancelTask() {
 			getActivity().toast("取消登录");
 			super.cancelTask();
 		}
-		
+
 		public RegisterTask(BaseActivity activity, String college, String city, String msg, String year, String label) {
 			super(activity);
 			this.college = college;
@@ -328,8 +351,8 @@ public class LoginActivity extends BaseActivity{
 					// 注册成功,保存信息,跳到主页
 					saveUser(result);
 					// 分享注册信息到其它平台
-					if(((CheckBox)intrView.findViewById(R.id.interest_cb)).isChecked()){
-						new ShareRegisterTask(LoginActivity.this, type);
+					if (((CheckBox) intrView.findViewById(R.id.interest_cb)).isChecked()) {
+						new ShareRegisterTask(LoginActivity.this, login_type);
 					}
 					Intent intent = new Intent(getActivity(), MainActivity.class);
 					getActivity().finish();
@@ -338,11 +361,9 @@ public class LoginActivity extends BaseActivity{
 			}
 
 		}
-		
+
 	}
-	
-	
-	
+
 	/**
 	 * 
 	 * 
@@ -419,7 +440,7 @@ public class LoginActivity extends BaseActivity{
 					viewpager.setCurrentItem(0);
 				} else {
 					viewpager.setCurrentItem(i - 1);
-					if(registerTask!=null){
+					if (registerTask != null) {
 						registerTask.stopTask();
 					}
 				}
@@ -428,7 +449,9 @@ public class LoginActivity extends BaseActivity{
 			}
 		}
 		return false;
-	}	private String getInterest(){
+	}
+
+	private String getInterest() {
 		EditText intr1 = (EditText) intrView.findViewById(R.id.interest_1);
 		EditText intr2 = (EditText) intrView.findViewById(R.id.interest_2);
 		EditText intr3 = (EditText) intrView.findViewById(R.id.interest_3);
@@ -439,53 +462,50 @@ public class LoginActivity extends BaseActivity{
 		String i3 = intr3.getText().toString().trim();
 		String i4 = intr4.getText().toString().trim();
 		String i5 = intr5.getText().toString().trim();
-		
+
 		String interest = "";
-		
+
 		if (!interest.contains(i1) && !i1.equals("")) {
-			if(interest.equals("")){
+			if (interest.equals("")) {
 				interest = i1;
-			}else{
-				interest = interest+"[/-/]"+i1;
+			} else {
+				interest = interest + "[/-/]" + i1;
 			}
 		}
 		if (!interest.contains(i2) && !i2.equals("")) {
-			if(interest.equals("")){
+			if (interest.equals("")) {
 				interest = i2;
-			}else{
-				interest = interest+"[/-/]"+i2;
+			} else {
+				interest = interest + "[/-/]" + i2;
 			}
 		}
 
 		if (!interest.contains(i3) && !i3.equals("")) {
-			if(interest.equals("")){
+			if (interest.equals("")) {
 				interest = i3;
-			}else{
-				interest = interest+"[/-/]"+i3;
+			} else {
+				interest = interest + "[/-/]" + i3;
 			}
 		}
 
 		if (!interest.contains(i4) && !i4.equals("")) {
-			if(interest.equals("")){
+			if (interest.equals("")) {
 				interest = i4;
-			}else{
-				interest = interest+"[/-/]"+i4;
+			} else {
+				interest = interest + "[/-/]" + i4;
 			}
 		}
 
 		if (!interest.contains(i5) && !i5.equals("")) {
-			if(interest.equals("")){
+			if (interest.equals("")) {
 				interest = i5;
-			}else{
-				interest = interest+"[/-/]"+i5;
+			} else {
+				interest = interest + "[/-/]" + i5;
 			}
 		}
-		
+
 		return interest;
 	}
-	
-	
-	
 
 	private List<String> initCollegeList(String prov) {
 		String alls = getFromAssets("colleges.txt");
@@ -534,21 +554,23 @@ public class LoginActivity extends BaseActivity{
 		provList.add("新疆");
 		return provList;
 	}
-	
-	
-	
+
 	private GetUserByMsgTask msgTask;
 
 	private LoadingDialog loadingDialog;
+
 	private class UserInfoListener implements ShareListener {
 
 		final Handler handler = new Handler(Looper.getMainLooper());
 
 		@Override
 		public void onAuthComplete(Bundle values) {
-			getSocailShare().getUserInfoWithShareType(LoginActivity.this, type, new UserInfoListener());
+			getSocailShare().getUserInfoWithShareType(LoginActivity.this, login_type, new UserInfoListener());
 		}
 
+		/**
+		 * Auth成功后返回的结果
+		 */
 		@Override
 		public void onApiComplete(String responses) {
 
@@ -560,6 +582,7 @@ public class LoginActivity extends BaseActivity{
 					if (msgTask != null) {
 						msgTask.stopTask();
 					}
+					// 获取用户信息
 					msgTask = new GetUserByMsgTask(LoginActivity.this, msg);
 					// 得到消息后，要判断用户是否已经注册了
 					loadingDialog = new LoadingDialog(LoginActivity.this, msgTask, "正在登录");
@@ -615,23 +638,33 @@ public class LoginActivity extends BaseActivity{
 						// 跳转到完善资料的界面
 						showProvView();
 					} else {
+						
+						final String userStr = result.toString();
+						saveUser(userStr);
 						// 已有账号, 直接登录
-						saveUser(result.toString());
-						Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-						finish();
-						startActivity(intent);
-
+						handler.postDelayed(new Runnable() {
+							@Override
+							public void run() {
+								if (hasLogin()) {
+									Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+									finish();
+									startActivity(intent);
+								} else {
+									toast("用户错误");
+									viewpager.setCurrentItem(0, false);
+								}
+							}
+						},150);
 					}
 				}
 			}
 		}
 	}
-	
-	
-	private class ShareRegisterTask extends BaseTask{
+
+	private class ShareRegisterTask extends BaseTask {
 
 		private String target;
-		
+
 		public ShareRegisterTask(BaseActivity activity, String target) {
 			super(activity);
 			this.target = target;
@@ -643,13 +676,11 @@ public class LoginActivity extends BaseActivity{
 			String share_type = "page";
 			String shareContent = "我刚刚在#校园那些事#上注册了账号，校园生活从这里开始，亲们快来看看吧，挺不错哦";
 			String shareUrl = ServerHelper.getS();
-			String imgUrl = shareUrl+"imgs/favicon.png";
-			String title  = "";
+			String imgUrl = shareUrl + "imgs/favicon.png";
+			String title = "";
 			share(share_type, shareContent, shareUrl, imgUrl, target, title);
 		}
 
-		
-		
 		private void share(String share_type, String shareContent, String shareUrl, String imgUrl, String target, String title) {
 			// 构造分享实体
 			ShareContent content = new ShareContent();
@@ -657,7 +688,7 @@ public class LoginActivity extends BaseActivity{
 			content.setImageUrl(imgUrl);
 			content.setTitle(title);
 			content.setUrl(shareUrl);
-			//content.addImageByRemoteUrl("");
+			// content.addImageByRemoteUrl("");
 			getActivity().getSocailShare().share(getActivity(), target, content, new ShareContentListener());
 
 		}
@@ -694,7 +725,7 @@ public class LoginActivity extends BaseActivity{
 
 		@Override
 		protected void onPostExecute() {
-			
+
 		}
 	}
 }

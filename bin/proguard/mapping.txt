@@ -6210,6 +6210,7 @@ com.xynxs.main.BaseActivity -> com.xynxs.main.a:
     boolean isExit -> b
     com.baidu.sharesdk.BaiduSocialShare socialShare -> c
     android.os.Handler mHandler -> a
+    com.xynxs.main.util.DBHelper dbHelper -> d
     void toQuitTheApp() -> a
     java.lang.String getFromAssets(java.lang.String) -> a
     void toast(java.lang.String) -> b
@@ -6228,11 +6229,15 @@ com.xynxs.main.BaseActivity -> com.xynxs.main.a:
     int getDataInt(java.lang.String) -> d
     com.xynxs.main.bean.User getUser() -> g
     void saveUser(java.lang.String) -> e
-    java.lang.Object convert(java.lang.Object,java.lang.Class) -> a
+    com.xynxs.main.util.DBHelper getDbhelper() -> j
+    java.lang.Object convert(java.lang.String,java.lang.Class) -> a
     void access$0(com.xynxs.main.BaseActivity,boolean) -> a
 com.xynxs.main.BaseActivity$1 -> com.xynxs.main.b:
     com.xynxs.main.BaseActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
+com.xynxs.main.BaseActivity$2 -> com.xynxs.main.c:
+    com.xynxs.main.BaseActivity this$0 -> a
+    void run() -> run
 com.xynxs.main.GuideActivity -> com.xynxs.main.GuideActivity:
     android.support.v4.view.ViewPager viewpager -> b
     java.util.List list -> c
@@ -6241,20 +6246,20 @@ com.xynxs.main.GuideActivity -> com.xynxs.main.GuideActivity:
     void onClick(android.view.View) -> onClick
     java.util.List access$0(com.xynxs.main.GuideActivity) -> a
     android.widget.ImageView[] access$1(com.xynxs.main.GuideActivity) -> b
-com.xynxs.main.GuideActivity$ViewPagerAdapter -> com.xynxs.main.c:
+com.xynxs.main.GuideActivity$ViewPagerAdapter -> com.xynxs.main.d:
     java.util.List list -> b
     com.xynxs.main.GuideActivity this$0 -> a
     int getCount() -> getCount
     java.lang.Object instantiateItem(android.view.ViewGroup,int) -> instantiateItem
     void destroyItem(android.view.ViewGroup,int,java.lang.Object) -> destroyItem
     boolean isViewFromObject(android.view.View,java.lang.Object) -> isViewFromObject
-com.xynxs.main.GuideActivity$ViewPagerPageChangeListener -> com.xynxs.main.d:
+com.xynxs.main.GuideActivity$ViewPagerPageChangeListener -> com.xynxs.main.e:
     com.xynxs.main.GuideActivity this$0 -> a
     void onPageScrollStateChanged(int) -> onPageScrollStateChanged
     void onPageScrolled(int,float,int) -> onPageScrolled
     void onPageSelected(int) -> onPageSelected
 com.xynxs.main.LoginActivity -> com.xynxs.main.LoginActivity:
-    java.lang.String type -> b
+    java.lang.String login_type -> b
     java.lang.String msg -> c
     com.xynxs.main.component.MyViewPager viewpager -> d
     android.view.View loginView -> e
@@ -6263,9 +6268,10 @@ com.xynxs.main.LoginActivity -> com.xynxs.main.LoginActivity:
     android.view.View collegeView -> h
     android.view.View yearView -> i
     android.view.View intrView -> j
-    com.xynxs.main.LoginActivity$RegisterTask registerTask -> k
-    com.xynxs.main.LoginActivity$GetUserByMsgTask msgTask -> l
-    com.xynxs.main.dialog.LoadingDialog loadingDialog -> m
+    android.os.Handler handler -> k
+    com.xynxs.main.LoginActivity$RegisterTask registerTask -> l
+    com.xynxs.main.LoginActivity$GetUserByMsgTask msgTask -> m
+    com.xynxs.main.dialog.LoadingDialog loadingDialog -> n
     void onCreate(android.os.Bundle) -> onCreate
     void showWaitingView() -> h
     void showProvView() -> i
@@ -6289,90 +6295,95 @@ com.xynxs.main.LoginActivity -> com.xynxs.main.LoginActivity:
     void access$9(com.xynxs.main.LoginActivity,com.xynxs.main.dialog.LoadingDialog) -> a
     com.xynxs.main.component.MyViewPager access$10(com.xynxs.main.LoginActivity) -> g
     void access$11(com.xynxs.main.LoginActivity) -> h
-    void access$12(com.xynxs.main.LoginActivity,java.lang.String) -> c
-    void access$13(com.xynxs.main.LoginActivity,java.lang.String,java.lang.String) -> a
-    void access$14(com.xynxs.main.LoginActivity,java.lang.String,java.lang.String,java.lang.String) -> a
-    com.xynxs.main.LoginActivity$RegisterTask access$15(com.xynxs.main.LoginActivity) -> i
-    java.lang.String access$16(com.xynxs.main.LoginActivity) -> j
-    void access$17(com.xynxs.main.LoginActivity,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
-com.xynxs.main.LoginActivity$1 -> com.xynxs.main.e:
+    android.os.Handler access$12(com.xynxs.main.LoginActivity) -> i
+    void access$13(com.xynxs.main.LoginActivity,java.lang.String) -> c
+    void access$14(com.xynxs.main.LoginActivity,java.lang.String,java.lang.String) -> a
+    void access$15(com.xynxs.main.LoginActivity,java.lang.String,java.lang.String,java.lang.String) -> a
+    com.xynxs.main.LoginActivity$RegisterTask access$16(com.xynxs.main.LoginActivity) -> j
+    java.lang.String access$17(com.xynxs.main.LoginActivity) -> k
+    void access$18(com.xynxs.main.LoginActivity,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
+com.xynxs.main.LoginActivity$1 -> com.xynxs.main.f:
     com.xynxs.main.LoginActivity this$0 -> a
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
-com.xynxs.main.LoginActivity$10 -> com.xynxs.main.f:
+com.xynxs.main.LoginActivity$10 -> com.xynxs.main.g:
     com.xynxs.main.LoginActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.xynxs.main.LoginActivity$11 -> com.xynxs.main.g:
+com.xynxs.main.LoginActivity$11 -> com.xynxs.main.h:
     com.xynxs.main.LoginActivity this$0 -> a
     java.lang.String val$college -> b
     java.lang.String val$prov -> c
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.xynxs.main.LoginActivity$12 -> com.xynxs.main.h:
+com.xynxs.main.LoginActivity$12 -> com.xynxs.main.i:
     com.xynxs.main.LoginActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.xynxs.main.LoginActivity$13 -> com.xynxs.main.i:
+com.xynxs.main.LoginActivity$13 -> com.xynxs.main.j:
     com.xynxs.main.LoginActivity this$0 -> a
     java.lang.String val$college -> b
     java.lang.String val$prov -> c
     java.lang.String val$year -> d
     void onClick(android.view.View) -> onClick
-com.xynxs.main.LoginActivity$2 -> com.xynxs.main.j:
+com.xynxs.main.LoginActivity$2 -> com.xynxs.main.k:
     com.xynxs.main.LoginActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.xynxs.main.LoginActivity$3 -> com.xynxs.main.k:
+com.xynxs.main.LoginActivity$3 -> com.xynxs.main.l:
     com.xynxs.main.LoginActivity this$0 -> a
     com.baidu.sharesdk.BaiduSocialShare val$share -> b
     void run() -> run
-com.xynxs.main.LoginActivity$4 -> com.xynxs.main.l:
+com.xynxs.main.LoginActivity$4 -> com.xynxs.main.m:
     com.xynxs.main.LoginActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.xynxs.main.LoginActivity$5 -> com.xynxs.main.m:
+com.xynxs.main.LoginActivity$5 -> com.xynxs.main.n:
     com.xynxs.main.LoginActivity this$0 -> a
     android.widget.EditText val$provEt -> b
     com.xynxs.main.component.MyTextViewAdapter val$adapter -> c
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-com.xynxs.main.LoginActivity$6 -> com.xynxs.main.n:
+com.xynxs.main.LoginActivity$6 -> com.xynxs.main.o:
     com.xynxs.main.LoginActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.xynxs.main.LoginActivity$7 -> com.xynxs.main.o:
+com.xynxs.main.LoginActivity$7 -> com.xynxs.main.p:
     com.xynxs.main.LoginActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.xynxs.main.LoginActivity$8 -> com.xynxs.main.p:
+com.xynxs.main.LoginActivity$8 -> com.xynxs.main.q:
     com.xynxs.main.LoginActivity this$0 -> a
     android.widget.EditText val$colEt -> b
     com.xynxs.main.component.MyTextViewAdapter val$adapter -> c
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-com.xynxs.main.LoginActivity$9 -> com.xynxs.main.q:
+com.xynxs.main.LoginActivity$9 -> com.xynxs.main.r:
     com.xynxs.main.LoginActivity this$0 -> a
     java.lang.String val$prov -> b
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.xynxs.main.LoginActivity$GetUserByMsgTask -> com.xynxs.main.r:
+com.xynxs.main.LoginActivity$GetUserByMsgTask -> com.xynxs.main.s:
     java.lang.String msg -> b
     java.lang.Object result -> c
     com.xynxs.main.LoginActivity this$0 -> a
     void onCancelled() -> onCancelled
     void doInBackground() -> a
     void onPostExecute() -> b
-com.xynxs.main.LoginActivity$LoginBtnClickListener -> com.xynxs.main.s:
+    com.xynxs.main.LoginActivity access$0(com.xynxs.main.LoginActivity$GetUserByMsgTask) -> a
+com.xynxs.main.LoginActivity$GetUserByMsgTask$1 -> com.xynxs.main.t:
+    com.xynxs.main.LoginActivity$GetUserByMsgTask this$1 -> a
+    void run() -> run
+com.xynxs.main.LoginActivity$LoginBtnClickListener -> com.xynxs.main.u:
     java.lang.String t -> b
     com.xynxs.main.LoginActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.xynxs.main.LoginActivity$LoginViewPagerAdapter -> com.xynxs.main.t:
+com.xynxs.main.LoginActivity$LoginViewPagerAdapter -> com.xynxs.main.v:
     java.util.List list -> b
     com.xynxs.main.LoginActivity this$0 -> a
     int getCount() -> getCount
     java.lang.Object instantiateItem(android.view.ViewGroup,int) -> instantiateItem
     void destroyItem(android.view.ViewGroup,int,java.lang.Object) -> destroyItem
     boolean isViewFromObject(android.view.View,java.lang.Object) -> isViewFromObject
-com.xynxs.main.LoginActivity$LoginViewPagerPageChangeListener -> com.xynxs.main.u:
+com.xynxs.main.LoginActivity$LoginViewPagerPageChangeListener -> com.xynxs.main.w:
     com.xynxs.main.LoginActivity this$0 -> a
     void onPageScrollStateChanged(int) -> onPageScrollStateChanged
     void onPageScrolled(int,float,int) -> onPageScrolled
     void onPageSelected(int) -> onPageSelected
-com.xynxs.main.LoginActivity$RegisterTask -> com.xynxs.main.v:
+com.xynxs.main.LoginActivity$RegisterTask -> com.xynxs.main.x:
     java.lang.String college -> b
     java.lang.String year -> c
     java.lang.String city -> d
@@ -6383,66 +6394,97 @@ com.xynxs.main.LoginActivity$RegisterTask -> com.xynxs.main.v:
     void cancelTask() -> c
     void doInBackground() -> a
     void onPostExecute() -> b
-com.xynxs.main.LoginActivity$ShareRegisterTask -> com.xynxs.main.w:
+com.xynxs.main.LoginActivity$ShareRegisterTask -> com.xynxs.main.y:
     java.lang.String target -> b
     com.xynxs.main.LoginActivity this$0 -> a
     void doInBackground() -> a
     void share(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
     void onPostExecute() -> b
-com.xynxs.main.LoginActivity$ShareRegisterTask$ShareContentListener -> com.xynxs.main.x:
+com.xynxs.main.LoginActivity$ShareRegisterTask$ShareContentListener -> com.xynxs.main.z:
     android.os.Handler handler -> a
     com.xynxs.main.LoginActivity$ShareRegisterTask this$1 -> b
     void onAuthComplete(android.os.Bundle) -> onAuthComplete
     void onApiComplete(java.lang.String) -> onApiComplete
     void onError(com.baidu.sharesdk.BaiduShareException) -> onError
-com.xynxs.main.LoginActivity$ShareRegisterTask$ShareContentListener$1 -> com.xynxs.main.y:
+com.xynxs.main.LoginActivity$ShareRegisterTask$ShareContentListener$1 -> com.xynxs.main.aa:
     com.xynxs.main.LoginActivity$ShareRegisterTask$ShareContentListener this$2 -> a
     void run() -> run
-com.xynxs.main.LoginActivity$ShareRegisterTask$ShareContentListener$2 -> com.xynxs.main.z:
+com.xynxs.main.LoginActivity$ShareRegisterTask$ShareContentListener$2 -> com.xynxs.main.ab:
     com.xynxs.main.LoginActivity$ShareRegisterTask$ShareContentListener this$2 -> a
     java.lang.String val$responseStr -> b
     void run() -> run
-com.xynxs.main.LoginActivity$UserInfoListener -> com.xynxs.main.aa:
+com.xynxs.main.LoginActivity$UserInfoListener -> com.xynxs.main.ac:
     android.os.Handler handler -> a
     com.xynxs.main.LoginActivity this$0 -> b
     void onAuthComplete(android.os.Bundle) -> onAuthComplete
     void onApiComplete(java.lang.String) -> onApiComplete
     void onError(com.baidu.sharesdk.BaiduShareException) -> onError
     com.xynxs.main.LoginActivity access$1(com.xynxs.main.LoginActivity$UserInfoListener) -> a
-com.xynxs.main.LoginActivity$UserInfoListener$1 -> com.xynxs.main.ab:
+com.xynxs.main.LoginActivity$UserInfoListener$1 -> com.xynxs.main.ad:
     com.xynxs.main.LoginActivity$UserInfoListener this$1 -> a
     java.lang.String val$responseStr -> b
     void run() -> run
-com.xynxs.main.LoginActivity$UserInfoListener$2 -> com.xynxs.main.ac:
+com.xynxs.main.LoginActivity$UserInfoListener$2 -> com.xynxs.main.ae:
     com.xynxs.main.LoginActivity$UserInfoListener this$1 -> a
     java.lang.String val$error -> b
     void run() -> run
 com.xynxs.main.MainActivity -> com.xynxs.main.MainActivity:
     com.xynxs.main.component.MyViewPager viewpager -> b
     java.util.List list -> c
+    android.os.Handler handler -> d
     void onCreate(android.os.Bundle) -> onCreate
+    void getServerUserInfo() -> h
+    void getServerUserInfoResult(java.lang.String) -> f
+    void checkVersion() -> i
+    void checkVersionResult() -> j
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    void showUserToast(java.lang.String) -> g
     com.xynxs.main.component.MyViewPager access$0(com.xynxs.main.MainActivity) -> a
-com.xynxs.main.MainActivity$1 -> com.xynxs.main.ad:
+    void access$1(com.xynxs.main.MainActivity,java.lang.String) -> a
+    android.os.Handler access$2(com.xynxs.main.MainActivity) -> b
+    void access$3(com.xynxs.main.MainActivity) -> c
+com.xynxs.main.MainActivity$1 -> com.xynxs.main.af:
     com.xynxs.main.MainActivity this$0 -> a
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
-com.xynxs.main.MainActivity$MainViewPagerAdapter -> com.xynxs.main.ae:
+com.xynxs.main.MainActivity$2 -> com.xynxs.main.ag:
+    com.xynxs.main.MainActivity this$0 -> a
+    void run() -> run
+com.xynxs.main.MainActivity$3 -> com.xynxs.main.ah:
+    java.lang.Object result -> a
+    com.xynxs.main.MainActivity this$0 -> b
+    void run() -> run
+com.xynxs.main.MainActivity$4 -> com.xynxs.main.ai:
+    com.xynxs.main.MainActivity this$0 -> a
+    java.lang.String val$result -> b
+    void run() -> run
+    com.xynxs.main.MainActivity access$0(com.xynxs.main.MainActivity$4) -> a
+com.xynxs.main.MainActivity$4$1 -> com.xynxs.main.aj:
+    com.xynxs.main.MainActivity$4 this$1 -> a
+    java.lang.String val$name2 -> b
+    void run() -> run
+com.xynxs.main.MainActivity$5 -> com.xynxs.main.ak:
+    com.xynxs.main.MainActivity this$0 -> a
+    void run() -> run
+com.xynxs.main.MainActivity$6 -> com.xynxs.main.al:
+    com.xynxs.main.MainActivity this$0 -> a
+    void run() -> run
+com.xynxs.main.MainActivity$MainViewPagerAdapter -> com.xynxs.main.am:
     java.util.List list -> b
     com.xynxs.main.MainActivity this$0 -> a
     int getCount() -> getCount
     java.lang.Object instantiateItem(android.view.ViewGroup,int) -> instantiateItem
     void destroyItem(android.view.ViewGroup,int,java.lang.Object) -> destroyItem
     boolean isViewFromObject(android.view.View,java.lang.Object) -> isViewFromObject
-com.xynxs.main.MainActivity$MainViewPagerPageChangeListener -> com.xynxs.main.af:
+com.xynxs.main.MainActivity$MainViewPagerPageChangeListener -> com.xynxs.main.an:
     com.xynxs.main.MainActivity this$0 -> a
     void onPageScrollStateChanged(int) -> onPageScrollStateChanged
     void onPageScrolled(int,float,int) -> onPageScrolled
     void onPageSelected(int) -> onPageSelected
-com.xynxs.main.MainActivity$MyOnClickListener -> com.xynxs.main.ag:
+com.xynxs.main.MainActivity$MyOnClickListener -> com.xynxs.main.ao:
     int index -> b
     com.xynxs.main.MainActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.xynxs.main.MainActivityTab01 -> com.xynxs.main.ah:
+com.xynxs.main.MainActivityTab01 -> com.xynxs.main.ap:
     com.xynxs.main.MainActivity act -> a
     android.view.View rootView -> b
     com.xynxs.main.component.MyViewPager viewpager -> c
@@ -6453,23 +6495,23 @@ com.xynxs.main.MainActivityTab01 -> com.xynxs.main.ah:
     android.view.View access$0(com.xynxs.main.MainActivityTab01) -> a
     com.xynxs.main.MainActivity access$1(com.xynxs.main.MainActivityTab01) -> b
     com.xynxs.main.component.MyViewPager access$2(com.xynxs.main.MainActivityTab01) -> c
-com.xynxs.main.MainActivityTab01$MyOnClickListener -> com.xynxs.main.ai:
+com.xynxs.main.MainActivityTab01$MyOnClickListener -> com.xynxs.main.aq:
     int index -> b
     com.xynxs.main.MainActivityTab01 this$0 -> a
     void onClick(android.view.View) -> onClick
-com.xynxs.main.MainActivityTab01$TabViewPagerAdapter -> com.xynxs.main.aj:
+com.xynxs.main.MainActivityTab01$TabViewPagerAdapter -> com.xynxs.main.ar:
     java.util.List list -> b
     com.xynxs.main.MainActivityTab01 this$0 -> a
     int getCount() -> getCount
     java.lang.Object instantiateItem(android.view.ViewGroup,int) -> instantiateItem
     void destroyItem(android.view.ViewGroup,int,java.lang.Object) -> destroyItem
     boolean isViewFromObject(android.view.View,java.lang.Object) -> isViewFromObject
-com.xynxs.main.MainActivityTab01$TabViewPagerPageChangeListener -> com.xynxs.main.ak:
+com.xynxs.main.MainActivityTab01$TabViewPagerPageChangeListener -> com.xynxs.main.as:
     com.xynxs.main.MainActivityTab01 this$0 -> a
     void onPageScrollStateChanged(int) -> onPageScrollStateChanged
     void onPageScrolled(int,float,int) -> onPageScrolled
     void onPageSelected(int) -> onPageSelected
-com.xynxs.main.MainActivityTab02 -> com.xynxs.main.al:
+com.xynxs.main.MainActivityTab02 -> com.xynxs.main.at:
     com.xynxs.main.MainActivity act -> a
     android.view.View rootView -> b
     com.handmark.pulltorefresh.library.PullToRefreshListView mPullRefreshListView -> c
@@ -6479,31 +6521,31 @@ com.xynxs.main.MainActivityTab02 -> com.xynxs.main.al:
     com.xynxs.main.component.ReplyListAdapter access$1(com.xynxs.main.MainActivityTab02) -> b
     com.handmark.pulltorefresh.library.PullToRefreshListView access$2(com.xynxs.main.MainActivityTab02) -> c
     com.xynxs.main.MainActivity access$3(com.xynxs.main.MainActivityTab02) -> d
-com.xynxs.main.MainActivityTab02$1 -> com.xynxs.main.am:
+com.xynxs.main.MainActivityTab02$1 -> com.xynxs.main.au:
     com.xynxs.main.MainActivityTab02 this$0 -> a
     void onRefresh(com.handmark.pulltorefresh.library.PullToRefreshBase) -> onRefresh
-com.xynxs.main.MainActivityTab02$2 -> com.xynxs.main.an:
+com.xynxs.main.MainActivityTab02$2 -> com.xynxs.main.av:
     com.xynxs.main.MainActivityTab02 this$0 -> a
     void onLastItemVisible() -> onLastItemVisible
-com.xynxs.main.MainActivityTab02$GetDataTask -> com.xynxs.main.ao:
+com.xynxs.main.MainActivityTab02$GetDataTask -> com.xynxs.main.aw:
     com.xynxs.main.MainActivityTab02 this$0 -> a
     java.lang.Void doInBackground(java.lang.Void[]) -> a
     void onPostExecute(java.lang.Void) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.xynxs.main.MainActivityTab03 -> com.xynxs.main.ap:
+com.xynxs.main.MainActivityTab03 -> com.xynxs.main.ax:
     com.xynxs.main.MainActivity act -> a
     android.view.View rootView -> b
-com.xynxs.main.MainActivityTab04 -> com.xynxs.main.aq:
+com.xynxs.main.MainActivityTab04 -> com.xynxs.main.ay:
     com.xynxs.main.MainActivity act -> a
     android.view.View rootView -> b
     void onClick(android.view.View) -> onClick
     com.xynxs.main.MainActivity access$0(com.xynxs.main.MainActivityTab04) -> a
-com.xynxs.main.MainActivityTab04$1 -> com.xynxs.main.ar:
+com.xynxs.main.MainActivityTab04$1 -> com.xynxs.main.az:
     com.xynxs.main.MainActivityTab04 this$0 -> a
     com.xynxs.main.dialog.ConfirmDialog val$confirm -> b
     void onClick(android.view.View) -> onClick
-com.xynxs.main.MainActivityTab04$2 -> com.xynxs.main.as:
+com.xynxs.main.MainActivityTab04$2 -> com.xynxs.main.ba:
     com.xynxs.main.MainActivityTab04 this$0 -> a
     com.xynxs.main.dialog.ConfirmDialog val$confirm -> b
     void onClick(android.view.View) -> onClick
@@ -6527,17 +6569,17 @@ com.xynxs.main.MyInfoActivity -> com.xynxs.main.MyInfoActivity:
     void initData(boolean) -> a
     void setLabel(java.lang.String) -> f
     void hideInputKeybord(android.widget.EditText) -> a
-com.xynxs.main.MyInfoActivity$1 -> com.xynxs.main.at:
+com.xynxs.main.MyInfoActivity$1 -> com.xynxs.main.bb:
     com.xynxs.main.MyInfoActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.xynxs.main.MyInfoActivity$LoadHeadImgTask -> com.xynxs.main.au:
+com.xynxs.main.MyInfoActivity$LoadHeadImgTask -> com.xynxs.main.bc:
     android.widget.ImageView view -> a
     java.lang.String url -> b
     void doInBackground() -> a
     void stopTask() -> d
     void onPostExecute() -> b
-com.xynxs.main.R -> com.xynxs.main.av:
-com.xynxs.main.R$styleable -> com.xynxs.main.aw:
+com.xynxs.main.R -> com.xynxs.main.bd:
+com.xynxs.main.R$styleable -> com.xynxs.main.be:
     int[] PullToRefresh -> PullToRefresh
     int PullToRefresh_ptrAdapterViewBackground -> PullToRefresh_ptrAdapterViewBackground
     int PullToRefresh_ptrAnimationStyle -> PullToRefresh_ptrAnimationStyle
@@ -6561,35 +6603,218 @@ com.xynxs.main.R$styleable -> com.xynxs.main.aw:
 com.xynxs.main.WelcomActivity -> com.xynxs.main.WelcomActivity:
     void onCreate(android.os.Bundle) -> onCreate
     boolean hasShownGuide() -> h
-com.xynxs.main.WelcomActivity$1 -> com.xynxs.main.ax:
+com.xynxs.main.WelcomActivity$1 -> com.xynxs.main.bf:
     com.xynxs.main.WelcomActivity this$0 -> a
     void run() -> run
-com.xynxs.main.bean.Reply -> com.xynxs.main.a.a:
-com.xynxs.main.bean.User -> com.xynxs.main.a.b:
-    java.lang.String id -> a
-    java.lang.String name -> b
-    java.lang.String college_name -> c
-    int gender -> d
-    long score -> e
-    long registerDate -> f
-    int entranceYear -> g
-    java.lang.String label -> h
-    java.lang.String sign -> i
-    java.lang.String birthDay -> j
-    java.lang.String QQ -> k
-    java.lang.String realName -> l
-    java.lang.String getRealName() -> a
-    java.lang.String getQQ() -> b
-    java.lang.String getBirthDay() -> c
-    java.lang.String getId() -> d
-    java.lang.String getName() -> e
-    java.lang.String getCollege_name() -> f
-    int getGender() -> g
-    long getScore() -> h
-    long getRegisterDate() -> i
-    int getEntranceYear() -> j
-    java.lang.String getLabel() -> k
-    java.lang.String getSign() -> l
+com.xynxs.main.bean.Post -> com.xynxs.main.bean.Post:
+    java.lang.String id -> id
+    java.lang.String topic -> topic
+    java.lang.String content -> content
+    int isNoname -> isNoname
+    int hasImg -> hasImg
+    long createDate -> createDate
+    long visitCount -> visitCount
+    long commentCount -> commentCount
+    int scope -> scope
+    int SCOPE_ALL -> SCOPE_ALL
+    int SCOPE_CITY -> SCOPE_CITY
+    int SCOPE_COLLEGE -> SCOPE_COLLEGE
+    int state -> state
+    int STATE_NORMAL -> STATE_NORMAL
+    int STATE_WRONG -> STATE_WRONG
+    java.lang.String owner_id -> owner_id
+    java.lang.Integer owner_gender -> owner_gender
+    java.lang.String owner_college_name -> owner_college_name
+    java.lang.String owner_city_name -> owner_city_name
+    java.lang.String owner_head_img -> owner_head_img
+    java.lang.String owner_name -> owner_name
+    java.lang.Integer is_owner_fav -> is_owner_fav
+    java.lang.Long owner_score -> owner_score
+    java.lang.Long getOwner_score() -> getOwner_score
+    void setOwner_score(java.lang.Long) -> setOwner_score
+    java.lang.Integer getIs_owner_fav() -> getIs_owner_fav
+    void setIs_owner_fav(java.lang.Integer) -> setIs_owner_fav
+    java.lang.String getOwner_name() -> getOwner_name
+    void setOwner_name(java.lang.String) -> setOwner_name
+    java.lang.Integer getOwner_gender() -> getOwner_gender
+    void setOwner_gender(java.lang.Integer) -> setOwner_gender
+    java.lang.String getOwner_college_name() -> getOwner_college_name
+    void setOwner_college_name(java.lang.String) -> setOwner_college_name
+    java.lang.String getOwner_city_name() -> getOwner_city_name
+    void setOwner_city_name(java.lang.String) -> setOwner_city_name
+    java.lang.String getOwner_head_img() -> getOwner_head_img
+    void setOwner_head_img(java.lang.String) -> setOwner_head_img
+    java.lang.String getId() -> getId
+    void setId(java.lang.String) -> setId
+    java.lang.String getTopic() -> getTopic
+    void setTopic(java.lang.String) -> setTopic
+    java.lang.String getContent() -> getContent
+    void setContent(java.lang.String) -> setContent
+    int getIsNoname() -> getIsNoname
+    void setIsNoname(int) -> setIsNoname
+    int getHasImg() -> getHasImg
+    void setHasImg(int) -> setHasImg
+    long getCreateDate() -> getCreateDate
+    void setCreateDate(long) -> setCreateDate
+    long getVisitCount() -> getVisitCount
+    void setVisitCount(long) -> setVisitCount
+    long getCommentCount() -> getCommentCount
+    void setCommentCount(long) -> setCommentCount
+    int getState() -> getState
+    void setState(int) -> setState
+    java.lang.String getOwner_id() -> getOwner_id
+    void setOwner_id(java.lang.String) -> setOwner_id
+    int getScope() -> getScope
+    void setScope(int) -> setScope
+com.xynxs.main.bean.Reply -> com.xynxs.main.bean.Reply:
+    java.lang.String id -> id
+    java.lang.String owner_id -> owner_id
+    java.lang.String quote -> quote
+    java.lang.String quote_id -> quote_id
+    java.lang.String content -> content
+    java.lang.String post_id -> post_id
+    long createDate -> createDate
+    int isNoname -> isNoname
+    int isQuoterRead -> isQuoterRead
+    java.lang.String owner_name -> owner_name
+    java.lang.String owner_college_name -> owner_college_name
+    java.lang.String owner_head_img -> owner_head_img
+    java.lang.Long owner_score -> owner_score
+    java.lang.String post_topic -> post_topic
+    java.lang.String post_content -> post_content
+    java.lang.Integer post_hasImg -> post_hasImg
+    java.lang.String post_Owner_id -> post_Owner_id
+    java.lang.Integer post_Owner_gender -> post_Owner_gender
+    java.lang.Integer owner_gender -> owner_gender
+    int state -> state
+    int getIsQuoterRead() -> getIsQuoterRead
+    void setIsQuoterRead(int) -> setIsQuoterRead
+    java.lang.Integer getOwner_gender() -> getOwner_gender
+    java.lang.Long getOwner_score() -> getOwner_score
+    void setOwner_score(java.lang.Long) -> setOwner_score
+    void setOwner_gender(java.lang.Integer) -> setOwner_gender
+    java.lang.Integer getPost_Owner_gender() -> getPost_Owner_gender
+    void setPost_Owner_gender(java.lang.Integer) -> setPost_Owner_gender
+    java.lang.String getPost_topic() -> getPost_topic
+    void setPost_topic(java.lang.String) -> setPost_topic
+    java.lang.String getPost_content() -> getPost_content
+    void setPost_content(java.lang.String) -> setPost_content
+    java.lang.Integer getPost_hasImg() -> getPost_hasImg
+    void setPost_hasImg(java.lang.Integer) -> setPost_hasImg
+    java.lang.String getPost_Owner_id() -> getPost_Owner_id
+    void setPost_Owner_id(java.lang.String) -> setPost_Owner_id
+    java.lang.String getOwner_head_img() -> getOwner_head_img
+    void setOwner_head_img(java.lang.String) -> setOwner_head_img
+    java.lang.String getOwner_name() -> getOwner_name
+    void setOwner_name(java.lang.String) -> setOwner_name
+    java.lang.String getOwner_college_name() -> getOwner_college_name
+    void setOwner_college_name(java.lang.String) -> setOwner_college_name
+    int getIsNoname() -> getIsNoname
+    void setIsNoname(int) -> setIsNoname
+    java.lang.String getId() -> getId
+    void setId(java.lang.String) -> setId
+    java.lang.String getOwner_id() -> getOwner_id
+    void setOwner_id(java.lang.String) -> setOwner_id
+    java.lang.String getQuote() -> getQuote
+    void setQuote(java.lang.String) -> setQuote
+    java.lang.String getQuote_id() -> getQuote_id
+    void setQuote_id(java.lang.String) -> setQuote_id
+    java.lang.String getContent() -> getContent
+    void setContent(java.lang.String) -> setContent
+    java.lang.String getPost_id() -> getPost_id
+    void setPost_id(java.lang.String) -> setPost_id
+    long getCreateDate() -> getCreateDate
+    void setCreateDate(long) -> setCreateDate
+    int getState() -> getState
+    void setState(int) -> setState
+com.xynxs.main.bean.User -> com.xynxs.main.bean.User:
+    java.lang.String id -> id
+    java.lang.String name -> name
+    java.lang.String college_name -> college_name
+    int gender -> gender
+    java.lang.String city_name -> city_name
+    long score -> score
+    java.lang.String head_img -> head_img
+    long registerDate -> registerDate
+    int entranceYear -> entranceYear
+    int state -> state
+    long post_count -> post_count
+    java.lang.String label -> label
+    java.lang.String sign -> sign
+    java.lang.String password -> password
+    long avaibleDate -> avaibleDate
+    java.lang.String birthDay -> birthDay
+    java.lang.String QQ -> QQ
+    java.lang.String email -> email
+    java.lang.String tel -> tel
+    java.lang.String address -> address
+    java.lang.String department -> department
+    java.lang.String realName -> realName
+    java.lang.Integer height -> height
+    java.lang.String media_type -> media_type
+    java.lang.String media_id -> media_id
+    long lastLoginTime -> lastLoginTime
+    int todayPostScore -> todayPostScore
+    int todayReplyScore -> todayReplyScore
+    long balance -> balance
+    long getBalance() -> getBalance
+    void setBalance(long) -> setBalance
+    long getLastLoginTime() -> getLastLoginTime
+    void setLastLoginTime(long) -> setLastLoginTime
+    int getTodayPostScore() -> getTodayPostScore
+    void setTodayPostScore(int) -> setTodayPostScore
+    int getTodayReplyScore() -> getTodayReplyScore
+    void setTodayReplyScore(int) -> setTodayReplyScore
+    java.lang.Integer getHeight() -> getHeight
+    void setHeight(java.lang.Integer) -> setHeight
+    java.lang.String getRealName() -> getRealName
+    void setRealName(java.lang.String) -> setRealName
+    java.lang.String getDepartment() -> getDepartment
+    void setDepartment(java.lang.String) -> setDepartment
+    java.lang.String getAddress() -> getAddress
+    void setAddress(java.lang.String) -> setAddress
+    java.lang.String getTel() -> getTel
+    void setTel(java.lang.String) -> setTel
+    java.lang.String getEmail() -> getEmail
+    void setEmail(java.lang.String) -> setEmail
+    java.lang.String getQQ() -> getQQ
+    void setQQ(java.lang.String) -> setQQ
+    java.lang.String getBirthDay() -> getBirthDay
+    void setBirthDay(java.lang.String) -> setBirthDay
+    long getAvaibleDate() -> getAvaibleDate
+    void setAvaibleDate(long) -> setAvaibleDate
+    java.lang.String getPassword() -> getPassword
+    void setPassword(java.lang.String) -> setPassword
+    java.lang.String getId() -> getId
+    void setId(java.lang.String) -> setId
+    java.lang.String getName() -> getName
+    void setName(java.lang.String) -> setName
+    java.lang.String getCollege_name() -> getCollege_name
+    void setCollege_name(java.lang.String) -> setCollege_name
+    int getGender() -> getGender
+    void setGender(int) -> setGender
+    java.lang.String getCity_name() -> getCity_name
+    void setCity_name(java.lang.String) -> setCity_name
+    long getScore() -> getScore
+    void setScore(long) -> setScore
+    java.lang.String getHead_img() -> getHead_img
+    void setHead_img(java.lang.String) -> setHead_img
+    long getRegisterDate() -> getRegisterDate
+    java.lang.String getMedia_type() -> getMedia_type
+    void setMedia_type(java.lang.String) -> setMedia_type
+    java.lang.String getMedia_id() -> getMedia_id
+    void setMedia_id(java.lang.String) -> setMedia_id
+    void setRegisterDate(long) -> setRegisterDate
+    int getEntranceYear() -> getEntranceYear
+    void setEntranceYear(int) -> setEntranceYear
+    int getState() -> getState
+    void setState(int) -> setState
+    long getPost_count() -> getPost_count
+    void setPost_count(long) -> setPost_count
+    java.lang.String getLabel() -> getLabel
+    void setLabel(java.lang.String) -> setLabel
+    java.lang.String getSign() -> getSign
+    void setSign(java.lang.String) -> setSign
 com.xynxs.main.component.MyTextViewAdapter -> com.xynxs.main.component.a:
     com.xynxs.main.BaseActivity act -> a
     java.util.List allList -> b
@@ -6601,21 +6826,35 @@ com.xynxs.main.component.MyViewPager -> com.xynxs.main.component.MyViewPager:
 com.xynxs.main.component.ReplyListAdapter -> com.xynxs.main.component.b:
     com.xynxs.main.MainActivity act -> a
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.xynxs.main.dialog.ConfirmDialog -> com.xynxs.main.b.a:
+com.xynxs.main.dialog.ConfirmDialog -> com.xynxs.main.a.a:
     android.view.View rootView -> a
     android.widget.Button getPositiveBtn() -> a
     android.widget.Button getNegativeBtn() -> b
-com.xynxs.main.dialog.LoadingDialog -> com.xynxs.main.b.b:
+com.xynxs.main.dialog.LoadingDialog -> com.xynxs.main.a.b:
     android.widget.TextView loadText -> a
     com.xynxs.main.task.BaseTask task -> b
     java.lang.String msg -> c
     void setMessage(java.lang.CharSequence) -> setMessage
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     void onCreate(android.os.Bundle) -> onCreate
-com.xynxs.main.dialog.LoadingDialog$1 -> com.xynxs.main.b.c:
+com.xynxs.main.dialog.LoadingDialog$1 -> com.xynxs.main.a.c:
     com.xynxs.main.dialog.LoadingDialog this$0 -> a
     void onShow(android.content.DialogInterface) -> onShow
-com.xynxs.main.task.BaseTask -> com.xynxs.main.c.a:
+com.xynxs.main.dialog.MustUpdateDialog -> com.xynxs.main.a.d:
+    android.view.View rootView -> a
+    java.lang.String url -> b
+    com.xynxs.main.MainActivity act -> c
+    void onClick(android.view.View) -> onClick
+com.xynxs.main.dialog.ReLoginDialog -> com.xynxs.main.a.e:
+    android.view.View rootView -> a
+    com.xynxs.main.MainActivity act -> b
+    void onClick(android.view.View) -> onClick
+com.xynxs.main.dialog.UpdateDialog -> com.xynxs.main.a.f:
+    android.view.View rootView -> a
+    java.lang.String url -> b
+    com.xynxs.main.MainActivity act -> c
+    void onClick(android.view.View) -> onClick
+com.xynxs.main.task.BaseTask -> com.xynxs.main.b.a:
     boolean isForceStop -> a
     com.xynxs.main.BaseActivity activity -> b
     java.util.List helpers -> c
@@ -6631,7 +6870,12 @@ com.xynxs.main.task.BaseTask -> com.xynxs.main.c.a:
     com.xynxs.main.BaseActivity getActivity() -> h
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.xynxs.main.util.DTCrypt -> com.xynxs.main.d.a:
+com.xynxs.main.util.DBHelper -> com.xynxs.main.c.a:
+    void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
+    void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
+    void updateKeyVal(java.lang.String,java.lang.String) -> a
+    java.lang.String getVal(java.lang.String) -> a
+com.xynxs.main.util.DTCrypt -> com.xynxs.main.c.b:
     java.lang.String iv -> a
     javax.crypto.spec.IvParameterSpec ivspec -> b
     javax.crypto.spec.SecretKeySpec keyspec -> c
@@ -6644,11 +6888,11 @@ com.xynxs.main.util.DTCrypt -> com.xynxs.main.d.a:
     java.lang.String padString(java.lang.String) -> f
     java.lang.String encode(java.lang.String) -> d
     java.lang.String decode(java.lang.String) -> e
-com.xynxs.main.util.LevelUtil -> com.xynxs.main.d.b:
+com.xynxs.main.util.LevelUtil -> com.xynxs.main.c.c:
     int getLevel(long) -> a
     java.lang.String getLevelNameByLevel(int) -> a
     java.lang.String getLevelNameByScore(long) -> b
-com.xynxs.main.util.ServerHelper -> com.xynxs.main.d.c:
+com.xynxs.main.util.ServerHelper -> com.xynxs.main.c.d:
     int versionCode -> a
     java.util.Map params -> b
     boolean isFinish -> c
@@ -6658,17 +6902,19 @@ com.xynxs.main.util.ServerHelper -> com.xynxs.main.d.c:
     java.lang.String result -> g
     java.lang.String getS() -> a
     void addParam(java.lang.String,java.lang.String) -> a
-    java.lang.String initDataVal() -> d
+    java.lang.String initDataVal() -> e
     void setVersionCode(int) -> a
     int getServerHelperVersionCode() -> b
     java.lang.String p(java.lang.String) -> b
     void stopConnection() -> c
+    java.lang.Object getUser(java.lang.String,boolean) -> a
     java.lang.Object getUserByMsg(java.lang.String) -> a
     java.lang.Object register(java.lang.String,java.lang.String,java.lang.String,int,java.lang.String) -> a
-com.xynxs.main.util.StringUtil -> com.xynxs.main.d.d:
+    java.lang.Object getNewestVersion() -> d
+com.xynxs.main.util.StringUtil -> com.xynxs.main.c.e:
     java.lang.String decodeUnicode(java.lang.String) -> a
     int getCurrentYear() -> a
-com.xynxs.main.util.ToastUtil -> com.xynxs.main.d.e:
+com.xynxs.main.util.ToastUtil -> com.xynxs.main.c.f:
     android.os.Handler handler -> a
     android.widget.Toast toast -> b
     java.lang.Object synObj -> c
@@ -6678,12 +6924,12 @@ com.xynxs.main.util.ToastUtil -> com.xynxs.main.d.e:
     java.lang.Object access$1() -> b
     android.widget.Toast access$2() -> c
     void access$3(android.widget.Toast) -> a
-com.xynxs.main.util.ToastUtil$1 -> com.xynxs.main.d.f:
+com.xynxs.main.util.ToastUtil$1 -> com.xynxs.main.c.g:
     java.lang.String val$msg -> a
     int val$len -> b
     android.content.Context val$act -> c
     void run() -> run
-com.xynxs.main.util.ToastUtil$1$1 -> com.xynxs.main.d.g:
+com.xynxs.main.util.ToastUtil$1$1 -> com.xynxs.main.c.h:
     com.xynxs.main.util.ToastUtil$1 this$1 -> a
     java.lang.String val$msg -> b
     int val$len -> c
