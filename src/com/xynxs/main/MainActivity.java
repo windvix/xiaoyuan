@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity {
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {
-						
+
 					}
 					run();
 				}
@@ -142,23 +142,22 @@ public class MainActivity extends BaseActivity {
 					// 取出已保存用户上次的登录时间
 					User newU = (User) convert(result, User.class);
 					if (newU != null && newU.getId() != null) {
-						//if (newU.getScore() > getUser().getScore()) {
-						if(true){
-						showUserToast("今日登录：+" + (newU.getScore() - getUser().getScore())+"分");
-							
-						String name1 = LevelUtil.getLevelNameByScore(getUser().getScore());
-						final String name2 = LevelUtil.getLevelNameByScore(newU.getScore());
-						
-						//if(!name1.equals(name2)){
-						if(true){
-						handler.postDelayed(new Runnable() {
+						if (newU.getScore() > getUser().getScore()) {
+							showUserToast("今日登录：+" + (newU.getScore() - getUser().getScore()) + "分");
+
+							String name1 = LevelUtil.getLevelNameByScore(getUser().getScore());
+							final String name2 = LevelUtil.getLevelNameByScore(newU.getScore());
+
+							if (!name1.equals(name2)) {
+								handler.postDelayed(new Runnable() {
 									@Override
 									public void run() {
-										showUserToast("升级为："+name2);
+										showUserToast("升级为：" + name2);
 									}
-							}, 2500);
+								}, 2500);
+							}
 						}
-						}
+						//最新用户信息，保存
 						saveUser(result);
 					} else {
 						cleanAllData();
