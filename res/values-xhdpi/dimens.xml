@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- post_template -->
+    <dimen name="post_detail_owner_img_size">42dp</dimen>
+    <dimen name="post_detail_owner_college_size">12sp</dimen>
+    <dimen name="post_detail_owner_name_size">13sp</dimen>
+    <dimen name="post_detail_padding">7dp</dimen>
+    <dimen name="post_detail_owner_gender_size">14sp</dimen>
+    <dimen name="post_detail_time_size">13sp</dimen>
+    <dimen name="post_detail_star_size">22dp</dimen>
+    <dimen name="post_detail_delete_btn_font_size">12sp</dimen>
+    <dimen name="post_detail_btn_width">56dp</dimen>
+    <dimen name="post_detail_btn_height">21dp</dimen>
+    <dimen name="post_detail_content_font_size">15sp</dimen>
+    <dimen name="post_detail_thank_font_size">13sp</dimen>
+    <dimen name="post_detail_content_img_size">110dp</dimen>
+
+    <!-- post comment -->
+    <dimen name="post_comment_name_size">13sp</dimen>
+    <dimen name="post_comment_head_img_size">30dp</dimen>
+    <dimen name="post_comment_college_size">12sp</dimen>
+    <dimen name="post_comment_content_font_size">15sp</dimen>
+
+    <!-- user center head -->
+    <dimen name="user_center_padding">9dp</dimen>
+    <dimen name="user_detail_btn_size">13sp</dimen>
+    <dimen name="user_center_name_size">15sp</dimen>
+    <dimen name="user_center_college_padding_top">3dp</dimen>
+    <dimen name="user_center_img_size">64dp</dimen>
+
+    <!-- post msg -->
+    <dimen name="user_msg_name_size">13sp</dimen>
+    <dimen name="user_msg_img_size">35dp</dimen>
+    <dimen name="user_msg_college_size">11sp</dimen>
+    <dimen name="user_msg_padding">6dp</dimen>
+    <dimen name="user_msg_name_padding_top">1dp</dimen>
+    <dimen name="user_msg_content_size">15sp</dimen>
+    <dimen name="user_msg_post_content">13sp</dimen>
+
+</resources>

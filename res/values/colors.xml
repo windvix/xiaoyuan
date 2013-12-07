@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">#50000000</color>
+    <color name="select_tab_pressed">#edb118</color>
+    <color name="select_tab_default">#7e7e7e</color>
+    <color name="app_bg">#f8f8f8</color>
+</resources>

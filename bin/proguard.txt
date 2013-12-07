@@ -1,0 +1,32 @@
+# view res/layout/activity_nav.xml #generated:8
+-keep class android.support.v4.view.ViewPager { <init>(...); }
+
+# view AndroidManifest.xml #generated:78
+-keep class com.baidu.social.core.PlatformSsoCallBackActivity { <init>(...); }
+
+# view res/layout/main_tab_02.xml #generated:67
+-keep class com.handmark.pulltorefresh.library.PullToRefreshListView { <init>(...); }
+
+# view AndroidManifest.xml #generated:86
+-keep class com.tencent.tauth.AuthActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:50
+-keep class com.xynxs.main.GuideActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:62
+-keep class com.xynxs.main.LoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:56
+-keep class com.xynxs.main.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:69
+-keep class com.xynxs.main.MyInfoActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:37
+-keep class com.xynxs.main.WelcomActivity { <init>(...); }
+
+# view res/layout/activity_login.xml #generated:8
+# view res/layout/activity_main.xml #generated:138
+# view res/layout/main_tab_01.xml #generated:203
+-keep class com.xynxs.main.component.MyViewPager { <init>(...); }
+
