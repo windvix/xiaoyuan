@@ -145,6 +145,7 @@ D:\Android_project\xiaoyuan2\res\layout\activity_main.xml \
 D:\Android_project\xiaoyuan2\res\layout\activity_nav.xml \
 D:\Android_project\xiaoyuan2\res\layout\activity_user_info.xml \
 D:\Android_project\xiaoyuan2\res\layout\activity_welcome.xml \
+D:\Android_project\xiaoyuan2\res\layout\dialog_bottom_select.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_confirm.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_loading.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_msg.xml \

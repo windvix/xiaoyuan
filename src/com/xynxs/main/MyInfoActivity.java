@@ -3,6 +3,7 @@ package com.xynxs.main;
 import java.io.File;
 
 import com.xynxs.main.bean.User;
+import com.xynxs.main.dialog.GenderSelectDialog;
 import com.xynxs.main.dialog.LoadingDialog;
 import com.xynxs.main.task.LoadHeadImgTask;
 import com.xynxs.main.task.UpdateUserInfoTask;
@@ -86,6 +87,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 		userInfoBirth.setOnClickListener(this);
 		userImgBtn.setOnClickListener(this);
 		findViewById(R.id.title_bar_right_btn).setOnClickListener(this);
+		findViewById(R.id.title_bar_left_btn).setOnClickListener(this);
 		
 		
 		super.onCreate(savedInstanceState);
@@ -171,8 +173,13 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();
+		//提交按钮
 		if(id==R.id.title_bar_right_btn){
 			submitBtnClick();
+		}else if(id==R.id.title_bar_left_btn){
+			finish();
+		}else if(id==R.id.user_info_gender){
+			new GenderSelectDialog(this).show();
 		}
 	}
 	
@@ -258,6 +265,12 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 	}
+	
+	
+	public void setGender(String gender){
+		userInfoGender.setText(gender);
+	}
+	
 	
 	public void submitResult(String result){
 		submitLoading.dismiss();
