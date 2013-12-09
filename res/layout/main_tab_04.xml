@@ -184,7 +184,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:background="@drawable/dialog_nagative_button_click"
+            android:background="@drawable/red_btn_selector"
             android:gravity="center"
             android:padding="10dp"
             android:text="退出当前账号"

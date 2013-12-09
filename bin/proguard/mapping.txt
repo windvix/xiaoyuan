@@ -5550,6 +5550,8 @@ com.handmark.pulltorefresh.library.OverscrollHelper -> com.handmark.pulltorefres
     void overScrollBy(com.handmark.pulltorefresh.library.PullToRefreshBase,int,int,int,int,int,int,float,boolean) -> overScrollBy
     boolean isAndroidOverScrollEnabled(android.view.View) -> isAndroidOverScrollEnabled
     int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation() -> $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation
+com.handmark.pulltorefresh.library.OverscrollHelper$1 -> com.handmark.pulltorefresh.library.OverscrollHelper$1:
+    int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation -> $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation
 com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase -> com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase:
     boolean mLastItemVisible -> mLastItemVisible
     android.widget.AbsListView$OnScrollListener mOnScrollListener -> mOnScrollListener
@@ -5587,6 +5589,8 @@ com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase -> com.handmark.
     void removeIndicatorViews() -> removeIndicatorViews
     void updateIndicatorViewsVisibility() -> updateIndicatorViewsVisibility
     int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode() -> $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
+com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase$1 -> com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase$1:
+    int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode -> $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
 com.handmark.pulltorefresh.library.PullToRefreshBase -> com.handmark.pulltorefresh.library.PullToRefreshBase:
     boolean DEBUG -> DEBUG
     boolean USE_HW_LAYERS -> USE_HW_LAYERS
@@ -5729,6 +5733,11 @@ com.handmark.pulltorefresh.library.PullToRefreshBase$2 -> com.handmark.pulltoref
 com.handmark.pulltorefresh.library.PullToRefreshBase$3 -> com.handmark.pulltorefresh.library.PullToRefreshBase$3:
     com.handmark.pulltorefresh.library.PullToRefreshBase this$0 -> this$0
     void onSmoothScrollFinished() -> onSmoothScrollFinished
+com.handmark.pulltorefresh.library.PullToRefreshBase$4 -> com.handmark.pulltorefresh.library.PullToRefreshBase$4:
+    int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation -> $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation
+    int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$State -> $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$State
+    int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode -> $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
+    int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$AnimationStyle -> $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$AnimationStyle
 com.handmark.pulltorefresh.library.PullToRefreshBase$AnimationStyle -> com.handmark.pulltorefresh.library.PullToRefreshBase$AnimationStyle:
     com.handmark.pulltorefresh.library.PullToRefreshBase$AnimationStyle ROTATE -> ROTATE
     com.handmark.pulltorefresh.library.PullToRefreshBase$AnimationStyle FLIP -> FLIP
@@ -5848,6 +5857,8 @@ com.handmark.pulltorefresh.library.PullToRefreshListView -> com.handmark.pulltor
     android.view.View createRefreshableView(android.content.Context,android.util.AttributeSet) -> createRefreshableView
     android.widget.FrameLayout access$1(com.handmark.pulltorefresh.library.PullToRefreshListView) -> access$1
     int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode() -> $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
+com.handmark.pulltorefresh.library.PullToRefreshListView$1 -> com.handmark.pulltorefresh.library.PullToRefreshListView$1:
+    int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode -> $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
 com.handmark.pulltorefresh.library.PullToRefreshListView$InternalListView -> com.handmark.pulltorefresh.library.PullToRefreshListView$InternalListView:
     boolean mAddedLvFooter -> mAddedLvFooter
     com.handmark.pulltorefresh.library.PullToRefreshListView this$0 -> this$0
@@ -5932,6 +5943,8 @@ com.handmark.pulltorefresh.library.internal.FlipLoadingLayout -> com.handmark.pu
     int getDefaultDrawableResId() -> getDefaultDrawableResId
     float getDrawableRotationAngle() -> getDrawableRotationAngle
     int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode() -> $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
+com.handmark.pulltorefresh.library.internal.FlipLoadingLayout$1 -> com.handmark.pulltorefresh.library.internal.FlipLoadingLayout$1:
+    int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode -> $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
 com.handmark.pulltorefresh.library.internal.IndicatorLayout -> com.handmark.pulltorefresh.library.internal.IndicatorLayout:
     int DEFAULT_ROTATION_ANIMATION_DURATION -> DEFAULT_ROTATION_ANIMATION_DURATION
     android.view.animation.Animation mInAnim -> mInAnim
@@ -5949,6 +5962,8 @@ com.handmark.pulltorefresh.library.internal.IndicatorLayout -> com.handmark.pull
     void releaseToRefresh() -> releaseToRefresh
     void pullToRefresh() -> pullToRefresh
     int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode() -> $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
+com.handmark.pulltorefresh.library.internal.IndicatorLayout$1 -> com.handmark.pulltorefresh.library.internal.IndicatorLayout$1:
+    int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode -> $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
 com.handmark.pulltorefresh.library.internal.LoadingLayout -> com.handmark.pulltorefresh.library.internal.LoadingLayout:
     java.lang.String LOG_TAG -> LOG_TAG
     android.view.animation.Interpolator ANIMATION_INTERPOLATOR -> ANIMATION_INTERPOLATOR
@@ -5995,6 +6010,9 @@ com.handmark.pulltorefresh.library.internal.LoadingLayout -> com.handmark.pullto
     void setTextColor(android.content.res.ColorStateList) -> setTextColor
     int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation() -> $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation
     int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode() -> $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
+com.handmark.pulltorefresh.library.internal.LoadingLayout$1 -> com.handmark.pulltorefresh.library.internal.LoadingLayout$1:
+    int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation -> $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation
+    int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode -> $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
 com.handmark.pulltorefresh.library.internal.RotateLoadingLayout -> com.handmark.pulltorefresh.library.internal.RotateLoadingLayout:
     int ROTATION_ANIMATION_DURATION -> ROTATION_ANIMATION_DURATION
     android.view.animation.Animation mRotateAnimation -> mRotateAnimation
@@ -6211,33 +6229,37 @@ com.xynxs.main.BaseActivity -> com.xynxs.main.a:
     com.baidu.sharesdk.BaiduSocialShare socialShare -> c
     android.os.Handler mHandler -> a
     com.xynxs.main.util.DBHelper dbHelper -> d
+    java.lang.String appDownloadDir -> e
     void toQuitTheApp() -> a
     java.lang.String getFromAssets(java.lang.String) -> a
     void toast(java.lang.String) -> b
     void toastNetworkBusy() -> b
     com.baidu.sharesdk.BaiduSocialShare getSocailShare() -> c
-    android.view.LayoutInflater getInflater() -> h
+    android.view.LayoutInflater getInflater() -> i
     android.view.View createView(int) -> a
     void startActivity(android.content.Intent) -> startActivity
     boolean hasLogin() -> d
     int getVersionCode() -> e
     void cleanAllData() -> f
-    android.content.SharedPreferences getPreference() -> i
+    android.content.SharedPreferences getPreference() -> j
     boolean saveDataString(java.lang.String,java.lang.String) -> a
     java.lang.String getDataString(java.lang.String) -> c
     boolean saveDataInt(java.lang.String,int) -> a
     int getDataInt(java.lang.String) -> d
     com.xynxs.main.bean.User getUser() -> g
     void saveUser(java.lang.String) -> e
-    com.xynxs.main.util.DBHelper getDbhelper() -> j
+    com.xynxs.main.util.DBHelper getDbhelper() -> k
+    java.lang.String getAppDownloadDir() -> h
     java.lang.Object convert(java.lang.String,java.lang.Class) -> a
-    void access$0(com.xynxs.main.BaseActivity,boolean) -> a
+    android.graphics.Bitmap readBitmapAutoSize(java.lang.String,int,int) -> a
+    android.graphics.BitmapFactory$Options setBitmapOption(java.lang.String,int,int) -> b
+    boolean access$002(com.xynxs.main.BaseActivity,boolean) -> a
 com.xynxs.main.BaseActivity$1 -> com.xynxs.main.b:
     com.xynxs.main.BaseActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
+    void run() -> run
 com.xynxs.main.BaseActivity$2 -> com.xynxs.main.c:
     com.xynxs.main.BaseActivity this$0 -> a
-    void run() -> run
+    void handleMessage(android.os.Message) -> handleMessage
 com.xynxs.main.GuideActivity -> com.xynxs.main.GuideActivity:
     android.support.v4.view.ViewPager viewpager -> b
     java.util.List list -> c
@@ -6273,16 +6295,16 @@ com.xynxs.main.LoginActivity -> com.xynxs.main.LoginActivity:
     com.xynxs.main.LoginActivity$GetUserByMsgTask msgTask -> m
     com.xynxs.main.dialog.LoadingDialog loadingDialog -> n
     void onCreate(android.os.Bundle) -> onCreate
-    void showWaitingView() -> h
-    void showProvView() -> i
+    void showWaitingView() -> i
+    void showProvView() -> j
     void showCollegeView(java.lang.String) -> f
     void showYearView(java.lang.String,java.lang.String) -> b
     void showIntrView(java.lang.String,java.lang.String,java.lang.String) -> a
     void register(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
-    java.lang.String getInterest() -> j
+    java.lang.String getInterest() -> k
     java.util.List initCollegeList(java.lang.String) -> g
-    java.util.List initProvList() -> k
+    java.util.List initProvList() -> l
     void access$0(com.xynxs.main.LoginActivity,java.lang.String) -> a
     void access$1(com.xynxs.main.LoginActivity) -> a
     com.xynxs.main.dialog.LoadingDialog access$2(com.xynxs.main.LoginActivity) -> b
@@ -6433,10 +6455,10 @@ com.xynxs.main.MainActivity -> com.xynxs.main.MainActivity:
     java.util.List list -> c
     android.os.Handler handler -> d
     void onCreate(android.os.Bundle) -> onCreate
-    void getServerUserInfo() -> h
+    void getServerUserInfo() -> i
     void getServerUserInfoResult(java.lang.String) -> f
-    void checkVersion() -> i
-    void checkVersionResult() -> j
+    void checkVersion() -> j
+    void checkVersionResult() -> k
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     void showUserToast(java.lang.String) -> g
     com.xynxs.main.component.MyViewPager access$0(com.xynxs.main.MainActivity) -> a
@@ -6564,20 +6586,27 @@ com.xynxs.main.MyInfoActivity -> com.xynxs.main.MyInfoActivity:
     android.widget.EditText userInfoIntro -> m
     android.widget.TextView userInfoLabel -> n
     android.widget.TextView userInfoScore -> o
-    com.xynxs.main.MyInfoActivity$LoadHeadImgTask imgTask -> p
+    com.xynxs.main.task.LoadHeadImgTask imgTask -> p
+    com.xynxs.main.dialog.LoadingDialog submitLoading -> q
+    boolean pictureSelected -> r
+    java.lang.String city -> s
     void onCreate(android.os.Bundle) -> onCreate
-    void initData(boolean) -> a
-    void setLabel(java.lang.String) -> f
+    void initData() -> i
+    void setLabel(java.lang.String) -> g
+    void onClick(android.view.View) -> onClick
+    void submitBtnClick() -> j
+    void submitResult(java.lang.String) -> f
+    void deleteUserHeadImg() -> k
+    void onDestroy() -> onDestroy
     void hideInputKeybord(android.widget.EditText) -> a
+    android.widget.ImageView access$0(com.xynxs.main.MyInfoActivity) -> a
+    void access$1(com.xynxs.main.MyInfoActivity,com.xynxs.main.task.LoadHeadImgTask) -> a
 com.xynxs.main.MyInfoActivity$1 -> com.xynxs.main.bb:
     com.xynxs.main.MyInfoActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.xynxs.main.MyInfoActivity$LoadHeadImgTask -> com.xynxs.main.bc:
-    android.widget.ImageView view -> a
-    java.lang.String url -> b
-    void doInBackground() -> a
-    void stopTask() -> d
-    void onPostExecute() -> b
+com.xynxs.main.MyInfoActivity$2 -> com.xynxs.main.bc:
+    com.xynxs.main.MyInfoActivity this$0 -> a
+    void run() -> run
 com.xynxs.main.R -> com.xynxs.main.bd:
 com.xynxs.main.R$styleable -> com.xynxs.main.be:
     int[] PullToRefresh -> PullToRefresh
@@ -6602,7 +6631,7 @@ com.xynxs.main.R$styleable -> com.xynxs.main.be:
     int PullToRefresh_ptrSubHeaderTextAppearance -> PullToRefresh_ptrSubHeaderTextAppearance
 com.xynxs.main.WelcomActivity -> com.xynxs.main.WelcomActivity:
     void onCreate(android.os.Bundle) -> onCreate
-    boolean hasShownGuide() -> h
+    boolean hasShownGuide() -> i
 com.xynxs.main.WelcomActivity$1 -> com.xynxs.main.bf:
     com.xynxs.main.WelcomActivity this$0 -> a
     void run() -> run
@@ -6855,21 +6884,35 @@ com.xynxs.main.dialog.UpdateDialog -> com.xynxs.main.a.f:
     com.xynxs.main.MainActivity act -> c
     void onClick(android.view.View) -> onClick
 com.xynxs.main.task.BaseTask -> com.xynxs.main.b.a:
-    boolean isForceStop -> a
-    com.xynxs.main.BaseActivity activity -> b
-    java.util.List helpers -> c
-    com.xynxs.main.util.ServerHelper getHelper() -> e
-    void stopTask() -> d
+    com.xynxs.main.BaseActivity activity -> a
+    java.util.List helpers -> b
+    com.xynxs.main.util.ServerHelper getHelper() -> d
+    void stopTask() -> e
     void cancelTask() -> c
     java.lang.Void doInBackground(java.lang.Void[]) -> a
     void doInBackground() -> a
     void onPostExecute(java.lang.Void) -> a
     void onPostExecute() -> b
     void startTask() -> f
-    boolean isForceStop() -> g
-    com.xynxs.main.BaseActivity getActivity() -> h
+    com.xynxs.main.BaseActivity getActivity() -> g
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.xynxs.main.task.LoadHeadImgTask -> com.xynxs.main.b.b:
+    android.widget.ImageView view -> a
+    java.lang.String url -> b
+    android.graphics.Bitmap bitmap -> c
+    void doInBackground() -> a
+    void onPostExecute() -> b
+    byte[] getImage(java.lang.String) -> a
+    byte[] readStream(java.io.InputStream) -> a
+    void saveFile(android.graphics.Bitmap,java.io.File) -> a
+    android.graphics.Bitmap byteToBitmap(byte[]) -> a
+com.xynxs.main.task.UpdateUserInfoTask -> com.xynxs.main.b.c:
+    boolean pictureSelected -> a
+    com.xynxs.main.bean.User user -> b
+    java.lang.String result -> c
+    void doInBackground() -> a
+    void onPostExecute() -> b
 com.xynxs.main.util.DBHelper -> com.xynxs.main.c.a:
     void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
@@ -6895,13 +6938,14 @@ com.xynxs.main.util.LevelUtil -> com.xynxs.main.c.c:
 com.xynxs.main.util.ServerHelper -> com.xynxs.main.c.d:
     int versionCode -> a
     java.util.Map params -> b
-    boolean isFinish -> c
-    java.io.InputStreamReader isr -> d
-    java.io.BufferedReader br -> e
-    java.net.HttpURLConnection conn -> f
-    java.lang.String result -> g
+    com.xynxs.main.task.BaseTask task -> c
+    boolean isFinish -> d
+    java.io.InputStreamReader isr -> e
+    java.io.BufferedReader br -> f
+    java.net.HttpURLConnection conn -> g
+    java.lang.String result -> h
     java.lang.String getS() -> a
-    void addParam(java.lang.String,java.lang.String) -> a
+    void addParam(java.lang.String,java.lang.String) -> b
     java.lang.String initDataVal() -> e
     void setVersionCode(int) -> a
     int getServerHelperVersionCode() -> b
@@ -6910,31 +6954,15 @@ com.xynxs.main.util.ServerHelper -> com.xynxs.main.c.d:
     java.lang.Object getUser(java.lang.String,boolean) -> a
     java.lang.Object getUserByMsg(java.lang.String) -> a
     java.lang.Object register(java.lang.String,java.lang.String,java.lang.String,int,java.lang.String) -> a
+    java.lang.Object updateUserInfo(java.lang.String,java.lang.String,int,java.lang.String,java.lang.String,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
     java.lang.Object getNewestVersion() -> d
+    void uploadImg(java.io.File,java.lang.String,java.lang.String) -> a
+    java.lang.String getUploadImgURL(java.lang.String,java.lang.String) -> a
+    java.lang.String replace(java.lang.String) -> c
 com.xynxs.main.util.StringUtil -> com.xynxs.main.c.e:
-    java.lang.String decodeUnicode(java.lang.String) -> a
+    boolean isEmpty(java.lang.String) -> a
+    java.lang.String decodeUnicode(java.lang.String) -> b
     int getCurrentYear() -> a
-com.xynxs.main.util.ToastUtil -> com.xynxs.main.c.f:
-    android.os.Handler handler -> a
-    android.widget.Toast toast -> b
-    java.lang.Object synObj -> c
-    void showMessage(android.content.Context,java.lang.String) -> a
-    void showMessage(android.content.Context,java.lang.String,int) -> a
-    android.os.Handler access$0() -> a
-    java.lang.Object access$1() -> b
-    android.widget.Toast access$2() -> c
-    void access$3(android.widget.Toast) -> a
-com.xynxs.main.util.ToastUtil$1 -> com.xynxs.main.c.g:
-    java.lang.String val$msg -> a
-    int val$len -> b
-    android.content.Context val$act -> c
-    void run() -> run
-com.xynxs.main.util.ToastUtil$1$1 -> com.xynxs.main.c.h:
-    com.xynxs.main.util.ToastUtil$1 this$1 -> a
-    java.lang.String val$msg -> b
-    int val$len -> c
-    android.content.Context val$act -> d
-    void run() -> run
 flexjson.BasicType -> a.a:
     flexjson.BasicType OBJECT -> a
     flexjson.BasicType ARRAY -> b

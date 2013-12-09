@@ -1,17 +1,20 @@
 # view res/layout/activity_nav.xml #generated:8
 -keep class android.support.v4.view.ViewPager { <init>(...); }
 
-# view AndroidManifest.xml #generated:78
+# view AndroidManifest.xml #generated:83
 -keep class com.baidu.social.core.PlatformSsoCallBackActivity { <init>(...); }
 
 # view res/layout/main_tab_02.xml #generated:67
 -keep class com.handmark.pulltorefresh.library.PullToRefreshListView { <init>(...); }
 
-# view AndroidManifest.xml #generated:86
+# view AndroidManifest.xml #generated:91
 -keep class com.tencent.tauth.AuthActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:50
 -keep class com.xynxs.main.GuideActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:75
+-keep class com.xynxs.main.InterestEditActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:62
 -keep class com.xynxs.main.LoginActivity { <init>(...); }

@@ -42,10 +42,15 @@ public class WelcomActivity extends BaseActivity{
 		//第一次使用
 		else{
 			finish();
+			//创建文件下载目录
 			Intent guide = new Intent(getApplicationContext(), GuideActivity.class);
 			startActivity(guide);
 		}
 	}
+	
+	
+	
+	
 	
 	
 	

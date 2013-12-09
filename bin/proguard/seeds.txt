@@ -4123,6 +4123,9 @@ com.handmark.pulltorefresh.library.OverscrollHelper: void overScrollBy(com.handm
 com.handmark.pulltorefresh.library.OverscrollHelper: void overScrollBy(com.handmark.pulltorefresh.library.PullToRefreshBase,int,int,int,int,int,int,float,boolean)
 com.handmark.pulltorefresh.library.OverscrollHelper: boolean isAndroidOverScrollEnabled(android.view.View)
 com.handmark.pulltorefresh.library.OverscrollHelper: int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation()
+com.handmark.pulltorefresh.library.OverscrollHelper$1
+com.handmark.pulltorefresh.library.OverscrollHelper$1: int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation
+com.handmark.pulltorefresh.library.OverscrollHelper$1: void <clinit>()
 com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase
 com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase: boolean mLastItemVisible
 com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase: android.widget.AbsListView$OnScrollListener mOnScrollListener
@@ -4164,6 +4167,9 @@ com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase: boolean isLastI
 com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase: void removeIndicatorViews()
 com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase: void updateIndicatorViewsVisibility()
 com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase: int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode()
+com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase$1
+com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase$1: int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
+com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase$1: void <clinit>()
 com.handmark.pulltorefresh.library.PullToRefreshBase
 com.handmark.pulltorefresh.library.PullToRefreshBase: boolean DEBUG
 com.handmark.pulltorefresh.library.PullToRefreshBase: boolean USE_HW_LAYERS
@@ -4313,6 +4319,12 @@ com.handmark.pulltorefresh.library.PullToRefreshBase$3
 com.handmark.pulltorefresh.library.PullToRefreshBase$3: com.handmark.pulltorefresh.library.PullToRefreshBase this$0
 com.handmark.pulltorefresh.library.PullToRefreshBase$3: PullToRefreshBase$3(com.handmark.pulltorefresh.library.PullToRefreshBase)
 com.handmark.pulltorefresh.library.PullToRefreshBase$3: void onSmoothScrollFinished()
+com.handmark.pulltorefresh.library.PullToRefreshBase$4
+com.handmark.pulltorefresh.library.PullToRefreshBase$4: int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation
+com.handmark.pulltorefresh.library.PullToRefreshBase$4: int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$State
+com.handmark.pulltorefresh.library.PullToRefreshBase$4: int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
+com.handmark.pulltorefresh.library.PullToRefreshBase$4: int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$AnimationStyle
+com.handmark.pulltorefresh.library.PullToRefreshBase$4: void <clinit>()
 com.handmark.pulltorefresh.library.PullToRefreshBase$AnimationStyle
 com.handmark.pulltorefresh.library.PullToRefreshBase$AnimationStyle: com.handmark.pulltorefresh.library.PullToRefreshBase$AnimationStyle ROTATE
 com.handmark.pulltorefresh.library.PullToRefreshBase$AnimationStyle: com.handmark.pulltorefresh.library.PullToRefreshBase$AnimationStyle FLIP
@@ -4462,6 +4474,9 @@ com.handmark.pulltorefresh.library.PullToRefreshListView: void handleStyledAttri
 com.handmark.pulltorefresh.library.PullToRefreshListView: android.view.View createRefreshableView(android.content.Context,android.util.AttributeSet)
 com.handmark.pulltorefresh.library.PullToRefreshListView: android.widget.FrameLayout access$1(com.handmark.pulltorefresh.library.PullToRefreshListView)
 com.handmark.pulltorefresh.library.PullToRefreshListView: int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode()
+com.handmark.pulltorefresh.library.PullToRefreshListView$1
+com.handmark.pulltorefresh.library.PullToRefreshListView$1: int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
+com.handmark.pulltorefresh.library.PullToRefreshListView$1: void <clinit>()
 com.handmark.pulltorefresh.library.PullToRefreshListView$InternalListView
 com.handmark.pulltorefresh.library.PullToRefreshListView$InternalListView: boolean mAddedLvFooter
 com.handmark.pulltorefresh.library.PullToRefreshListView$InternalListView: com.handmark.pulltorefresh.library.PullToRefreshListView this$0
@@ -4567,6 +4582,9 @@ com.handmark.pulltorefresh.library.internal.FlipLoadingLayout: void resetImpl()
 com.handmark.pulltorefresh.library.internal.FlipLoadingLayout: int getDefaultDrawableResId()
 com.handmark.pulltorefresh.library.internal.FlipLoadingLayout: float getDrawableRotationAngle()
 com.handmark.pulltorefresh.library.internal.FlipLoadingLayout: int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode()
+com.handmark.pulltorefresh.library.internal.FlipLoadingLayout$1
+com.handmark.pulltorefresh.library.internal.FlipLoadingLayout$1: int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
+com.handmark.pulltorefresh.library.internal.FlipLoadingLayout$1: void <clinit>()
 com.handmark.pulltorefresh.library.internal.IndicatorLayout
 com.handmark.pulltorefresh.library.internal.IndicatorLayout: int DEFAULT_ROTATION_ANIMATION_DURATION
 com.handmark.pulltorefresh.library.internal.IndicatorLayout: android.view.animation.Animation mInAnim
@@ -4585,6 +4603,9 @@ com.handmark.pulltorefresh.library.internal.IndicatorLayout: void onAnimationSta
 com.handmark.pulltorefresh.library.internal.IndicatorLayout: void releaseToRefresh()
 com.handmark.pulltorefresh.library.internal.IndicatorLayout: void pullToRefresh()
 com.handmark.pulltorefresh.library.internal.IndicatorLayout: int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode()
+com.handmark.pulltorefresh.library.internal.IndicatorLayout$1
+com.handmark.pulltorefresh.library.internal.IndicatorLayout$1: int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
+com.handmark.pulltorefresh.library.internal.IndicatorLayout$1: void <clinit>()
 com.handmark.pulltorefresh.library.internal.LoadingLayout
 com.handmark.pulltorefresh.library.internal.LoadingLayout: java.lang.String LOG_TAG
 com.handmark.pulltorefresh.library.internal.LoadingLayout: android.view.animation.Interpolator ANIMATION_INTERPOLATOR
@@ -4633,6 +4654,10 @@ com.handmark.pulltorefresh.library.internal.LoadingLayout: void setTextAppearanc
 com.handmark.pulltorefresh.library.internal.LoadingLayout: void setTextColor(android.content.res.ColorStateList)
 com.handmark.pulltorefresh.library.internal.LoadingLayout: int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation()
 com.handmark.pulltorefresh.library.internal.LoadingLayout: int[] $SWITCH_TABLE$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode()
+com.handmark.pulltorefresh.library.internal.LoadingLayout$1
+com.handmark.pulltorefresh.library.internal.LoadingLayout$1: int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Orientation
+com.handmark.pulltorefresh.library.internal.LoadingLayout$1: int[] $SwitchMap$com$handmark$pulltorefresh$library$PullToRefreshBase$Mode
+com.handmark.pulltorefresh.library.internal.LoadingLayout$1: void <clinit>()
 com.handmark.pulltorefresh.library.internal.RotateLoadingLayout
 com.handmark.pulltorefresh.library.internal.RotateLoadingLayout: int ROTATION_ANIMATION_DURATION
 com.handmark.pulltorefresh.library.internal.RotateLoadingLayout: android.view.animation.Animation mRotateAnimation
@@ -4677,6 +4702,7 @@ com.xynxs.main.MainActivity
 com.xynxs.main.MainActivity: MainActivity()
 com.xynxs.main.MyInfoActivity
 com.xynxs.main.MyInfoActivity: MyInfoActivity()
+com.xynxs.main.MyInfoActivity: void onClick(android.view.View)
 com.xynxs.main.R$anim: int app_exit
 com.xynxs.main.R$anim: int end_zoomin
 com.xynxs.main.R$anim: int end_zoomout
@@ -4843,6 +4869,9 @@ com.xynxs.main.R$drawable: int post_template_bg_click
 com.xynxs.main.R$drawable: int post_template_bg_default
 com.xynxs.main.R$drawable: int post_template_msg_bg
 com.xynxs.main.R$drawable: int post_template_msg_bg_default
+com.xynxs.main.R$drawable: int red_btn_click
+com.xynxs.main.R$drawable: int red_btn_default
+com.xynxs.main.R$drawable: int red_btn_selector
 com.xynxs.main.R$drawable: int search_dialog_bg
 com.xynxs.main.R$drawable: int select_bar_bg
 com.xynxs.main.R$drawable: int select_tab_bg

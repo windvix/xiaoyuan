@@ -71,7 +71,12 @@
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        
+                <!-- 个人信息编辑界面 -->
+        <activity
+            android:name="com.xynxs.main.InterestEditActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         
 
         <!-- 用于SSO回调的activity -->

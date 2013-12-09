@@ -82,6 +82,9 @@ D:\Android_project\xiaoyuan2\res\drawable\post_template_bg_click.xml \
 D:\Android_project\xiaoyuan2\res\drawable\post_template_bg_default.xml \
 D:\Android_project\xiaoyuan2\res\drawable\post_template_msg_bg.xml \
 D:\Android_project\xiaoyuan2\res\drawable\post_template_msg_bg_default.xml \
+D:\Android_project\xiaoyuan2\res\drawable\red_btn_click.xml \
+D:\Android_project\xiaoyuan2\res\drawable\red_btn_default.xml \
+D:\Android_project\xiaoyuan2\res\drawable\red_btn_selector.xml \
 D:\Android_project\xiaoyuan2\res\drawable\search_dialog_bg.xml \
 D:\Android_project\xiaoyuan2\res\drawable\select_bar_bg.xml \
 D:\Android_project\xiaoyuan2\res\drawable\select_tab_bg.xml \

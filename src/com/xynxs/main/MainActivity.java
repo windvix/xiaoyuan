@@ -107,7 +107,7 @@ public class MainActivity extends BaseActivity {
 			@Override
 			public void run() {
 
-				result = new ServerHelper().getUser(getUser().getId(), true);
+				result = new ServerHelper(null).getUser(getUser().getId(), true);
 				/**
 				 * 如果无法获取得到用户信息，将会不断循环
 				 */
@@ -177,7 +177,7 @@ public class MainActivity extends BaseActivity {
 			@Override
 			public void run() {
 				Object result = null;
-				result = new ServerHelper().getNewestVersion();
+				result = new ServerHelper(null).getNewestVersion();
 				// 说明连接成功
 				if (result != null && !result.equals("")) {
 					// 尝试解释

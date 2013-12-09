@@ -9,9 +9,7 @@ import com.xynxs.main.util.ServerHelper;
 import android.os.AsyncTask;
 
 public abstract class BaseTask extends AsyncTask<Void, Void, Void>{
-	
-	private boolean isForceStop = false;
-	
+
 	private BaseActivity activity;
 	
 	private List<ServerHelper> helpers;
@@ -24,9 +22,11 @@ public abstract class BaseTask extends AsyncTask<Void, Void, Void>{
 		}
 	}
 	
-	
+	/**
+	 * 获取服务器连接助手
+	 */
 	public ServerHelper getHelper(){
-		ServerHelper helper=  new ServerHelper();
+		ServerHelper helper=  new ServerHelper(this);
 		helpers.add(helper);
 		return helper;
 	}
@@ -35,7 +35,6 @@ public abstract class BaseTask extends AsyncTask<Void, Void, Void>{
 	 * 停止当前任务
 	 */
 	public void stopTask(){
-		isForceStop = true;
 		cancel(true);
 		if(helpers!=null && helpers.size()>0){
 			for(ServerHelper h:helpers){
@@ -49,13 +48,18 @@ public abstract class BaseTask extends AsyncTask<Void, Void, Void>{
 	 * 取消任务(和停止的区别在于,这里通知了activity的视图)
 	 */
 	public void cancelTask(){
-		isForceStop = true;
 		cancel(true);
+		if(helpers!=null && helpers.size()>0){
+			for(ServerHelper h:helpers){
+				h.stopConnection();
+			}
+			helpers.clear();
+		}
 	}
 	
 	@Override
 	protected Void doInBackground(Void... params) {
-		if(!isForceStop){
+		if(!isCancelled()){
 			doInBackground();
 		}
 		return null;
@@ -69,7 +73,7 @@ public abstract class BaseTask extends AsyncTask<Void, Void, Void>{
 	
 	@Override
 	protected void onPostExecute(Void result) {
-		if(!isForceStop){
+		if(!isCancelled()){
 			onPostExecute();
 		}
 	}
@@ -81,13 +85,6 @@ public abstract class BaseTask extends AsyncTask<Void, Void, Void>{
 	 */
 	public void startTask(){
 		execute();
-	}
-	
-	/**
-	 * 是否强行停止
-	 */
-	public boolean isForceStop(){
-		return isForceStop;
 	}
 	
 	protected BaseActivity getActivity(){

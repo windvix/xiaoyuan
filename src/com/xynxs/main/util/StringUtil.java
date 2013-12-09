@@ -62,6 +62,20 @@ public class StringUtil {
 		return dateStr;
 	}
 
+	
+	/**
+	 * 判断字符串是否为空
+	 */
+	public static boolean isEmpty(String str) {
+		boolean result = false;
+		if (str == null) {
+			result = true;
+		} else if (str.equals("")) {
+			result = true;
+		}
+		return result;
+	}
+	
 	public static String decodeUnicode(String theString) {
 		char aChar;
 		int len = theString.length();

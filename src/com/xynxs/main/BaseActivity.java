@@ -1,5 +1,8 @@
 package com.xynxs.main;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 import org.apache.http.util.EncodingUtils;
@@ -23,10 +26,14 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 @SuppressLint("CommitPrefEdits")
 public class BaseActivity extends Activity {
@@ -99,7 +106,7 @@ public class BaseActivity extends Activity {
 	 * 显示一个类toast消息
 	 */
 	public void toast(String msg) {
-		ToastUtil.showMessage(getApplicationContext(), msg);
+		Toast.makeText(getApplicationContext(), msg,Toast.LENGTH_SHORT).show();
 	}
 
 	/**
@@ -247,12 +254,126 @@ public class BaseActivity extends Activity {
 		return dbHelper;
 	}
 	
+	private static String appDownloadDir;
 
+	/**
+	 * 获取系统的下载目录
+	 */
+	public String getAppDownloadDir() {
+		if (appDownloadDir == null) {
+			File file = Environment.getExternalStoragePublicDirectory(Const.IMG_DOWNLOAD_FOLDER);
+
+			// 判断目录是否存在, 存在则直接返回
+			if (file.exists() && file.isDirectory()) {
+				appDownloadDir = file.getAbsolutePath();
+			}
+			// 不存在，尝试创建目录
+			else {
+				try {
+					file.mkdir();
+					// 创建成功, 则返回
+					if (file.exists() && file.isDirectory()) {
+						appDownloadDir = file.getAbsolutePath();
+					}
+				} catch (Exception e) {
+
+				}
+			}
+			// 如果appDownloadDir还是为空,说明上面的创建失败
+			if (appDownloadDir == null) {
+				File cache = Environment.getDownloadCacheDirectory();
+				
+				//以缓存目录作为下载目录
+				if (cache.exists() && cache.isDirectory()) {
+					File cacheFile = new File(cache.getAbsoluteFile(), Const.IMG_DOWNLOAD_FOLDER);
+					if (cacheFile.exists() && cacheFile.isDirectory()) {
+						appDownloadDir = cacheFile.getAbsolutePath();
+					} else {
+						try {
+							cacheFile.mkdir();
+							if (cacheFile.exists() && cacheFile.isDirectory()) {
+								appDownloadDir = cacheFile.getAbsolutePath();
+							}
+						} catch (Exception e) {
+
+						}
+					}
+				}
+				//缓存目录不存在，尝试创建
+				else {
+					try {
+						cache.mkdir();
+						if (cache.exists() && cache.isDirectory()) {
+							File cacheFile = new File(cache.getAbsoluteFile(), Const.IMG_DOWNLOAD_FOLDER);
+							cacheFile.mkdir();
+							if (cacheFile.exists() && cacheFile.isDirectory()) {
+								appDownloadDir = cacheFile.getAbsolutePath();
+							}
+						}
+					} catch (Exception e) {
+
+					}
+				}
+			}
+		}
+		return appDownloadDir + "/";
+	}
+
+	
 	/**
 	 * 数据转换成对象
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object convert(String data, Class target) {
 		return new Gson().fromJson(data, target);
+	}
+	
+	
+	
+	/**
+	 * 将绝对路径的图片,以指定的高度和宽度生成bitmap对象
+	 */
+	public Bitmap readBitmapAutoSize(String filePath, int outWidth, int outHeight) {
+		// outWidth和outHeight是目标图片的最大宽度和高度，用作限制
+		FileInputStream fs = null;
+		BufferedInputStream bs = null;
+		try {
+			fs = new FileInputStream(filePath);
+			bs = new BufferedInputStream(fs);
+			BitmapFactory.Options options = setBitmapOption(filePath, outWidth, outHeight);
+			return BitmapFactory.decodeStream(bs, null, options);
+		} catch (Exception e) {
+		} finally {
+			try {
+				bs.close();
+				fs.close();
+			} catch (Exception e) {
+			}
+		}
+		return null;
+	}
+
+	private BitmapFactory.Options setBitmapOption(String file, int width, int height) {
+		BitmapFactory.Options opt = new BitmapFactory.Options();
+		opt.inJustDecodeBounds = true;
+		// 设置只是解码图片的边距，此操作目的是度量图片的实际宽度和高度
+		BitmapFactory.decodeFile(file, opt);
+
+		int outWidth = opt.outWidth; // 获得图片的实际高和宽
+		int outHeight = opt.outHeight;
+
+		opt.inDither = false;
+		opt.inPreferredConfig = Bitmap.Config.RGB_565;
+		// 设置加载图片的颜色数为16bit，默认是RGB_8888，表示24bit颜色和透明通道，但一般用不上
+		opt.inSampleSize = 1;
+		// 设置缩放比,1表示原比例，2表示原来的四分之一....
+		// 计算缩放比
+		if (outWidth != 0 && outHeight != 0 && width != 0 && height != 0) {
+			int sampleSize = (outWidth / width + outHeight / height) / 2;
+			opt.inSampleSize = sampleSize;
+		}
+
+		opt.inJustDecodeBounds = false;// 最后把标志复原
+		return opt;
 	}
 }

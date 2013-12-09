@@ -28,6 +28,7 @@ import com.baidu.inf.iis.bcs.model.ObjectMetadata;
 import com.baidu.inf.iis.bcs.request.PutObjectRequest;
 import com.baidu.inf.iis.bcs.response.BaiduBCSResponse;
 import com.google.gson.Gson;
+import com.xynxs.main.task.BaseTask;
 
 /**
  * 服务器连接助手
@@ -53,6 +54,12 @@ public class ServerHelper {
 	 */
 	private Map<String, String> params = new HashMap<String, String>();
 
+	private BaseTask task;
+
+	public ServerHelper(BaseTask task) {
+		this.task = task;
+	}
+
 	public static String getS() {
 		return SERVER;
 	}
@@ -71,6 +78,7 @@ public class ServerHelper {
 		}
 	}
 
+	
 	private String initDataVal() {
 		String result = new Gson().toJson(params, HashMap.class);
 		result = DTCrypt.encode(result);
@@ -120,7 +128,13 @@ public class ServerHelper {
 				isr = new InputStreamReader(conn.getInputStream());
 				br = new BufferedReader(isr);
 				String temp = null;
-				while ((temp = br.readLine()) != null && !isFinish) {
+				
+				boolean isCancel = false;
+				if(task!=null){
+					isCancel = task.isCancelled();
+				}
+				
+				while ((temp = br.readLine()) != null && !isFinish && !isCancel) {
 					result = result + temp;
 				}
 				isr.close();
