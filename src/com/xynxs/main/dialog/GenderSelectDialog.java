@@ -13,6 +13,9 @@ import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
+/**
+ * 性别选择对话框
+ */
 public class GenderSelectDialog extends Dialog implements android.view.View.OnClickListener {
 
 	private MyInfoActivity activity;

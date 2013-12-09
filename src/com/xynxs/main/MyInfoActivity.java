@@ -12,6 +12,7 @@ import com.xynxs.main.util.LevelUtil;
 import com.xynxs.main.util.StringUtil;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -42,9 +43,9 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 	private TextView userInfoScore;
 
 	private LoadHeadImgTask imgTask;
-	
+
 	private LoadingDialog submitLoading;
-	
+
 	private boolean pictureSelected;
 
 	@Override
@@ -80,7 +81,6 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 
 		initData();
 
-		
 		userInfoGender.setOnClickListener(this);
 		userInfoCollege.setOnClickListener(this);
 		userInfoEntrYear.setOnClickListener(this);
@@ -88,8 +88,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 		userImgBtn.setOnClickListener(this);
 		findViewById(R.id.title_bar_right_btn).setOnClickListener(this);
 		findViewById(R.id.title_bar_left_btn).setOnClickListener(this);
-		
-		
+
 		super.onCreate(savedInstanceState);
 	}
 
@@ -97,9 +96,9 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 	 * 初始化数据
 	 */
 	private void initData() {
-		//城市
+		// 城市
 		city = getUser().getCity_name();
-		
+
 		// 用户头像
 		userImg.setTag(getUser().getId() + Const.MIN_JPG);
 		new Handler().postDelayed(new Runnable() {
@@ -173,24 +172,70 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();
-		//提交按钮
-		if(id==R.id.title_bar_right_btn){
+		// 提交按钮
+		if (id == R.id.title_bar_right_btn) {
 			submitBtnClick();
-		}else if(id==R.id.title_bar_left_btn){
+		} else if (id == R.id.title_bar_left_btn) {
 			finish();
-		}else if(id==R.id.user_info_gender){
+		} else if (id == R.id.user_info_gender) {
 			new GenderSelectDialog(this).show();
+		} else if(id==R.id.user_info_college){
+			showCollegeSelect();
+		} else if(id==R.id.user_info_entran_year){
+			showYearSelect();
+		}
+	}
+	
+	private static final int COLLEGE_RESULT = 11;
+	private static final int YEAR_RESULT = 23;
+	
+	/**
+	 * 选择大学
+	 */
+	private void showCollegeSelect(){
+		Intent intent = new Intent(this, SelectProvActivity.class);
+		intent.putExtra(Const.COLLEGE_NAME_KEY, userInfoCollege.getText().toString());
+		intent.putExtra(Const.CITY_NAME_KEY, city);
+		startActivityForResult(intent, COLLEGE_RESULT);
+	}
+	
+	//显示年份选择
+	private void showYearSelect(){
+		Intent intent = new Intent(this, SelectYearActivity.class);
+		intent.putExtra(Const.ENTR_YEAR_KEY, Integer.parseInt(userInfoEntrYear.getText().toString()));
+		startActivityForResult(intent, YEAR_RESULT);
+	}
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		//大学选择结果
+		if(requestCode==COLLEGE_RESULT){
+			String college = data.getStringExtra(Const.COLLEGE_NAME_KEY);
+			userInfoCollege.setText(college);
+			city = data.getStringExtra(Const.CITY_NAME_KEY);
+		}
+		//年份选择结果
+		else if(requestCode==YEAR_RESULT){
+			int entrYear = data.getIntExtra(Const.ENTR_YEAR_KEY, 0);
+			userInfoEntrYear.setText(entrYear+"");
 		}
 	}
 	
 	
+	
 	private String city;
-	
-	
+
+
 	/**
 	 * 提交按钮
 	 */
-	private void submitBtnClick(){
+	private void submitBtnClick() {
+		findViewById(R.id.user_info_nouse).requestFocus();
+		if (!isChange()) {
+			toast("资料没有变化");
+			return;
+		}
 		String nick = userInfoNick.getText().toString();
 		String birth = "";
 		String college = "";
@@ -198,8 +243,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 		String intro = "";
 		int entrYear = 100;
 		int gender = 1;
-		
-		
+
 		String label = "";
 		String realName = "";
 		User user = getUser();
@@ -222,10 +266,10 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 				label = label.replace("，", "[/-/]");
 				label = label.replace("、", "[/-/]");
 				realName = userInfoRealname.getText().toString();
-				String sex = userInfoGender.getText().toString();
-				if(sex.equals("男")){
+				String sex = userInfoGender.getText().toString().trim();
+				if (sex.equals("男")) {
 					gender = 1;
-				}else{
+				} else {
 					gender = 2;
 				}
 
@@ -244,11 +288,10 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 				if (realName.length() > 7) {
 					toast("姓名7个字以内");
 				} else {
-					
+
 					if (label.replace("[/-/]", ";").split(";").length > 10) {
 						toast("最多设置10个感兴趣的标签");
-					}
-					else {
+					} else {
 
 						if (intro.length() > 50) {
 							toast("个人说明不能超过50字");
@@ -256,7 +299,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 							if (QQ.length() > 13) {
 								toast("QQ长度13字以内");
 							} else {
-								submitLoading = new LoadingDialog(this,  new UpdateUserInfoTask(this, pictureSelected, user),"正在提交");
+								submitLoading = new LoadingDialog(this, new UpdateUserInfoTask(this, pictureSelected, user), "正在提交");
 								submitLoading.show();
 							}
 						}
@@ -265,24 +308,28 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 	}
-	
-	
-	public void setGender(String gender){
+
+	/**
+	 * 设置性别
+	 */
+	public void setGender(String gender) {
 		userInfoGender.setText(gender);
 	}
-	
-	
-	public void submitResult(String result){
+
+	/**
+	 * 提交数据返回的结果
+	 */
+	public void submitResult(String result) {
 		submitLoading.dismiss();
-		if(StringUtil.isEmpty(result)){
+		if (StringUtil.isEmpty(result)) {
 			toast("网络不给力，请稍后再试");
-		}else{
-			if(result.startsWith("FAIL")){
+		} else {
+			if (result.startsWith("FAIL")) {
 				toast(result);
-			}else{
+			} else {
 				saveUser(result);
-				if(pictureSelected){
-					//删除本地用户头像
+				if (pictureSelected) {
+					// 删除本地用户头像
 					deleteUserHeadImg();
 				}
 				pictureSelected = false;
@@ -291,20 +338,19 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 	}
-	
-	
-	//删除本地用户头像
-	private void deleteUserHeadImg(){
-		File min = new File(getAppDownloadDir()+getUser().getId()+Const.MIN_JPG);
-		File max = new File(getAppDownloadDir()+getUser().getId()+Const.MAX_JPG);
-		try{
+
+	// 删除本地用户头像
+	private void deleteUserHeadImg() {
+		File min = new File(getAppDownloadDir() + getUser().getId() + Const.MIN_JPG);
+		File max = new File(getAppDownloadDir() + getUser().getId() + Const.MAX_JPG);
+		try {
 			min.delete();
 			max.delete();
-		}catch(Exception e){
-			
+		} catch (Exception e) {
+
 		}
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		if (imgTask != null) {
@@ -313,6 +359,74 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 		super.onDestroy();
 	}
 
+	
+
+	/**
+	 * 信息是否发生了变化
+	 */
+	private boolean isChange() {
+		boolean isChange = false;
+		if (pictureSelected) {
+			isChange = true;
+		} else {
+			User user = getUser();
+			String nick = userInfoNick.getText().toString();
+			String birth = userInfoBirth.getText().toString().replace("-", "");
+			String college = userInfoCollege.getText().toString();;
+			String city = this.city;
+			int entrYear = Integer.parseInt(userInfoEntrYear.getText().toString());
+			String QQ = userInfoQQ.getText().toString();
+			String intro = userInfoIntro.getText().toString();
+			String label = userInfoLabel.getText().toString();
+			label = label.trim();
+			label = label.replace(" ", "[/-/]");
+			label = label.replace(",", "[/-/]");
+			label = label.replace(";", "[/-/]");
+			label = label.replace("，", "[/-/]");
+			label = label.replace("、", "[/-/]");
+			String realName = userInfoRealname.getText().toString();
+			String sex = userInfoGender.getText().toString().trim();
+			int gender = 1;
+			if (sex.equals("男")) {
+				gender = 1;
+			} else {
+				gender = 2;
+			}
+			
+			if(!nick.equals(user.getName())){
+				isChange = true;
+			}
+			if(!birth.equals(user.getBirthDay())){
+				isChange = true;
+			}
+			if(!college.equals(user.getCollege_name())){
+				isChange = true;
+			}
+			if(!city.equals(user.getCity_name())){
+				isChange = true;
+			}
+			if(entrYear!=user.getEntranceYear()){
+				isChange = true;
+			}
+			if(!QQ.equals(user.getQQ())){
+				isChange = true;
+			}
+			if(!intro.equals(user.getSign())){
+				isChange = true;
+			}
+			if(!label.equals(user.getLabel())){
+				isChange = true;
+			}
+			if(!realName.equals(user.getRealName())){
+				isChange = true;
+			}
+			if(gender!=user.getGender()){
+				isChange = true;
+			}
+		}
+		return isChange;
+	}
+	
 	/**
 	 * 隐藏弹出的键盘
 	 */
@@ -320,4 +434,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
 	}
+	
+	
+	
 }

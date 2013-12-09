@@ -4,6 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.http.util.EncodingUtils;
 
@@ -328,7 +332,59 @@ public class BaseActivity extends Activity {
 		return new Gson().fromJson(data, target);
 	}
 	
+	/**
+	 * 初始化大学列表
+	 */
+	protected List<String> initCollegeList(String prov) {
+		String alls = getFromAssets("colleges.txt");
+		@SuppressWarnings("unchecked")
+		Map<String, List<String>> map = (HashMap<String, List<String>>) convert(alls, HashMap.class);
+		List<String> list = new ArrayList<String>();
+		if (map.containsKey(prov)) {
+			list = map.get(prov);
+			map.clear();
+		}
+		return list;
+	}
 	
+	/**
+	 * 初始化省份列表
+	 */
+	protected List<String> initProvList() {
+		List<String> provList = new ArrayList<String>();
+		provList.add("北京");
+		provList.add("天津");
+		provList.add("河北");
+		provList.add("山西");
+		provList.add("辽宁");
+		provList.add("吉林");
+		provList.add("黑龙江");
+		provList.add("上海");
+		provList.add("江苏");
+		provList.add("浙江");
+		provList.add("安徽");
+		provList.add("福建");
+		provList.add("江西");
+		provList.add("山东");
+		provList.add("河南");
+		provList.add("湖北");
+		provList.add("湖南");
+		provList.add("广东");
+		provList.add("内蒙古");
+		provList.add("广西");
+		provList.add("海南");
+		provList.add("重庆");
+		provList.add("四川");
+		provList.add("贵州");
+		provList.add("云南");
+		provList.add("西藏");
+		provList.add("陕西");
+		provList.add("甘肃");
+		provList.add("青海");
+		provList.add("宁夏");
+		provList.add("新疆");
+		return provList;
+	}
 	
 	/**
 	 * 将绝对路径的图片,以指定的高度和宽度生成bitmap对象
