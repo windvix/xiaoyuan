@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/post_template_bg"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="10dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center"
+        android:orientation="horizontal"
+        android:tag="postList" >
+
+        <ImageView
+            android:id="@+id/post_user_img"
+            android:layout_width="@dimen/post_detail_owner_img_size"
+            android:layout_height="@dimen/post_detail_owner_img_size"
+            android:layout_weight="0"
+            android:background="@drawable/head_default"
+            android:scaleType="fitCenter" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/post_detail_padding" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/post_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="李小白你好吗吗作九十"
+                    android:textColor="#2c5871"
+                    android:textSize="@dimen/post_detail_owner_name_size" />
+
+                <TextView
+                    android:id="@+id/post_user_college"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:paddingLeft="@dimen/post_detail_padding"
+                    android:text="广东水利电力职业技术学院"
+                    android:textColor="#696969"
+                    android:textSize="@dimen/post_detail_owner_college_size" />
+
+                <TextView
+                    android:id="@+id/post_user_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:paddingLeft="2dp"
+                    android:text="♂"
+                    android:textColor="@color/gender_man"
+                    android:textSize="@dimen/post_detail_owner_gender_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" >
+
+                    <TextView
+                        android:id="@+id/post_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="今天09:56"
+                        android:textColor="#696969"
+                        android:textSize="@dimen/post_detail_time_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right" >
+
+                    <ImageView
+                        android:id="@+id/post_fav_btn"
+                        android:layout_width="@dimen/post_detail_star_size"
+                        android:layout_height="@dimen/post_detail_star_size"
+                        android:layout_marginRight="@dimen/post_detail_padding"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/star_unselect"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/post_del_btn"
+                        android:layout_width="@dimen/post_detail_btn_width"
+                        android:layout_height="@dimen/post_detail_btn_height"
+                        android:layout_marginRight="@dimen/post_detail_padding"
+                        android:background="@drawable/post_btn_default"
+                        android:gravity="center"
+                        android:text="删除"
+                        android:textColor="#2d6a89"
+                        android:textSize="@dimen/post_detail_delete_btn_font_size"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/post_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:paddingTop="8dp"
+            android:text="【校园求助】做课程设计,不是很会,现在求指导啊..谁可以帮助我解决一下难题啊"
+            android:textColor="#323232"
+            android:textSize="@dimen/post_detail_content_font_size" />
+
+        <LinearLayout
+            android:id="@+id/post_content_img_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/post_content_img"
+                android:layout_width="@dimen/post_detail_content_img_size"
+                android:layout_height="@dimen/post_detail_content_img_size"
+                android:layout_weight="0"
+                android:scaleType="fitCenter"
+                android:src="@drawable/post_default_img" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:paddingRight="@dimen/post_detail_padding" >
+
+                    <LinearLayout
+                        android:id="@+id/post_comment_btn"
+                        android:layout_width="@dimen/post_detail_btn_width"
+                        android:layout_height="@dimen/post_detail_btn_height"
+                        android:background="@drawable/post_btn_default"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:visibility="invisible" >
+
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:src="@drawable/post_comment" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="2dp"
+                            android:text="评论"
+                            android:textColor="#2d6a89"
+                            android:textSize="@dimen/post_detail_delete_btn_font_size" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="2dp" >
+
+        <LinearLayout
+            android:id="@+id/post_thank_layout"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:background="@drawable/post_info_bg"
+            android:gravity="left|center"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="答谢:"
+                android:textColor="#2d6a89"
+                android:textSize="@dimen/post_detail_thank_font_size" />
+
+            <TextView
+                android:id="@+id/post_thank_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="去务工磊饭店"
+                android:textColor="#2d6a89"
+                android:textSize="@dimen/post_detail_thank_font_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:gravity="center|right" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:paddingBottom="2dp"
+                android:paddingLeft="@dimen/post_detail_padding"
+                android:paddingRight="@dimen/post_detail_padding"
+                android:paddingTop="2dp" >
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/post_eye" />
+
+                <TextView
+                    android:id="@+id/post_visit_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:text="1234568"
+                    android:textColor="#2d6a89"
+                    android:textSize="@dimen/post_detail_thank_font_size" />
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/post_detail_padding"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/post_comment" />
+
+                <TextView
+                    android:id="@+id/post_reply_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:text="1234568"
+                    android:textColor="#2d6a89"
+                    android:textSize="@dimen/post_detail_thank_font_size" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

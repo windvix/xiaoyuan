@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MainActivityTab01_01 implements OnClickListener, OnRefreshListener<ListView> {
+public class MainActivityTab01_02 implements OnClickListener, OnRefreshListener<ListView> {
 
 	private MainActivity act;
 
@@ -34,34 +34,33 @@ public class MainActivityTab01_01 implements OnClickListener, OnRefreshListener<
 	private Button scopeBtn;
 
 	private TextView topicTv;
+	
+	private Button timeBtn;
 
 	private int index = 0;
 	
 	private static final int COUNT = 10;
 
-	private static final String TAB = "1";
+	private static final String TAB = "2";
 
 	private ListPostTask task;
 
 	private MainActivityTab01 main;
 
 	private PostListAdapter adapter;
-	
-	private String keyword;
 
-	public MainActivityTab01_01(MainActivityTab01 main, View root, Button scopeBtn, TextView topicTv) {
+	public MainActivityTab01_02(MainActivityTab01 main, View root, Button scopeBtn, TextView topicTv, Button timeBtn) {
 		this.main = main;
 		this.act = main.getActivity();
 		this.root = root;
 		this.scopeBtn = scopeBtn;
 		this.topicTv = topicTv;
+		this.timeBtn = timeBtn;
 		listView = (PullToRefreshListView) root.findViewById(R.id.pull_refresh_list);
 		listView.setOnRefreshListener(this);
 
 		// 加载上次的数据
 		loadLastData();
-
-		refresh("");
 
 		listView.setOnPullEventListener(new OnPullEventListener<ListView>() {
 			@Override
@@ -74,13 +73,12 @@ public class MainActivityTab01_01 implements OnClickListener, OnRefreshListener<
 	/**
 	 * 刷新当前列表
 	 */
-	public void refresh(String keyword) {
-		this.keyword = keyword;
+	public void refresh() {
 		listView.setRefreshing();
 		if (task != null) {
 			task.stopTask();
 		}
-		task = new ListPostTask(main, TAB, topicTv.getText().toString(), scopeBtn.getText().toString(), 0, COUNT, keyword);
+		task = new ListPostTask(main, TAB, topicTv.getText().toString(), scopeBtn.getText().toString(), 0, COUNT, timeBtn.getText().toString());
 		task.startTask();
 	}
 
@@ -170,6 +168,6 @@ public class MainActivityTab01_01 implements OnClickListener, OnRefreshListener<
 
 	@Override
 	public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-		refresh("");
+		refresh();
 	}
 }

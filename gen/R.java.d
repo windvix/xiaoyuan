@@ -93,6 +93,8 @@ D:\Android_project\xiaoyuan2\res\drawable\select_tab_text_color.xml \
 D:\Android_project\xiaoyuan2\res\drawable\setting_textlist_item_bg.xml \
 D:\Android_project\xiaoyuan2\res\drawable\setting_textlist_item_bg_click.xml \
 D:\Android_project\xiaoyuan2\res\drawable\setting_textlist_item_bg_default.xml \
+D:\Android_project\xiaoyuan2\res\drawable\star_select.png \
+D:\Android_project\xiaoyuan2\res\drawable\star_unselect.png \
 D:\Android_project\xiaoyuan2\res\drawable\tab_address.xml \
 D:\Android_project\xiaoyuan2\res\drawable\tab_find_frd.xml \
 D:\Android_project\xiaoyuan2\res\drawable\tab_settings.xml \
@@ -110,9 +112,9 @@ D:\Android_project\xiaoyuan2\res\drawable\title_bar_setting_icon.png \
 D:\Android_project\xiaoyuan2\res\drawable\title_bar_set_icon.png \
 D:\Android_project\xiaoyuan2\res\drawable\title_bar_submit_icon.png \
 D:\Android_project\xiaoyuan2\res\drawable\title_bar_text.xml \
-D:\Android_project\xiaoyuan2\res\drawable\title_bar_text2.xml \
 D:\Android_project\xiaoyuan2\res\drawable\title_bar_text_click.xml \
 D:\Android_project\xiaoyuan2\res\drawable\title_bar_text_default.xml \
+D:\Android_project\xiaoyuan2\res\drawable\title_bar_text_selector.xml \
 D:\Android_project\xiaoyuan2\res\drawable\title_bar_topic_icon.png \
 D:\Android_project\xiaoyuan2\res\drawable\title_btn.xml \
 D:\Android_project\xiaoyuan2\res\drawable\welcome_bg.jpg \
@@ -152,9 +154,12 @@ D:\Android_project\xiaoyuan2\res\layout\dialog_bottom_select.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_confirm.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_loading.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_msg.xml \
+D:\Android_project\xiaoyuan2\res\layout\dialog_search.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_update.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_user_toast.xml \
+D:\Android_project\xiaoyuan2\res\layout\list_end_no_more.xml \
 D:\Android_project\xiaoyuan2\res\layout\list_no_data.xml \
+D:\Android_project\xiaoyuan2\res\layout\list_post_template.xml \
 D:\Android_project\xiaoyuan2\res\layout\login_01.xml \
 D:\Android_project\xiaoyuan2\res\layout\login_02.xml \
 D:\Android_project\xiaoyuan2\res\layout\login_03.xml \
@@ -217,6 +222,8 @@ D:\Android_project\xiaoyuan2\bin\res\drawable\post_comment.png \
 D:\Android_project\xiaoyuan2\bin\res\drawable\post_default_img.png \
 D:\Android_project\xiaoyuan2\bin\res\drawable\post_eye.png \
 D:\Android_project\xiaoyuan2\bin\res\drawable\post_info_eye.png \
+D:\Android_project\xiaoyuan2\bin\res\drawable\star_select.png \
+D:\Android_project\xiaoyuan2\bin\res\drawable\star_unselect.png \
 D:\Android_project\xiaoyuan2\bin\res\drawable\title_bar_back_icon.png \
 D:\Android_project\xiaoyuan2\bin\res\drawable\title_bar_refresh_icon.png \
 D:\Android_project\xiaoyuan2\bin\res\drawable\title_bar_search_icon.png \
