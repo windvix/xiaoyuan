@@ -25,6 +25,8 @@ public class MainActivityTab01 {
 	private View selectView02 = null;
 	private View selectView03 = null;
 	
+	private MainActivityTab01_01 tab01;
+	
 	public MainActivityTab01(MainActivity activity, View view01){
 		this.act = activity;
 		this.rootView = view01;
@@ -47,6 +49,8 @@ public class MainActivityTab01 {
 		rootView.findViewById(R.id.select_new_tab).setOnClickListener(new MyOnClickListener(0));
 		rootView.findViewById(R.id.select_hot_tab).setOnClickListener(new MyOnClickListener(1));
 		rootView.findViewById(R.id.select_intr_tab).setOnClickListener(new MyOnClickListener(2));
+	
+		tab01 = new MainActivityTab01_01(activity, list.get(0));
 	}
 
 	

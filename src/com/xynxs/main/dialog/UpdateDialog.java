@@ -10,6 +10,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.xynxs.main.BaseActivity;
 import com.xynxs.main.MainActivity;
 import com.xynxs.main.R;
 
@@ -22,9 +23,9 @@ public class UpdateDialog extends Dialog implements android.view.View.OnClickLis
 
 	private String url;
 
-	private MainActivity act;
+	private BaseActivity act;
 
-	public UpdateDialog(MainActivity activity, String versionName, final String url, String description) {
+	public UpdateDialog(BaseActivity activity, String versionName, final String url, String description) {
 		super(activity, R.style.Dialog);
 		this.url = url;
 		this.act = activity;

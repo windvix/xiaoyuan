@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/main_bottom"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/BOTTOM_BAR_HEIGHT"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bottom_bar_bg"
         android:orientation="vertical" >

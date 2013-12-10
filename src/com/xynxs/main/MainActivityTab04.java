@@ -31,7 +31,8 @@ public class MainActivityTab04 implements OnClickListener {
 	public void onClick(View v) {
 		int id = v.getId();
 		if(id==R.id.bottom_tab_04_btn_about){
-			
+			Intent intent = new Intent(act, AboutActivity.class);
+			act.startActivity(intent);
 		}
 		if(id==R.id.bottom_tab_04_btn_clean){
 			
@@ -41,8 +42,6 @@ public class MainActivityTab04 implements OnClickListener {
 			confirm.getPositiveBtn().setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					
-					
 					Intent intent = new Intent(act.getApplicationContext(), LoginActivity.class);
 					act.cleanAllData();
 					act.toast("请重新登录");
@@ -60,7 +59,8 @@ public class MainActivityTab04 implements OnClickListener {
 			confirm.show();
 		}
 		if(id==R.id.bottom_tab_04_btn_fq){
-			
+			Intent intent = new Intent(act, FeedbackActivity.class);
+			act.startActivity(intent);
 		}
 		if(id==R.id.bottom_tab_04_btn_pi){
 			Intent intent = new Intent(act.getApplicationContext(), MyInfoActivity.class);

@@ -187,6 +187,22 @@ public class BaseActivity extends Activity {
 		}
 		return version;
 	}
+	
+	/**
+	 * 获取版本名称：e.g 1.0, 2.1.2
+	 */
+	protected String getVersionName() {
+		String version = "";
+		PackageManager pm = getPackageManager();// context为当前Activity上下文
+		PackageInfo pi;
+		try {
+			pi = pm.getPackageInfo(getPackageName(), 0);
+			version = pi.versionName;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return version;
+	}
 
 	/**
 	 * 以下是关于数据的读取也保存

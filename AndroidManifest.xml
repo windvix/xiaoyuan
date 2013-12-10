@@ -87,6 +87,20 @@
             android:name="com.xynxs.main.SelectYearActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        
+        
+        <!-- 意见反馈界面 -->
+        <activity
+            android:name="com.xynxs.main.FeedbackActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        
+        <!-- 关于界面 -->
+        <activity
+            android:name="com.xynxs.main.AboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        
 
         <!-- 用于SSO回调的activity -->
         <activity

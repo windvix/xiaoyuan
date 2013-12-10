@@ -3,6 +3,8 @@
     
     <!-- title bar -->
     <dimen name="TITLE_BAR_HEIGHT">45dp</dimen>
+    <dimen name="BOTTOM_BAR_HEIGHT">55dp</dimen>
+    <dimen name="SELECT_TAB_HEIGHT">29dp</dimen>
     <dimen name="title_bar_btn_width">52dp</dimen>
     <dimen name="title_bar_btn_height">30dp</dimen>
     <dimen name="title_bar_btn_size">14sp</dimen>

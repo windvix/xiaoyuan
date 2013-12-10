@@ -15,22 +15,23 @@ import com.xynxs.main.util.Const;
 import com.xynxs.main.util.LevelUtil;
 import com.xynxs.main.util.ServerHelper;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+/**
+ * 主界面
+ */
 public class MainActivity extends BaseActivity {
 
 	private MyViewPager viewpager = null;

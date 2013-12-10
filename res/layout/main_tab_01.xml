@@ -104,7 +104,7 @@
     <LinearLayout
         android:id="@+id/main_select_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="29dp"
+        android:layout_height="@dimen/SELECT_TAB_HEIGHT"
         android:layout_weight="0"
         android:background="@drawable/select_bar_bg"
         android:orientation="horizontal" >
@@ -112,7 +112,7 @@
         <!-- 最新事 -->
 
         <LinearLayout
-                        android:id="@+id/select_new_tab"
+            android:id="@+id/select_new_tab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -168,7 +168,7 @@
         <!-- 我的兴趣 -->
 
         <LinearLayout
-                        android:id="@+id/select_intr_tab"
+            android:id="@+id/select_intr_tab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
