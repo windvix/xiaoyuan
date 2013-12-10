@@ -3,7 +3,7 @@ package com.xynxs.main;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.xynxs.main.component.MyTextViewAdapter;
+import com.xynxs.main.adapter.MyTextViewAdapter;
 import com.xynxs.main.util.Const;
 
 

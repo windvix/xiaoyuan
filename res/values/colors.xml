@@ -7,4 +7,7 @@
     
     
     <color name="dialog_bottom_select_default">#161510</color>
+    
+        <color name="gender_man">#0d90e4</color>
+    <color name="gender_woman">#dc2536</color>
 </resources>

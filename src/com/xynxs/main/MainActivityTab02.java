@@ -7,8 +7,8 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnLastItemVisibleListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.xynxs.main.adapter.ReplyListAdapter;
 import com.xynxs.main.bean.Reply;
-import com.xynxs.main.component.ReplyListAdapter;
 
 import android.os.AsyncTask;
 import android.text.format.DateUtils;

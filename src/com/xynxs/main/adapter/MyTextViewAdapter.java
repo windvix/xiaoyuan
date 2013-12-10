@@ -1,4 +1,4 @@
-package com.xynxs.main.component;
+package com.xynxs.main.adapter;
 
 import java.util.ArrayList;
 import java.util.List;

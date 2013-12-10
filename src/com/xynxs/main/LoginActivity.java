@@ -11,7 +11,7 @@ import com.baidu.sharesdk.ShareContent;
 import com.baidu.sharesdk.ShareListener;
 import com.baidu.sharesdk.Utility;
 import com.tencent.stat.common.User;
-import com.xynxs.main.component.MyTextViewAdapter;
+import com.xynxs.main.adapter.MyTextViewAdapter;
 import com.xynxs.main.component.MyViewPager;
 import com.xynxs.main.dialog.LoadingDialog;
 import com.xynxs.main.task.BaseTask;

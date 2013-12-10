@@ -9,6 +9,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivityTab01 {
@@ -26,6 +27,11 @@ public class MainActivityTab01 {
 	private View selectView03 = null;
 	
 	private MainActivityTab01_01 tab01;
+	
+	private TextView titleTv;
+	private Button rightBtn;
+	private Button leftBtn;
+	
 	
 	public MainActivityTab01(MainActivity activity, View view01){
 		this.act = activity;
@@ -50,10 +56,12 @@ public class MainActivityTab01 {
 		rootView.findViewById(R.id.select_hot_tab).setOnClickListener(new MyOnClickListener(1));
 		rootView.findViewById(R.id.select_intr_tab).setOnClickListener(new MyOnClickListener(2));
 	
-		tab01 = new MainActivityTab01_01(activity, list.get(0));
+		titleTv = (TextView)rootView.findViewById(R.id.title_bar_title_tv);
+		rightBtn = (Button)rootView.findViewById(R.id.title_bar_right_btn);
+		leftBtn = (Button)rootView.findViewById(R.id.title_bar_left_btn);
+		
+		tab01 = new MainActivityTab01_01(this, list.get(0), rightBtn, titleTv);
 	}
-
-	
 	
 	private class TabViewPagerAdapter extends PagerAdapter {
 
@@ -130,8 +138,21 @@ public class MainActivityTab01 {
 
 		@Override
 		public void onClick(View v) {
-			viewpager.setCurrentItem(index);
+			viewpager.setCurrentItem(index,false);
 		}
 	};
 
+	
+	public void setList(String data){
+		int cur = viewpager.getCurrentItem();
+		if(cur==0){
+			tab01.onRefreshResult(data);
+		}
+	}
+	
+	
+	
+	public MainActivity getActivity(){
+		return act;
+	}
 }

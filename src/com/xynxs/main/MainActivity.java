@@ -52,10 +52,6 @@ public class MainActivity extends BaseActivity {
 		View view03 = createView(R.layout.main_tab_03);
 		View view04 = createView(R.layout.main_tab_04);
 
-		new MainActivityTab01(this, view01);
-		new MainActivityTab02(this, view02);
-		new MainActivityTab03(this, view03);
-		new MainActivityTab04(this, view04);
 
 		list.add(view01);
 		list.add(view02);
@@ -90,10 +86,17 @@ public class MainActivity extends BaseActivity {
 			}
 		}, 150);
 
-		getServerUserInfo();
+		
 
 		// 获取当前用户
+		getServerUserInfo();
+		
 
+		new MainActivityTab01(this, view01);
+		new MainActivityTab02(this, view02);
+		new MainActivityTab03(this, view03);
+		new MainActivityTab04(this, view04);
+		
 		super.onCreate(savedInstanceState);
 	}
 
