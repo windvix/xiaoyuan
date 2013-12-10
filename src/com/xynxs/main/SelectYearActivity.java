@@ -26,12 +26,10 @@ public class SelectYearActivity extends BaseActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+		super.onCreate(savedInstanceState);
 		original_year = getIntent().getIntExtra(Const.ENTR_YEAR_KEY, 0);
 		
 		setContentView(R.layout.login_05);
-		super.onCreate(savedInstanceState);
-		
 		ListView listView = (ListView) findViewById(R.id.year_listview);
 		findViewById(R.id.title_bar_left_btn).setOnClickListener(new OnClickListener() {
 			@Override
@@ -61,6 +59,7 @@ public class SelectYearActivity extends BaseActivity{
 		Intent intent = new Intent();
 		intent.putExtra(Const.ENTR_YEAR_KEY, year);
 		setResult(12, intent);
+		finish();
 	}
 	
 	@Override

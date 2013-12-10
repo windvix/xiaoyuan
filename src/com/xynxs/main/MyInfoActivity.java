@@ -1,23 +1,31 @@
 package com.xynxs.main;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Calendar;
 
 import com.xynxs.main.bean.User;
 import com.xynxs.main.dialog.GenderSelectDialog;
 import com.xynxs.main.dialog.LoadingDialog;
+import com.xynxs.main.dialog.PictureSelectDialog;
 import com.xynxs.main.task.LoadHeadImgTask;
 import com.xynxs.main.task.UpdateUserInfoTask;
 import com.xynxs.main.util.Const;
 import com.xynxs.main.util.LevelUtil;
 import com.xynxs.main.util.StringUtil;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -183,8 +191,52 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 			showCollegeSelect();
 		} else if(id==R.id.user_info_entran_year){
 			showYearSelect();
+		}else if(id==R.id.user_info_birth){
+			showBirthSelect();
+		}else if(id==R.id.user_info_img_btn){
+			new PictureSelectDialog(this).show();
 		}
 	}
+	
+	
+	private void showBirthSelect(){
+		User user = getUser();
+		String bir = user.getBirthDay();
+		int temY = user.getEntranceYear()-19;
+		int temM = 0;
+		int temD = 1;
+		if (bir == null || bir.equals("") || bir.length() != 8) {
+		} else {
+			
+			temY = Integer.parseInt(bir.substring(0, 4));
+			temM = Integer.parseInt(bir.substring(4, 6)) - 1;
+			temD = Integer.parseInt(bir.substring(6, 8));
+		}
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(temY, temM, temD);
+		
+		DatePickerDialog picker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+			@Override
+			public void onDateSet(DatePicker dp, int year, int month, int dayOfMonth) {
+				// et.setText("您选择了：" + year + "年" + (month+1) + "月" +
+				// dayOfMonth + "日");
+				String y = year + "";
+				String m = (month + 1) + "";
+				String d = dayOfMonth + "";
+				if (m.length() == 1) {
+					m = "0" + m;
+				}
+				if (d.length() == 1) {
+					d = "0" + d;
+				}
+				userInfoBirth.setText(y + "-" + m + "-" + d);
+			}
+			
+		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+		picker.show();
+	}
+	
 	
 	private static final int COLLEGE_RESULT = 11;
 	private static final int YEAR_RESULT = 23;
@@ -206,6 +258,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 		startActivityForResult(intent, YEAR_RESULT);
 	}
 	
+	private static final int CUT_PHOTO_REQUEST_CODE = 2117;
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -219,6 +272,53 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 		else if(requestCode==YEAR_RESULT){
 			int entrYear = data.getIntExtra(Const.ENTR_YEAR_KEY, 0);
 			userInfoEntrYear.setText(entrYear+"");
+		}		
+		// 在相册中选择了图片
+		else if (requestCode == Const.PIC_SELECT_CODE && data != null) {
+			Uri imgUri = data.getData();
+			Intent cutIntent = new Intent("com.android.camera.action.CROP");
+			cutIntent.setDataAndType(imgUri, "image/*");
+			cutIntent.putExtra("crop", "true");
+			cutIntent.putExtra("aspectX", 1);
+			cutIntent.putExtra("aspectY", 1);
+			cutIntent.putExtra("outputX", 100);
+			cutIntent.putExtra("outputY", 100);
+			cutIntent.putExtra("noFaceDetection", true);
+			cutIntent.putExtra("return-data", true);
+			startActivityForResult(cutIntent, CUT_PHOTO_REQUEST_CODE);
+		}
+		// 拍照
+		if (requestCode == Const.PIC_TAKE_CODE) {
+			File file = new File(getAppDownloadDir() + Const.TAKE_PIC_FILE_NAME);
+			if (file.length() > 1) {
+				Uri imgUri = Uri.fromFile(file);
+				Intent cutIntent = new Intent("com.android.camera.action.CROP");
+				cutIntent.setDataAndType(imgUri, "image/*");
+				cutIntent.putExtra("crop", "true");
+				cutIntent.putExtra("aspectX", 1);
+				cutIntent.putExtra("aspectY", 1);
+				cutIntent.putExtra("outputX", 100);
+				cutIntent.putExtra("outputY", 100);
+				cutIntent.putExtra("noFaceDetection", true);
+				cutIntent.putExtra("return-data", true);
+				startActivityForResult(cutIntent, CUT_PHOTO_REQUEST_CODE);
+			} else {
+				try {
+					file.delete();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		//裁剪图片
+		else if (requestCode == CUT_PHOTO_REQUEST_CODE && data != null) {
+			Bitmap bm = data.getParcelableExtra("data");
+			if (bm != null) {
+				saveBitmap(getUser().getId() + Const.TEMP_JPG, bm);
+				userImg.setImageBitmap(bm);
+				userImg.invalidate();
+				pictureSelected = true;
+			}
 		}
 	}
 	
@@ -236,7 +336,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 			toast("资料没有变化");
 			return;
 		}
-		String nick = userInfoNick.getText().toString();
+		String nick = userInfoNick.getText().toString().trim();
 		String birth = "";
 		String college = "";
 		String QQ = "";
@@ -436,5 +536,24 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	
-	
+	/**
+	 * 保存图片到下载目录
+	 */
+	private File saveBitmap(String fileName, Bitmap mBitmap) {
+		File file = new File(getAppDownloadDir() + fileName);
+		try {
+			if (file.exists()) {
+				file.delete();
+			}
+			file.createNewFile();
+			FileOutputStream fOut = null;
+			fOut = new FileOutputStream(file);
+			mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+			fOut.flush();
+			fOut.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return file;
+	}
 }

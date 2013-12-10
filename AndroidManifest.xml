@@ -80,6 +80,13 @@
             android:name="com.xynxs.main.SelectProvActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        
+        
+        <!-- 年份选择界面 -->
+        <activity
+            android:name="com.xynxs.main.SelectYearActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 
         <!-- 用于SSO回调的activity -->
         <activity
