@@ -1,10 +1,10 @@
 package com.xynxs.main.task;
 
-import com.xynxs.main.MainActivityTab01;
+import com.xynxs.main.component.ListPostTaskHelper;
 
 public class ListPostTask extends BaseTask{
 
-	private MainActivityTab01 main;
+	private ListPostTaskHelper main;
 	
 	private int tab;
 	
@@ -23,7 +23,7 @@ public class ListPostTask extends BaseTask{
 	
 	private String result;
 	
-	public ListPostTask(MainActivityTab01 main, String tab,String topic, String scope, int index, int count, String keyword) {
+	public ListPostTask(ListPostTaskHelper main, String tab,String topic, String scope, int index, int count, String keyword) {
 		super(main.getActivity());
 		userId = getActivity().getUser().getId();
 		this.main = main;
@@ -52,7 +52,7 @@ public class ListPostTask extends BaseTask{
 	@Override
 	protected void onPostExecute() {
 		if(!isCancelled()){
-			main.setList(result);
+			main.setPostList(result);
 		}
 	}
 

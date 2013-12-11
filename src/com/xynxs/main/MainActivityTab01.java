@@ -3,6 +3,7 @@ package com.xynxs.main;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.xynxs.main.component.ListPostTaskHelper;
 import com.xynxs.main.component.MyViewPager;
 import com.xynxs.main.dialog.SearchDialog;
 
@@ -17,7 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivityTab01 implements OnClickListener {
+public class MainActivityTab01 implements OnClickListener , ListPostTaskHelper{
 
 	private MainActivity act;
 
@@ -33,6 +34,7 @@ public class MainActivityTab01 implements OnClickListener {
 
 	private MainActivityTab01_01 tab01;
 	private MainActivityTab01_02 tab02;
+	private MainActivityTab01_03 tab03;
 
 	private TextView titleTv;
 	private Button rightBtn;
@@ -67,7 +69,7 @@ public class MainActivityTab01 implements OnClickListener {
 
 		tab01 = new MainActivityTab01_01(this, list.get(0), rightBtn, titleTv);
 		tab02 = new MainActivityTab01_02(this, list.get(1), rightBtn, titleTv, leftBtn);
-		new MainActivityTab01_03(this, list.get(2), titleTv);
+		tab03 = new MainActivityTab01_03(this, list.get(2), titleTv);
 
 		rightBtn.setOnClickListener(this);
 		leftBtn.setOnClickListener(this);
@@ -254,6 +256,8 @@ public class MainActivityTab01 implements OnClickListener {
 				rootView.findViewById(R.id.title_bar_right_layout).setVisibility(View.VISIBLE);
 				rootView.findViewById(R.id.title_bar_left_layout).setVisibility(View.VISIBLE);
 				((ImageView) rootView.findViewById(R.id.title_bar_left_icon)).setImageResource(R.drawable.title_bar_search_icon);
+				tab02.stopAllTask();
+				tab03.stopAllTask();
 			}
 			if (page == 1) {
 				((TextView) rootView.findViewById(R.id.select_hot_tab_tv)).setTextColor(act.getResources().getColor(R.color.select_tab_pressed));
@@ -261,9 +265,11 @@ public class MainActivityTab01 implements OnClickListener {
 				rootView.findViewById(R.id.title_bar_left_icon).setVisibility(View.GONE);
 				leftBtn.setText("本周");
 				leftBtn.setClickable(true);
-				rightBtn.setClickable(false);
+				rightBtn.setClickable(true);
 				rootView.findViewById(R.id.title_bar_right_layout).setVisibility(View.VISIBLE);
 				rootView.findViewById(R.id.title_bar_left_layout).setVisibility(View.VISIBLE);
+				tab01.stopAllTask();
+				tab03.stopAllTask();
 			}
 			if (page == 2) {
 				((TextView) rootView.findViewById(R.id.select_intr_tab_tv)).setTextColor(act.getResources().getColor(R.color.select_tab_pressed));
@@ -273,6 +279,8 @@ public class MainActivityTab01 implements OnClickListener {
 				rootView.findViewById(R.id.title_bar_right_layout).setVisibility(View.INVISIBLE);
 				leftBtn.setClickable(false);
 				rightBtn.setClickable(false);
+				tab02.stopAllTask();
+				tab01.stopAllTask();
 			}
 		}
 	}
@@ -286,18 +294,38 @@ public class MainActivityTab01 implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			viewpager.setCurrentItem(index, false);
+			int cur = viewpager.getCurrentItem();
+			if(cur==index){
+				if(cur==0){
+					tab01.refresh();
+				}else if(cur==1){
+					tab02.refresh();
+				}else if(cur==2){
+					tab03.refresh();
+				}
+			}else{
+				viewpager.setCurrentItem(index, false);
+			}
 		}
 	};
 
-	public void setList(String data) {
+	/**
+	 * 
+	 */
+	@Override
+	public MainActivity getActivity() {
+		return act;
+	}
+
+	@Override
+	public void setPostList(String data) {
 		int cur = viewpager.getCurrentItem();
 		if (cur == 0) {
 			tab01.onRefreshResult(data);
+		}else if(cur==1){
+			tab02.onRefreshResult(data);
+		}else if(cur==2){
+			tab03.onRefreshResult(data);
 		}
-	}
-
-	public MainActivity getActivity() {
-		return act;
 	}
 }

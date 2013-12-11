@@ -448,4 +448,8 @@ public class BaseActivity extends Activity {
 		opt.inJustDecodeBounds = false;// 最后把标志复原
 		return opt;
 	}
+
+	public int getTitleBarHeight() {
+		return getResources().getDimensionPixelSize(R.dimen.TITLE_BAR_HEIGHT);
+	}
 }

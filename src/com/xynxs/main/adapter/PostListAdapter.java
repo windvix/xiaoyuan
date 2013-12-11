@@ -3,8 +3,13 @@ package com.xynxs.main.adapter;
 import java.util.List;
 
 import com.xynxs.main.BaseActivity;
+import com.xynxs.main.BigPictureActivity;
+import com.xynxs.main.MainActivity;
+import com.xynxs.main.MainActivityTab01;
 import com.xynxs.main.R;
 import com.xynxs.main.bean.Post;
+import com.xynxs.main.component.ListPostTaskHelper;
+import com.xynxs.main.component.PostListAdapterHelper;
 import com.xynxs.main.task.LoadHeadImgTask;
 import com.xynxs.main.task.LoadImgTask;
 import com.xynxs.main.util.Const;
@@ -23,9 +28,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 
-public class PostListAdapter extends ArrayAdapter<Post> {
+public class PostListAdapter extends ArrayAdapter<Post> implements ListPostTaskHelper {
 
-	private BaseActivity act;
+	private MainActivity act;
 
 	private int resId;
 
@@ -37,12 +42,21 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 
 	private boolean hasMore = false;
 
-	public PostListAdapter(BaseActivity act, int resId, List<Post> objects, String topic, boolean hasMore) {
-		super(act, resId, objects);
-		this.act = act;
+	private int page_size = 10;
+	private PostListAdapterHelper helper;
+
+	private int index = 0;
+
+	private boolean isLoadingMore = false;
+
+	public PostListAdapter(PostListAdapterHelper helper, int resId, List<Post> objects, String topic, int page_size) {
+		super(helper.getActivity(), resId, objects);
+		this.act = helper.getActivity();
+		this.helper = helper;
 		this.resId = resId;
 		this.list = objects;
 		this.topic = topic;
+		this.page_size = page_size;
 		if (topic != null) {
 			if (topic.startsWith("全")) {
 				showTopic = true;
@@ -50,28 +64,38 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 				showTopic = false;
 			}
 		}
-		this.hasMore = hasMore;
+		if (list.size() >= page_size) {
+			hasMore = true;
+		} else {
+			hasMore = false;
+		}
+		if (hasMore) {
+			index = page_size;
+		}
+		isLoadingMore  = false;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Post post = getItem(position);
+		final Post post = getItem(position);
 
 		boolean hasData = true;
-		if (list.size() == 1) {
+		if (getCount() == 1) {
 			if (StringUtil.isEmpty(post.getId())) {
 				convertView = getNoDataView();
 				hasData = false;
 			}
 		}
 		if (hasData) {
-			if (position < (list.size() - 1)) {
+			
+			//非最后一条
+			if (position < (getCount() - 1) && post!=null && post.getId()!=null) {
 				if (convertView == null) {
 					convertView = act.createView(R.layout.list_post_template);
-				}else if(convertView.findViewById(R.id.post_user_img)==null){
+				} else if (convertView.findViewById(R.id.post_user_img) == null) {
 					convertView = act.createView(R.layout.list_post_template);
 				}
-				
+
 				View postTemp = convertView;
 				ImageView headView = (ImageView) postTemp.findViewById(R.id.post_user_img);
 				TextView nameView = (TextView) postTemp.findViewById(R.id.post_user_name);
@@ -116,7 +140,6 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 
 					@Override
 					public void onClick(View v) {
-						// TODO Auto-generated method stub
 
 					}
 				});
@@ -148,6 +171,15 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 					imgView.setTag(post.getId() + Const.MIN_JPG);
 					new LoadImgTask(act, imgView, ServerHelper.getUploadImgURL(post.getOwner_id(), post.getId() + Const.MIN_JPG));
 					postTemp.findViewById(R.id.post_content_img_layout).setVisibility(View.VISIBLE);
+					imgView.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(act, BigPictureActivity.class);
+							intent.putExtra(Const.BIG_PIC_URL, ServerHelper.getUploadImgURL(post.getOwner_id(), post.getId() + Const.MAX_JPG));
+							intent.putExtra(Const.BIG_PIC_FILE_NAME, post.getId() + Const.MAX_JPG);
+							act.startActivity(intent);
+						}
+					});
 				} else {
 					postTemp.findViewById(R.id.post_content_img_layout).setVisibility(View.GONE);
 				}
@@ -157,24 +189,94 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 				replyView.setText(post.getCommentCount() + "");
 
 			}
-			//最后一条
-			else{
-				if(convertView==null){
+			// 最后一条
+			else {
+				if (convertView == null) {
 					convertView = act.createView(R.layout.list_end_no_more);
-				}else if(convertView.findViewById(R.id.loadmore_tv)==null){
+				} else if (convertView.findViewById(R.id.loadmore_tv) == null) {
 					convertView = act.createView(R.layout.list_end_no_more);
 				}
-				TextView msg = (TextView)convertView.findViewById(R.id.loadmore_tv);
-				if(hasMore){
-					msg.setText("加载更多");
-				}else{
-					msg.setText("没有更多了");
+				TextView msg = (TextView) convertView.findViewById(R.id.loadmore_tv);
+				if (!isLoadingMore) {
+					if (hasMore) {
+						msg.setText("加载更多");
+						nextPage(convertView.findViewById(R.id.refreshable_view_loadmore_layout));
+						convertView.findViewById(R.id.loadmore_icon).setVisibility(View.GONE);
+						convertView.findViewById(R.id.refreshable_view_loadmore_layout).setClickable(true);
+					} else {
+						msg.setText("没有更多了");
+						convertView.findViewById(R.id.loadmore_icon).setVisibility(View.GONE);
+						convertView.findViewById(R.id.refreshable_view_loadmore_layout).setClickable(false);
+					}
+				} else {
+					msg.setText("正在加载");
+					convertView.findViewById(R.id.refreshable_view_loadmore_layout).setClickable(false);
+					convertView.findViewById(R.id.loadmore_icon).setVisibility(View.VISIBLE);
 				}
 			}
 		}
 		return convertView;
 	}
 
+	private View loadView;
+	
+	private void nextPage(final View loadView) {
+		this.loadView = loadView;
+		loadView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				v.setClickable(false);
+				TextView msg = (TextView) loadView.findViewById(R.id.loadmore_tv);
+				msg.setText("正在加载");
+				isLoadingMore = true;
+				loadView.findViewById(R.id.loadmore_icon).setVisibility(View.VISIBLE);
+				helper.nextPage(index);
+			}
+		});
+	}
+
+	@Override
+	public void setPostList(String data) {
+		isLoadingMore = false;
+		if(StringUtil.isEmpty(data)){
+			act.toast("网络不给力，请稍后再试");
+			if(loadView!=null && loadView.findViewById(R.id.loadmore_tv)!=null){
+				TextView msg = (TextView) loadView.findViewById(R.id.loadmore_tv);
+				msg.setText("加载更多");
+				loadView.findViewById(R.id.loadmore_icon).setVisibility(View.GONE);
+				loadView.findViewById(R.id.refreshable_view_loadmore_layout).setClickable(true);
+			}
+		}else{
+			List<Post> pList = helper.convertPostList(data);
+			if(pList.size()>=page_size){
+				hasMore = true;
+			}
+			
+			TextView msg = (TextView) loadView.findViewById(R.id.loadmore_tv);
+			
+			if (hasMore) {
+				msg.setText("加载更多");
+				loadView.findViewById(R.id.loadmore_icon).setVisibility(View.GONE);
+				loadView.findViewById(R.id.refreshable_view_loadmore_layout).setClickable(true);
+			} else {
+				msg.setText("没有更多了");
+				loadView.findViewById(R.id.loadmore_icon).setVisibility(View.GONE);
+				loadView.findViewById(R.id.refreshable_view_loadmore_layout).setClickable(false);
+			}
+			
+			
+			//删除adapter最后的空post
+			this.remove(getItem(getCount()-1));
+			for(Post post: pList){
+				this.add(post);
+			}
+			index+=page_size;
+			//告诉数据已变化
+			this.notifyDataSetChanged();
+		}
+	}
+	
+	
 	public void setGenderText(TextView genderView, int gender) {
 		if (genderView != null) {
 			if (gender >= 2) {
@@ -196,5 +298,12 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 		view.findViewById(R.id.no_data_root_layout).setLayoutParams(params);
 		return view;
 	}
+
+	@Override
+	public MainActivity getActivity() {
+		return act;
+	}
+
+
 
 }
