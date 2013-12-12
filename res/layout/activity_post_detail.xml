@@ -376,7 +376,7 @@
                 <!-- 加载更多视图 -->
 
                 <LinearLayout
-                    android:id="@+id/refreshable_view_loadmore_layout"
+                    android:id="@+id/post_detail_loadmore_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

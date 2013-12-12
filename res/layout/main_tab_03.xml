@@ -89,4 +89,297 @@
         </RelativeLayout>
     </RelativeLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <!-- user info head -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="135dp"
+                    android:layout_weight="0"
+                    android:background="@drawable/person_center_bg"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:gravity="top|center"
+                        android:orientation="vertical"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="@dimen/user_center_padding"
+                        android:paddingRight="@dimen/user_center_padding"
+                        android:paddingTop="10dp" >
+
+                        <ImageView
+                            android:id="@+id/main_bottom_tab_03_head"
+                            android:layout_width="@dimen/user_center_img_size"
+                            android:layout_height="@dimen/user_center_img_size"
+                            android:background="@drawable/head_default"
+                            android:scaleType="fitCenter" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingTop="10dp" >
+
+                            <TextView
+                                android:id="@+id/main_bottom_tab_03_detail_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom_dialog_button_click"
+                                android:gravity="center"
+                                android:paddingBottom="5dp"
+                                android:paddingLeft="@dimen/user_center_padding"
+                                android:paddingRight="@dimen/user_center_padding"
+                                android:paddingTop="5dp"
+                                android:text="详细资料"
+                                android:textColor="#fff"
+                                android:textSize="@dimen/user_detail_btn_size" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="@dimen/user_center_padding"
+                        android:paddingRight="@dimen/user_center_padding"
+                        android:paddingTop="10dp" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/main_bottom_tab_03_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="一二三四五六七八九二"
+                                android:textColor="#2c5871"
+                                android:textSize="@dimen/user_center_name_size" />
+
+                            <TextView
+                                android:id="@+id/main_bottom_tab_03_level"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="8dp"
+                                android:text="4级"
+                                android:textColor="#7e7e7e"
+                                android:textSize="13sp"
+                                android:visibility="visible" />
+
+                            <TextView
+                                android:id="@+id/main_bottom_tab_03_gender"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="@dimen/user_center_padding"
+                                android:text="♂"
+                                android:textColor="@color/gender_man"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:orientation="horizontal"
+                            android:paddingTop="@dimen/user_center_college_padding_top" >
+
+                            <TextView
+                                android:id="@+id/main_bottom_tab_03_college"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="广东水利电力职业技术学院"
+                                android:textColor="#7e7e7e"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/main_bottom_tab_03_grade"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="@dimen/user_center_padding"
+                                android:text="2009届"
+                                android:textColor="#7e7e7e"
+                                android:textSize="13sp"
+                                android:visibility="visible" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:orientation="horizontal"
+                            android:paddingTop="@dimen/user_center_college_padding_top" >
+
+                            <TextView
+                                android:id="@+id/main_bottom_tab_03_intro"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="这个人很懒, 什么也没留下......"
+                                android:textColor="#7e7e7e"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="bottom"
+                            android:orientation="horizontal" >
+
+                            <LinearLayout
+                                android:id="@+id/main_bottom_tab_03_saying_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/scope_select_item_bg"
+                                android:gravity="center"
+                                android:orientation="vertical" >
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="校园事"
+                                    android:textColor="#7e7e7e"
+                                    android:textSize="@dimen/user_center_name_size" />
+
+                                <TextView
+                                    android:id="@+id/main_bottom_tab_03_saying_count"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="123456"
+                                    android:textColor="#7e7e7e"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/main_bottom_tab_03_fav_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/scope_select_item_bg"
+                                android:gravity="center"
+                                android:orientation="vertical" >
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="收藏"
+                                    android:textColor="#7e7e7e"
+                                    android:textSize="@dimen/user_center_name_size" />
+
+                                <TextView
+                                    android:id="@+id/main_bottom_tab_03_fav_count"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="123456"
+                                    android:textColor="#7e7e7e"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_weight="0"
+                    android:background="@drawable/bottom_bar_bg" >
+                </LinearLayout>
+            </LinearLayout>
+            <!-- end of user head -->
+
+
+            <!-- content layout -->
+
+            <LinearLayout
+                android:id="@+id/user_center_post_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+            <!-- post layout -->
+
+
+            <!-- list end no more -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <!-- 加载更多视图 -->
+
+                <LinearLayout
+                    android:id="@+id/user_center_post_loadmore_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/post_template_bg"
+                    android:gravity="top"
+                    android:orientation="vertical"
+                    android:padding="10dp" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <ProgressBar
+                            android:id="@+id/loadmore_icon"
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:indeterminateBehavior="repeat"
+                            android:max="10000"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/loadmore_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:gravity="center"
+                            android:paddingLeft="6dp"
+                            android:text="没有更多了"
+                            android:textColor="#666666" />
+                    </LinearLayout>
+
+                    <!-- 加载更多视图 -->
+                </LinearLayout>
+            </LinearLayout>
+            <!-- end of list end no more -->
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

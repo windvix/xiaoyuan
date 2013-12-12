@@ -35,8 +35,10 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("CommitPrefEdits")
@@ -454,5 +456,30 @@ public class BaseActivity extends Activity {
 
 	public int getTitleBarHeight() {
 		return getResources().getDimensionPixelSize(R.dimen.TITLE_BAR_HEIGHT);
+	}
+	
+	
+	public void showUserToast(String text) {
+		View view = createView(R.layout.dialog_user_toast);
+		TextView msg = (TextView) view.findViewById(R.id.text);
+		msg.setText(text);
+		Toast toast = new Toast(getApplicationContext());
+		toast.setDuration(Toast.LENGTH_SHORT);
+		// 让Toast显示为我们自定义的样子
+		toast.setView(view);
+		toast.show();
+	}
+	
+	
+	public void setGenderText(TextView genderView, int gender) {
+		if (genderView != null) {
+			if (gender >= 2) {
+				String text = "<font color='#ef2e71'><b>♀</b></font>";
+				genderView.setText(Html.fromHtml(text));
+			} else {
+				String text = "<font color='#0385e0'><b>♂</b></font>";
+				genderView.setText(Html.fromHtml(text));
+			}
+		}
 	}
 }

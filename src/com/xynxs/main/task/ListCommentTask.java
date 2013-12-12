@@ -26,6 +26,10 @@ public class ListCommentTask extends BaseTask{
 	@Override
 	protected void onPostExecute() {
 		PostDetailActivity act = (PostDetailActivity)getActivity();
-		act.getCommentResult(result);
+		boolean isAppend = false;
+		if(index>0){
+			isAppend = true;
+		}
+		act.getCommentResult(result,isAppend);
 	}
 }

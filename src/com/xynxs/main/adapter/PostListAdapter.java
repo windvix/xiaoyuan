@@ -127,7 +127,7 @@ public class PostListAdapter extends ArrayAdapter<Post> implements ListPostTaskH
 					});
 				}
 
-				setGenderText(genderView, post.getOwner_gender());
+				act.setGenderText(genderView, post.getOwner_gender());
 
 				// CO
 				collegeView.setText(post.getOwner_college_name());
@@ -284,18 +284,6 @@ public class PostListAdapter extends ArrayAdapter<Post> implements ListPostTaskH
 		}
 	}
 	
-	
-	public void setGenderText(TextView genderView, int gender) {
-		if (genderView != null) {
-			if (gender >= 2) {
-				String text = "<font color='#ef2e71'><b>♀</b></font>";
-				genderView.setText(Html.fromHtml(text));
-			} else {
-				String text = "<font color='#0385e0'><b>♂</b></font>";
-				genderView.setText(Html.fromHtml(text));
-			}
-		}
-	}
 
 	private View getNoDataView() {
 		View view = act.createView(R.layout.list_no_data);

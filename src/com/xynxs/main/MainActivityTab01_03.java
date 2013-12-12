@@ -15,6 +15,9 @@ public class MainActivityTab01_03 extends PostListAdapterHelper{
 
 	public MainActivityTab01_03(MainActivityTab01 main, View root,TextView topicTv) {
 		super(main, root, aTAB, topicTv);
+		
+		
+		
 	}
 
 	/**

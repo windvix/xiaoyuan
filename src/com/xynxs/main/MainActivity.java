@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.Html;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -331,15 +332,16 @@ public class MainActivity extends BaseActivity {
 		return false;
 	}
 
-	private void showUserToast(String text) {
-		View view = createView(R.layout.dialog_user_toast);
-		TextView msg = (TextView) view.findViewById(R.id.text);
-		msg.setText(text);
-		Toast toast = new Toast(getApplicationContext());
-		toast.setDuration(Toast.LENGTH_SHORT);
-		// 让Toast显示为我们自定义的样子
-		toast.setView(view);
-		toast.show();
+	public void setGenderText(TextView genderView, int gender) {
+		if (genderView != null) {
+			if (gender >= 2) {
+				String text = "<font color='#ef2e71'><b>♀</b></font>";
+				genderView.setText(Html.fromHtml(text));
+			} else {
+				String text = "<font color='#0385e0'><b>♂</b></font>";
+				genderView.setText(Html.fromHtml(text));
+			}
+		}
 	}
 
 }

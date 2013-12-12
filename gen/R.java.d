@@ -17,6 +17,7 @@ D:\Android_project\xiaoyuan2\res\anim\start_zoomout.xml \
 D:\Android_project\xiaoyuan2\res\anim\toast_dimiss.xml \
 D:\Android_project\xiaoyuan2\res\anim\toast_show.xml \
 D:\Android_project\xiaoyuan2\res\drawable\bg_dialog_user_toast.xml \
+D:\Android_project\xiaoyuan2\res\drawable\big_picture_bg.jpg \
 D:\Android_project\xiaoyuan2\res\drawable\blue_btn.xml \
 D:\Android_project\xiaoyuan2\res\drawable\blue_btn_click.xml \
 D:\Android_project\xiaoyuan2\res\drawable\blue_btn_default.xml \
@@ -69,6 +70,7 @@ D:\Android_project\xiaoyuan2\res\drawable\logo.png \
 D:\Android_project\xiaoyuan2\res\drawable\logo_50p.png \
 D:\Android_project\xiaoyuan2\res\drawable\nav_default.png \
 D:\Android_project\xiaoyuan2\res\drawable\nav_select.png \
+D:\Android_project\xiaoyuan2\res\drawable\person_center_bg.xml \
 D:\Android_project\xiaoyuan2\res\drawable\post_btn_default.xml \
 D:\Android_project\xiaoyuan2\res\drawable\post_comment.png \
 D:\Android_project\xiaoyuan2\res\drawable\post_default_img.png \
@@ -85,6 +87,8 @@ D:\Android_project\xiaoyuan2\res\drawable\post_template_msg_bg_default.xml \
 D:\Android_project\xiaoyuan2\res\drawable\red_btn_click.xml \
 D:\Android_project\xiaoyuan2\res\drawable\red_btn_default.xml \
 D:\Android_project\xiaoyuan2\res\drawable\red_btn_selector.xml \
+D:\Android_project\xiaoyuan2\res\drawable\scope_select_item_bg.xml \
+D:\Android_project\xiaoyuan2\res\drawable\scope_select_item_bg_click.xml \
 D:\Android_project\xiaoyuan2\res\drawable\search_dialog_bg.xml \
 D:\Android_project\xiaoyuan2\res\drawable\select_bar_bg.xml \
 D:\Android_project\xiaoyuan2\res\drawable\select_tab_bg.xml \
@@ -143,14 +147,17 @@ D:\Android_project\xiaoyuan2\res\drawable-xhdpi\favicon.png \
 D:\Android_project\xiaoyuan2\res\drawable-xhdpi\indicator_arrow.png \
 D:\Android_project\xiaoyuan2\res\drawable-xxhdpi\favicon.png \
 D:\Android_project\xiaoyuan2\res\layout\activity_about.xml \
+D:\Android_project\xiaoyuan2\res\layout\activity_bigpicture.xml \
 D:\Android_project\xiaoyuan2\res\layout\activity_feedback.xml \
 D:\Android_project\xiaoyuan2\res\layout\activity_login.xml \
 D:\Android_project\xiaoyuan2\res\layout\activity_main.xml \
 D:\Android_project\xiaoyuan2\res\layout\activity_nav.xml \
+D:\Android_project\xiaoyuan2\res\layout\activity_post_detail.xml \
 D:\Android_project\xiaoyuan2\res\layout\activity_prov_select.xml \
 D:\Android_project\xiaoyuan2\res\layout\activity_user_info.xml \
 D:\Android_project\xiaoyuan2\res\layout\activity_welcome.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_bottom_select.xml \
+D:\Android_project\xiaoyuan2\res\layout\dialog_comment.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_confirm.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_loading.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_msg.xml \
@@ -159,6 +166,7 @@ D:\Android_project\xiaoyuan2\res\layout\dialog_update.xml \
 D:\Android_project\xiaoyuan2\res\layout\dialog_user_toast.xml \
 D:\Android_project\xiaoyuan2\res\layout\list_end_no_more.xml \
 D:\Android_project\xiaoyuan2\res\layout\list_no_data.xml \
+D:\Android_project\xiaoyuan2\res\layout\list_post_comment.xml \
 D:\Android_project\xiaoyuan2\res\layout\list_post_template.xml \
 D:\Android_project\xiaoyuan2\res\layout\login_01.xml \
 D:\Android_project\xiaoyuan2\res\layout\login_02.xml \

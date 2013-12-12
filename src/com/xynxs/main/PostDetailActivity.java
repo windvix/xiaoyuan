@@ -9,6 +9,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.xynxs.main.bean.Post;
 import com.xynxs.main.bean.Reply;
+import com.xynxs.main.component.CommentHelper;
 import com.xynxs.main.dialog.CommentDialog;
 import com.xynxs.main.task.ListCommentTask;
 import com.xynxs.main.task.LoadHeadImgTask;
@@ -28,7 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-public class PostDetailActivity extends BaseActivity implements OnClickListener, OnRefreshListener<ScrollView>{
+public class PostDetailActivity extends BaseActivity implements OnClickListener, OnRefreshListener<ScrollView>, CommentHelper{
 
 	private String post_id;
 
@@ -38,11 +39,8 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 	private ListCommentTask listCommentTask;
 	
 	private PullToRefreshScrollView scrollview;
-
 	
-	private View loadMoreView;
-	
-	private static final int COUNT = 10;
+	private static final int COUNT = 20;
 	
 	private int index = 0;
 	
@@ -53,9 +51,6 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 
 		setContentView(R.layout.activity_post_detail);
 		post_id = getIntent().getStringExtra(Const.POST_ID_KEY);
-
-		
-		loadMoreView = findViewById(R.id.refreshable_view_loadmore_layout);
 		
 		commentContentLayout = (LinearLayout)findViewById(R.id.post_detail_comment_layout);
 		
@@ -74,7 +69,9 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 		findViewById(R.id.title_bar_left_btn).setOnClickListener(this);
 		findViewById(R.id.title_bar_right_btn).setOnClickListener(this);
 		
-
+		findViewById(R.id.post_detail_loadmore_layout).setOnClickListener(this);
+		findViewById(R.id.post_detail_loadmore_layout).setClickable(false);
+		
 		initData();
 
 		// 加载数据
@@ -91,6 +88,8 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 		scrollview.setMode(Mode.PULL_FROM_START);
 		
 		scrollview.setOnRefreshListener(this);
+		
+		
 	}
 
 	/**
@@ -195,19 +194,23 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 	}
 
 	@SuppressWarnings("unchecked")
-	public void getCommentResult(String data){
+	public void getCommentResult(String data, boolean isAppend){
 		scrollview.onRefreshComplete();
 		if(StringUtil.isEmpty(data)){
 			toast("加载评论失败");
 			showLoadMoreComment();
 		}else{
 			List<String> strList = (ArrayList<String>) convert(data, ArrayList.class);
-			index = 0;
+
+			if(!isAppend){
+				index = 0;
+			}
+			
 			if(strList.size()==0){
 				showNoComment();
 			}else{
 				List<Reply> replyList = convert(strList);
-				showCommentList(replyList,false);
+				showCommentList(replyList,isAppend);
 				if(strList.size()>=COUNT){
 					index = index + COUNT;
 					showLoadMoreComment();
@@ -255,7 +258,7 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 		// 加载头像
 		if (isNoname < 1) {
 			headImg.setTag(commentUserId + Const.MIN_JPG);
-			LoadHeadImgTask headTask = new LoadHeadImgTask(this, headImg, reply.getOwner_head_img());
+			new LoadHeadImgTask(this, headImg, reply.getOwner_head_img());
 			userName.setText(commentUserName);
 
 			headImg.setOnClickListener(new OnClickListener() {
@@ -298,15 +301,8 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 					quoteName = commentUserName;
 				}
 				String commentUserContent = "【" + quoteName + "】" + content;
-				
-				/**
-				if (commentDialog == null) {
-					commentDialog = new CommentDialog(PostDetailActivity.this, commentUserId, commentUserContent);
-				}
-				commentDialog.setContent(commentUserId, commentUserContent, "");
-				commentDialog.show();
-				*
-				*/
+				CommentDialog dialog = new CommentDialog(PostDetailActivity.this, currentPost.getId(), commentUserId, commentUserContent);
+				dialog.show();
 			}
 		});
 		return view;
@@ -325,45 +321,44 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 	
 	
 	private void showNoComment(){
-		TextView tv = (TextView)loadMoreView.findViewById(R.id.loadmore_tv);
-		loadMoreView.findViewById(R.id.loadmore_icon).setVisibility(View.INVISIBLE);
-		loadMoreView.setClickable(false);
+		TextView tv = (TextView)findViewById(R.id.post_detail_loadmore_layout).findViewById(R.id.loadmore_tv);
+		findViewById(R.id.post_detail_loadmore_layout).findViewById(R.id.loadmore_icon).setVisibility(View.INVISIBLE);
+		findViewById(R.id.post_detail_loadmore_layout).setClickable(false);
 		tv.setText("快来第一个评论吧！");
 	}
 	
 	private void showNoMoreComment(){
-		TextView tv = (TextView)loadMoreView.findViewById(R.id.loadmore_tv);
-		loadMoreView.findViewById(R.id.loadmore_icon).setVisibility(View.INVISIBLE);
-		loadMoreView.setClickable(false);
+		TextView tv = (TextView)findViewById(R.id.post_detail_loadmore_layout).findViewById(R.id.loadmore_tv);
+		findViewById(R.id.post_detail_loadmore_layout).findViewById(R.id.loadmore_icon).setVisibility(View.INVISIBLE);
+		findViewById(R.id.post_detail_loadmore_layout).setClickable(false);
 		tv.setText("没有更多了");
 	}
 	
 	
 	private void showLoadMoreComment(){
-		TextView tv = (TextView)loadMoreView.findViewById(R.id.loadmore_tv);
-		loadMoreView.findViewById(R.id.loadmore_icon).setVisibility(View.INVISIBLE);
-		loadMoreView.setClickable(true);
+		TextView tv = (TextView)findViewById(R.id.post_detail_loadmore_layout).findViewById(R.id.loadmore_tv);
+		findViewById(R.id.post_detail_loadmore_layout).findViewById(R.id.loadmore_icon).setVisibility(View.INVISIBLE);
+		findViewById(R.id.post_detail_loadmore_layout).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if(listCommentTask!=null){
+					listCommentTask.stopTask();
+				}
+				listCommentTask = new ListCommentTask(PostDetailActivity.this, currentPost.getId(), index, COUNT);
+				listCommentTask.startTask();
+				showLoadingMoreComment();
+			}
+		});
+		findViewById(R.id.post_detail_loadmore_layout).setClickable(true);
 		tv.setText("加载更多");
 	}
 	
 	
 	private void showLoadingMoreComment(){
-		TextView tv = (TextView)loadMoreView.findViewById(R.id.loadmore_tv);
-		loadMoreView.findViewById(R.id.loadmore_icon).setVisibility(View.VISIBLE);
-		loadMoreView.setClickable(false);
+		TextView tv = (TextView)findViewById(R.id.post_detail_loadmore_layout).findViewById(R.id.loadmore_tv);
+		findViewById(R.id.post_detail_loadmore_layout).findViewById(R.id.loadmore_icon).setVisibility(View.VISIBLE);
+		findViewById(R.id.post_detail_loadmore_layout).setClickable(false);
 		tv.setText("正在加载评论");
-	}
-	
-	private void setGenderText(TextView genderView, int gender) {
-		if (genderView != null) {
-			if (gender >= 2) {
-				String text = "<font color='#ef2e71'><b>♀</b></font>";
-				genderView.setText(Html.fromHtml(text));
-			} else {
-				String text = "<font color='#0385e0'><b>♂</b></font>";
-				genderView.setText(Html.fromHtml(text));
-			}
-		}
 	}
 
 	
@@ -382,10 +377,10 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 			}
 		}else if(id==R.id.post_comment_btn){
 			if(commentDialog == null){
-				commentDialog = new CommentDialog(this, currentPost.getId(), "","");
+				commentDialog = new CommentDialog(this, currentPost.getId(), currentPost.getOwner_id(),"");
 			}
 			commentDialog.show();
-		}
+		}			
 	}
 	
 	@Override
@@ -414,5 +409,15 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 		listCommentTask = new ListCommentTask(this, currentPost.getId(), 0, COUNT);
 		listCommentTask.startTask();
 		
+	}
+
+	@Override
+	public void commentSuccess() {
+		scrollview.setRefreshing();
+	}
+
+	@Override
+	public BaseActivity getActivity() {
+		return this;
 	}
 }
