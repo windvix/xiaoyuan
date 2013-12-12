@@ -31,7 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-public class MainActivityTab03 implements ListUserPostHelper , OnClickListener, OnRefreshListener<ScrollView>{
+public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, OnRefreshListener<ScrollView> {
 
 	private MainActivity act;
 
@@ -44,8 +44,7 @@ public class MainActivityTab03 implements ListUserPostHelper , OnClickListener, 
 
 	private ListUserPostTask userPostTask;
 	private GetUserPostCountTask postCountTask;
-	
-	
+
 	private PullToRefreshScrollView scrollView;
 
 	public MainActivityTab03(MainActivity activity, View view03) {
@@ -57,10 +56,8 @@ public class MainActivityTab03 implements ListUserPostHelper , OnClickListener, 
 		loadMoreView = root.findViewById(R.id.user_center_post_loadmore_layout);
 		contentLayout = (LinearLayout) root.findViewById(R.id.user_center_post_layout);
 
-		
-		
-		scrollView = (PullToRefreshScrollView)root.findViewById(R.id.user_center_scrollview);
-		
+		scrollView = (PullToRefreshScrollView) root.findViewById(R.id.user_center_scrollview);
+
 		scrollView.setOnPullEventListener(new OnPullEventListener<ScrollView>() {
 
 			@Override
@@ -68,11 +65,11 @@ public class MainActivityTab03 implements ListUserPostHelper , OnClickListener, 
 				refreshView.findViewById(R.id.pull_to_refresh_sub_text).setVisibility(View.VISIBLE);
 			}
 		});
-		
+
 		scrollView.setOnRefreshListener(this);
-		
+
 		initData();
-		
+
 		root.findViewById(R.id.title_bar_left_btn).setOnClickListener(this);
 		root.findViewById(R.id.title_bar_right_btn).setOnClickListener(this);
 
@@ -162,7 +159,7 @@ public class MainActivityTab03 implements ListUserPostHelper , OnClickListener, 
 		new LoadHeadImgTask(act, head, user.getHead_img());
 		sayCount.setText("-");
 
-		//加载历史
+		// 加载历史
 		String postsStr = act.getDataString(Const.MY_POST_LIST_KEY);
 		if (!StringUtil.isEmpty(postsStr)) {
 			List<String> strList = (List<String>) act.convert(postsStr, ArrayList.class);
@@ -173,8 +170,7 @@ public class MainActivityTab03 implements ListUserPostHelper , OnClickListener, 
 			}
 			long lastUpt = act.getDataLong(Const.MY_POST_LIST_TIME_KEY);
 			setRefreshTime(lastUpt);
-			
-			
+
 			showMyPost(postList, false);
 			showNoMore();
 		} else {
@@ -195,13 +191,20 @@ public class MainActivityTab03 implements ListUserPostHelper , OnClickListener, 
 		long lastUpt = act.getDataLong(Const.MY_POST_LIST_TIME_KEY);
 
 		if (System.currentTimeMillis() - lastUpt > Const.REFRESH_PERIOD) {
+			refresh();
+		}
+	}
+
+	public void refresh() {
+		if(!scrollView.isRefreshing()){
 			scrollView.setRefreshing();
 		}
-	}	
-	
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void getPostResult(String data, boolean isAppend) {
+		scrollView.onRefreshComplete();
 		if (StringUtil.isEmpty(data)) {
 			if (isAppend) {
 				act.toast("网络不给力，请稍后再试");
@@ -406,8 +409,7 @@ public class MainActivityTab03 implements ListUserPostHelper , OnClickListener, 
 		}
 
 	}
-	
-	
+
 	private void setRefreshTime(long time) {
 		if (scrollView != null) {
 			TextView tv = (TextView) scrollView.findViewById(R.id.pull_to_refresh_sub_text);
@@ -424,14 +426,16 @@ public class MainActivityTab03 implements ListUserPostHelper , OnClickListener, 
 
 	@Override
 	public void onClick(View v) {
-		
+
 	}
 
 	@Override
 	public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-		userPostTask = new ListUserPostTask(MainActivityTab03.this, user.getId(), 0, PAGE_SIZE);
-		userPostTask.startTask();
-		postCountTask = new GetUserPostCountTask(MainActivityTab03.this, user.getId());
-		postCountTask.startTask();
+		if (!scrollView.isRefreshing()) {
+			userPostTask = new ListUserPostTask(MainActivityTab03.this, user.getId(), 0, PAGE_SIZE);
+			userPostTask.startTask();
+			postCountTask = new GetUserPostCountTask(MainActivityTab03.this, user.getId());
+			postCountTask.startTask();
+		}
 	}
 }

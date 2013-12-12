@@ -339,7 +339,7 @@ public class MainActivity extends BaseActivity {
 				}else if(index==1){
 					
 				}else if(index==2){
-					
+					tab03.refresh();
 				}
 			}
 		}
