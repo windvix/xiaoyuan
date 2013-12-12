@@ -8,12 +8,12 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainActivityTab01_03 extends PostListAdapterHelper{
+public class MainPostListFocus extends PostListAdapterHelper{
 
 
 	private static final String aTAB = "3";
 
-	public MainActivityTab01_03(MainActivityTab01 main, View root,TextView topicTv) {
+	public MainPostListFocus(MainActivityTab01 main, View root,TextView topicTv) {
 		super(main, root, aTAB, topicTv);
 		
 		

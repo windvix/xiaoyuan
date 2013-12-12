@@ -89,9 +89,12 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <ScrollView
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/user_center_scrollview"
+        android:scrollbars="none"
+       	android:fadingEdge="none"
         android:layout_weight="1" >
 
         <LinearLayout
@@ -380,6 +383,6 @@
             <!-- end of list end no more -->
 
         </LinearLayout>
-    </ScrollView>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
 </LinearLayout>

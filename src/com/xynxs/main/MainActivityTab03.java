@@ -3,6 +3,13 @@ package com.xynxs.main;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnPullEventListener;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.State;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.xynxs.main.bean.Post;
 import com.xynxs.main.bean.User;
 import com.xynxs.main.component.ListUserPostHelper;
@@ -21,9 +28,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-public class MainActivityTab03 implements ListUserPostHelper {
+public class MainActivityTab03 implements ListUserPostHelper , OnClickListener, OnRefreshListener<ScrollView>{
 
 	private MainActivity act;
 
@@ -36,6 +44,9 @@ public class MainActivityTab03 implements ListUserPostHelper {
 
 	private ListUserPostTask userPostTask;
 	private GetUserPostCountTask postCountTask;
+	
+	
+	private PullToRefreshScrollView scrollView;
 
 	public MainActivityTab03(MainActivity activity, View view03) {
 
@@ -46,9 +57,27 @@ public class MainActivityTab03 implements ListUserPostHelper {
 		loadMoreView = root.findViewById(R.id.user_center_post_loadmore_layout);
 		contentLayout = (LinearLayout) root.findViewById(R.id.user_center_post_layout);
 
+		
+		
+		scrollView = (PullToRefreshScrollView)root.findViewById(R.id.user_center_scrollview);
+		
+		scrollView.setOnPullEventListener(new OnPullEventListener<ScrollView>() {
+
+			@Override
+			public void onPullEvent(PullToRefreshBase<ScrollView> refreshView, State state, Mode direction) {
+				refreshView.findViewById(R.id.pull_to_refresh_sub_text).setVisibility(View.VISIBLE);
+			}
+		});
+		
+		scrollView.setOnRefreshListener(this);
+		
 		initData();
+		
+		root.findViewById(R.id.title_bar_left_btn).setOnClickListener(this);
+		root.findViewById(R.id.title_bar_right_btn).setOnClickListener(this);
+
 	}
-	
+
 	private TextView theColege;
 	private TextView nameTv;
 	private TextView gradeTv;
@@ -62,6 +91,7 @@ public class MainActivityTab03 implements ListUserPostHelper {
 	private View loadMoreView;
 	private LinearLayout contentLayout;
 
+	@SuppressWarnings("unchecked")
 	private void initData() {
 		View view = root;
 		theColege = (TextView) view.findViewById(R.id.main_bottom_tab_03_college);
@@ -129,23 +159,46 @@ public class MainActivityTab03 implements ListUserPostHelper {
 			inr = inr.substring(0, 23) + "......";
 		}
 		intro.setText(inr);
-
+		new LoadHeadImgTask(act, head, user.getHead_img());
 		sayCount.setText("-");
 
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				new LoadHeadImgTask(act, head, user.getHead_img());
-				userPostTask = new ListUserPostTask(MainActivityTab03.this, user.getId(), 0, PAGE_SIZE);
-				userPostTask.startTask();
-
-				postCountTask = new GetUserPostCountTask(MainActivityTab03.this, user.getId());
-				postCountTask.startTask();
-				showLoadingMore();
+		//加载历史
+		String postsStr = act.getDataString(Const.MY_POST_LIST_KEY);
+		if (!StringUtil.isEmpty(postsStr)) {
+			List<String> strList = (List<String>) act.convert(postsStr, ArrayList.class);
+			List<Post> postList = new ArrayList<Post>();
+			for (String one : strList) {
+				Post post = (Post) act.convert(one, Post.class);
+				postList.add(post);
 			}
-		}, 2500);
+			long lastUpt = act.getDataLong(Const.MY_POST_LIST_TIME_KEY);
+			setRefreshTime(lastUpt);
+			
+			
+			showMyPost(postList, false);
+			showNoMore();
+		} else {
+			setRefreshTime(0);
+			showLoadingMore();
+		}
 	}
 
+	private boolean isRefresh = false;
+
+	public boolean isRefeshed() {
+		return isRefresh;
+	}
+
+	public void loadData() {
+		isRefresh = true;
+
+		long lastUpt = act.getDataLong(Const.MY_POST_LIST_TIME_KEY);
+
+		if (System.currentTimeMillis() - lastUpt > Const.REFRESH_PERIOD) {
+			scrollView.setRefreshing();
+		}
+	}	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void getPostResult(String data, boolean isAppend) {
@@ -174,14 +227,18 @@ public class MainActivityTab03 implements ListUserPostHelper {
 			if (index >= PAGE_SIZE) {
 				index = index + PAGE_SIZE;
 				showLoadMore();
-			}else{
+			} else {
 				showNoMore();
 			}
-			
-			if(postList.size()==0 && !isAppend){
+
+			if (postList.size() == 0 && !isAppend) {
 				showNoPost();
-			}else{
+			} else {
+
 				showMyPost(postList, isAppend);
+			}
+			if (!isAppend) {
+				saveMyPost(strList);
 			}
 		}
 	}
@@ -196,6 +253,14 @@ public class MainActivityTab03 implements ListUserPostHelper {
 			initOnePost(post, postTemp);
 			contentLayout.addView(postTemp);
 		}
+
+	}
+
+	private void saveMyPost(List<String> postList) {
+		String val = new Gson().toJson(postList);
+		act.saveDataString(Const.MY_POST_LIST_KEY, val);
+		act.saveDataLong(Const.MY_POST_LIST_TIME_KEY, System.currentTimeMillis());
+		setRefreshTime(System.currentTimeMillis());
 	}
 
 	private void initOnePost(final Post post, View root) {
@@ -246,7 +311,7 @@ public class MainActivityTab03 implements ListUserPostHelper {
 				act.startActivity(intent);
 			}
 		});
-		
+
 		// 内容
 		if (post.getTopic().contains("助")) {
 			thankLayout.setVisibility(View.VISIBLE);
@@ -256,7 +321,7 @@ public class MainActivityTab03 implements ListUserPostHelper {
 			thankLayout.setVisibility(View.INVISIBLE);
 			contentView.setText("【" + post.getTopic() + "】" + post.getContent());
 		}
-		
+
 		// 加载图片
 		if (post.getHasImg() > 0) {
 			imgView.setTag(post.getId() + Const.MIN_JPG);
@@ -276,12 +341,11 @@ public class MainActivityTab03 implements ListUserPostHelper {
 		} else {
 			postTemp.findViewById(R.id.post_content_img_layout).setVisibility(View.GONE);
 		}
-		
-		
+
 		// 浏览
 		visitView.setText(post.getVisitCount() + "");
 		replyView.setText(post.getCommentCount() + "");
-		
+
 	}
 
 	private void showLoadMore() {
@@ -326,20 +390,48 @@ public class MainActivityTab03 implements ListUserPostHelper {
 
 	@Override
 	public void getPostCountResult(String result) {
-		if(StringUtil.isEmpty(result)){
+		if (StringUtil.isEmpty(result)) {
 			result = "-1";
 		}
 		long count = -1;
-		try{
+		try {
 			Long.parseLong(result.toString());
-		}catch(Exception e){
-			
+		} catch (Exception e) {
+
 		}
-		if(count>=0){
-			sayCount.setText(count+"");
-		}else{
+		if (count >= 0) {
+			sayCount.setText(count + "");
+		} else {
 			sayCount.setText("-");
 		}
+
+	}
+	
+	
+	private void setRefreshTime(long time) {
+		if (scrollView != null) {
+			TextView tv = (TextView) scrollView.findViewById(R.id.pull_to_refresh_sub_text);
+			if (tv != null) {
+				if (time <= 100) {
+					tv.setText("上次刷新 未知");
+				} else {
+					tv.setText("上次刷新 " + StringUtil.getDateStr(time));
+				}
+			}
+
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
 		
+	}
+
+	@Override
+	public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+		userPostTask = new ListUserPostTask(MainActivityTab03.this, user.getId(), 0, PAGE_SIZE);
+		userPostTask.startTask();
+		postCountTask = new GetUserPostCountTask(MainActivityTab03.this, user.getId());
+		postCountTask.startTask();
 	}
 }

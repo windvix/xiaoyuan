@@ -93,14 +93,19 @@ public class MainActivity extends BaseActivity {
 		getServerUserInfo();
 		
 
-		new MainActivityTab01(this, view01);
-		new MainActivityTab02(this, view02);
-		new MainActivityTab03(this, view03);
+		tab01 = new MainActivityTab01(this, view01);
+		tab02 = new MainActivityTab02(this, view02);
+		tab03 = new MainActivityTab03(this, view03);
 		new MainActivityTab04(this, view04);
 		
 		super.onCreate(savedInstanceState);
 	}
 
+	
+	private MainActivityTab01 tab01;
+	private MainActivityTab02 tab02;
+	private MainActivityTab03 tab03;
+	
 	/**
 	 * 获取服务器上的用户信息
 	 */
@@ -320,7 +325,23 @@ public class MainActivity extends BaseActivity {
 
 		@Override
 		public void onClick(View v) {
-			viewpager.setCurrentItem(index, false);
+			int cur = viewpager.getCurrentItem();
+			if(cur!=index){
+				if(index==2){
+					if(!tab03.isRefeshed()){
+						tab03.loadData();
+					}
+				}
+				viewpager.setCurrentItem(index, false);
+			}else{
+				if(index==0){
+					tab01.refresh();
+				}else if(index==1){
+					
+				}else if(index==2){
+					
+				}
+			}
 		}
 	};
 

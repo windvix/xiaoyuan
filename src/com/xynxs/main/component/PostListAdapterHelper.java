@@ -159,7 +159,9 @@ public abstract class PostListAdapterHelper implements OnRefreshListener<ListVie
 
 	@Override
 	public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-		refresh();
+		if(!listView.isRefreshing()){
+			refresh();
+		}
 	}
 	
 	public void stopAllTask(){

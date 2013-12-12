@@ -76,4 +76,10 @@ public class Const {
 	public static final String MIN_PIC_FILE_NAME = "MIN_PIC_FILE_NAME";
 	
 	public static final String GUIDE_KEY = "GUIDE_KEY";
+	
+	public static final String MY_POST_LIST_KEY = "MY_POST_LIST_KEY";
+	public static final String MY_POST_LIST_TIME_KEY = "MY_POST_LIST_TIME_KEY";
+	
+	
+	public static final long REFRESH_PERIOD = 1000*60*60*1;
 }

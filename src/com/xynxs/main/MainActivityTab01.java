@@ -32,9 +32,9 @@ public class MainActivityTab01 implements OnClickListener , ListPostTaskHelper{
 	private View selectView02 = null;
 	private View selectView03 = null;
 
-	private MainActivityTab01_01 tab01;
-	private MainActivityTab01_02 tab02;
-	private MainActivityTab01_03 tab03;
+	private MainPostListNewest tab01;
+	private MainPostListHotest tab02;
+	private MainPostListFocus tab03;
 
 	private TextView titleTv;
 	private Button rightBtn;
@@ -67,9 +67,9 @@ public class MainActivityTab01 implements OnClickListener , ListPostTaskHelper{
 		rightBtn = (Button) rootView.findViewById(R.id.title_bar_right_btn);
 		leftBtn = (Button) rootView.findViewById(R.id.title_bar_left_btn);
 
-		tab01 = new MainActivityTab01_01(this, list.get(0), rightBtn, titleTv);
-		tab02 = new MainActivityTab01_02(this, list.get(1), rightBtn, titleTv, leftBtn);
-		tab03 = new MainActivityTab01_03(this, list.get(2), titleTv);
+		tab01 = new MainPostListNewest(this, list.get(0), rightBtn, titleTv);
+		tab02 = new MainPostListHotest(this, list.get(1), rightBtn, titleTv, leftBtn);
+		tab03 = new MainPostListFocus(this, list.get(2), titleTv);
 
 		rightBtn.setOnClickListener(this);
 		leftBtn.setOnClickListener(this);
@@ -326,6 +326,18 @@ public class MainActivityTab01 implements OnClickListener , ListPostTaskHelper{
 			tab02.onRefreshResult(data);
 		}else if(cur==2){
 			tab03.onRefreshResult(data);
+		}
+	}
+	
+	
+	public void refresh(){
+		int cur = viewpager.getCurrentItem();
+		if(cur==0){
+			tab01.refresh();
+		}else if(cur==1){
+			tab02.refresh();
+		}else if(cur==2){
+			tab03.refresh();
 		}
 	}
 }

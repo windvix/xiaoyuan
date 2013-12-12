@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivityTab01_02 extends PostListAdapterHelper{
+public class MainPostListHotest extends PostListAdapterHelper{
 
 	
 	private Button scopeBtn;
@@ -17,7 +17,7 @@ public class MainActivityTab01_02 extends PostListAdapterHelper{
 	private static final String aTAB = "2";
 
 
-	public MainActivityTab01_02(MainActivityTab01 main, View root, Button scopeBtn, TextView topicTv, Button timeBtn) {
+	public MainPostListHotest(MainActivityTab01 main, View root, Button scopeBtn, TextView topicTv, Button timeBtn) {
 		
 		super(main,root, aTAB, topicTv);
 		this.scopeBtn = scopeBtn;

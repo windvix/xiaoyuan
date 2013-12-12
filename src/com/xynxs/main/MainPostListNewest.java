@@ -2,13 +2,14 @@ package com.xynxs.main;
 
 import com.xynxs.main.component.PostListAdapterHelper;
 import com.xynxs.main.task.ListPostTask;
+import com.xynxs.main.util.Const;
 
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivityTab01_01 extends PostListAdapterHelper {
+public class MainPostListNewest extends PostListAdapterHelper {
 
 	private Button scopeBtn;
 
@@ -16,16 +17,23 @@ public class MainActivityTab01_01 extends PostListAdapterHelper {
 
 	private String keyword;
 
-	public MainActivityTab01_01(MainActivityTab01 main, View root, Button scopeBtn, TextView topicTv) {
+	public MainPostListNewest(MainActivityTab01 main, View root, Button scopeBtn, TextView topicTv) {
 		super(main, root, aTAB, topicTv);
 		this.scopeBtn = scopeBtn;
 
+		
+		
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				listView.setRefreshing();
+				
+				long lastUpdate =  act.getDataLong(Const.LAST_REFRESH_TIME_KEY + aTAB);
+				
+				if(System.currentTimeMillis()-lastUpdate>(Const.REFRESH_PERIOD)){
+					listView.setRefreshing();
+				}
 			}
-		}, 1200);
+		}, 2000);
 	}
 
 	/**
