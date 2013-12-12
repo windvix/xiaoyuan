@@ -10,9 +10,9 @@
     <dimen name="post_detail_owner_gender_size">13sp</dimen>
     <dimen name="post_detail_time_size">12sp</dimen>
     <dimen name="post_detail_star_size">20dp</dimen>
-    <dimen name="post_detail_delete_btn_font_size">11sp</dimen>
-    <dimen name="post_detail_btn_width">50dp</dimen>
-    <dimen name="post_detail_btn_height">18dp</dimen>
+    <dimen name="post_detail_delete_btn_font_size">12sp</dimen>
+    <dimen name="post_detail_btn_width">60dp</dimen>
+    <dimen name="post_detail_btn_height">22dp</dimen>
     <dimen name="post_detail_content_font_size">14sp</dimen>
     <dimen name="post_detail_thank_font_size">11sp</dimen>
     <dimen name="post_detail_content_img_size">90dp</dimen>

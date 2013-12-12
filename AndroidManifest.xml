@@ -101,7 +101,19 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         
-
+        
+        <!-- Post具体界面 -->
+        <activity
+            android:name="com.xynxs.main.PostDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        
+	    <!-- 关于界面 -->
+        <activity
+            android:name="com.xynxs.main.BigPictureActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        
         <!-- 用于SSO回调的activity -->
         <activity
             android:name="com.baidu.social.core.PlatformSsoCallBackActivity"
@@ -109,6 +121,8 @@
             android:label="@string/app_name"
             android:noHistory="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        
+        
 
         <!-- 腾讯SSO回调的 activity -->
         <activity

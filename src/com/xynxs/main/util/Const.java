@@ -71,7 +71,9 @@ public class Const {
 	public static final String NEW_MSG_OPEN = "NEW_MSG_OPEN";
 	
 	public static final String BIG_PIC_URL = "BIG_PIC_URL";
+	public static final String MIN_PIC_URL = "MIN_PIC_URL";
 	public static final String BIG_PIC_FILE_NAME = "BIG_PIC_FILE_NAME";
+	public static final String MIN_PIC_FILE_NAME = "MIN_PIC_FILE_NAME";
 	
 	public static final String GUIDE_KEY = "GUIDE_KEY";
 }

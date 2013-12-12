@@ -345,6 +345,9 @@ public class BaseActivity extends Activity {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object convert(String data, Class target) {
+		if(data==null){
+			data = "";
+		}
 		return new Gson().fromJson(data, target);
 	}
 	

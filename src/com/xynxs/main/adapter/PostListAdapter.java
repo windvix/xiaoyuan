@@ -6,6 +6,7 @@ import com.xynxs.main.BaseActivity;
 import com.xynxs.main.BigPictureActivity;
 import com.xynxs.main.MainActivity;
 import com.xynxs.main.MainActivityTab01;
+import com.xynxs.main.PostDetailActivity;
 import com.xynxs.main.R;
 import com.xynxs.main.bean.Post;
 import com.xynxs.main.component.ListPostTaskHelper;
@@ -136,11 +137,16 @@ public class PostListAdapter extends ArrayAdapter<Post> implements ListPostTaskH
 				postTemp.setTag(post.getId());
 
 				// 增加一个post的点击事件
-				postTemp.setOnClickListener(new OnClickListener() {
+				postTemp.findViewById(R.id.list_post_rootLayout).setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
-
+						Intent intent = new Intent(act, PostDetailActivity.class);
+						intent.putExtra(Const.POST_ID_KEY, post.getId());
+						intent.putExtra(Const.GENDER_KEY, post.getOwner_gender());
+						intent.putExtra(Const.POST_OWNER_ID_KEY, post.getOwner_id());
+						intent.putExtra(Const.CAN_VISIT_HOME, 1);
+						act.startActivity(intent);
 					}
 				});
 
@@ -177,6 +183,8 @@ public class PostListAdapter extends ArrayAdapter<Post> implements ListPostTaskH
 							Intent intent = new Intent(act, BigPictureActivity.class);
 							intent.putExtra(Const.BIG_PIC_URL, ServerHelper.getUploadImgURL(post.getOwner_id(), post.getId() + Const.MAX_JPG));
 							intent.putExtra(Const.BIG_PIC_FILE_NAME, post.getId() + Const.MAX_JPG);
+							intent.putExtra(Const.MIN_PIC_URL, ServerHelper.getUploadImgURL(post.getOwner_id(), post.getId() + Const.MIN_JPG));
+							intent.putExtra(Const.MIN_PIC_FILE_NAME, post.getId() + Const.MIN_JPG);
 							act.startActivity(intent);
 						}
 					});

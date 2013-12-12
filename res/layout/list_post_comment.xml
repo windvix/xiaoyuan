@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/post_template_bg"
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingLeft="@dimen/post_detail_padding"
+    android:paddingRight="@dimen/post_detail_padding"
+    android:paddingTop="8dp" >
+
+    <!-- 评论者头部信息 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/post_detail_padding"
+        android:paddingTop="@dimen/post_detail_padding" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/post_comment_user_img"
+                android:layout_width="@dimen/post_comment_head_img_size"
+                android:layout_height="@dimen/post_comment_head_img_size"
+                android:background="@drawable/head_default"
+                android:scaleType="fitXY" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/post_detail_padding" >
+
+                <TextView
+                    android:id="@+id/post_comment_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="一二三四五六七八九十"
+                    android:textColor="#2c5871"
+                    android:textSize="@dimen/post_comment_name_size" />
+
+                <TextView
+                    android:id="@+id/post_comment_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="今天09:56"
+                    android:textColor="#696969"
+                    android:textSize="@dimen/post_comment_college_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/post_comment_user_college"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:paddingLeft="@dimen/post_detail_padding"
+                    android:text="广东水利电力职业技术学院"
+                    android:textColor="#696969"
+                    android:textSize="@dimen/post_comment_college_size" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 回复按钮 -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:paddingRight="@dimen/post_detail_padding" >
+
+            <LinearLayout
+                android:id="@+id/post_comment_reply_btn"
+                android:layout_width="@dimen/post_detail_btn_width"
+                android:layout_height="@dimen/post_detail_btn_height"
+                android:background="@drawable/post_btn_default"
+                android:baselineAligned="false"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/post_comment" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:text="回复"
+                    android:textColor="#2d6a89"
+                    android:textSize="@dimen/post_comment_college_size" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <!-- 评论者头部信息结束 -->
+
+
+    <!-- 评论内容 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="3dp" >
+
+            <LinearLayout
+                android:id="@+id/post_comment_quote_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/post_quate_bg"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp" >
+
+                <TextView
+                    android:id="@+id/post_comment_quoter_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="李小白 "
+                    android:textColor="#2c5871"
+                    android:textSize="@dimen/post_comment_name_size" />
+
+                <TextView
+                    android:id="@+id/post_comment_quote_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="3dp"
+                    android:text="带有可 顺哥哥哥哥协助歌声工大规模花样百出其基本原则斯柯达基本原则基本原则工作"
+                    android:textColor="#323232"
+                    android:textSize="@dimen/post_comment_content_font_size" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/post_comment_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="你好啊.不错啊.哈哈哈哈保持中成药棋中木喹加强哈萨克斯坦"
+                android:textColor="#323232"
+                android:textSize="@dimen/post_comment_content_font_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout> <!-- 一个评论者列表 结束 -->

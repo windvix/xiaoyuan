@@ -38,13 +38,13 @@ public class BigPictureActivity extends BaseActivity implements OnClickListener{
 	LoadingCircleView circle;
 
 	private String url;
-	private String fileName;
+	private String filePath;
 
 	private LoadImgTask task;
 
 	private Handler handler;
 
-	private ImageView imgView;
+	private ImageView bitImgView;
 
 	private HttpURLConnection conn = null;
 
@@ -54,18 +54,21 @@ public class BigPictureActivity extends BaseActivity implements OnClickListener{
 
 	private ImageViewTouchListener touch;
 
+	private ImageView minImg;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		setContentView(R.layout.activity_bigpicture);
 
 		url = getIntent().getStringExtra(Const.BIG_PIC_URL);
-		fileName = getIntent().getStringExtra(Const.BIG_PIC_FILE_NAME);
-
+		filePath = getAppDownloadDir()+getIntent().getStringExtra(Const.BIG_PIC_FILE_NAME);		
 		circle = (LoadingCircleView) findViewById(R.id.big_pic_loading);
 		circle.setOnClickListener(this);
-		imgView = (ImageView) findViewById(R.id.big_pic_img);
+		bitImgView = (ImageView) findViewById(R.id.big_pic_img);
 
+		minImg = (ImageView)findViewById(R.id.big_pic_noimg);
+		
 		super.onCreate(savedInstanceState);
 
 		handler = new Handler() {
@@ -90,7 +93,18 @@ public class BigPictureActivity extends BaseActivity implements OnClickListener{
 				}
 			}
 		};
-		task = new LoadImgTask(this, url, fileName);
+		
+		String minFileName = getIntent().getStringExtra(Const.MIN_PIC_FILE_NAME);
+		Bitmap minBitmap = readBitmapAutoSize(getAppDownloadDir()+minFileName, minImg.getWidth(), minImg.getHeight());
+		
+		if(minBitmap!=null){
+			minImg.setImageBitmap(minBitmap);
+		}
+		
+		minImg.setVisibility(View.VISIBLE);
+		bitImgView.setVisibility(View.INVISIBLE);
+		
+		task = new LoadImgTask(this, url, filePath);
 	}
 
 	private int currentPer = 0;
@@ -135,10 +149,14 @@ public class BigPictureActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void showImg(Bitmap bitmap) {
+		circle.setClickable(false);
 		circle.setVisibility(View.GONE);
 		if (bitmap != null) {
-			if (imgView != null && touch != null) {
-				imgView.setVisibility(View.VISIBLE);
+			if(minImg!=null){
+				minImg.setVisibility(View.GONE);
+			}
+			if (bitImgView != null) {
+				bitImgView.setVisibility(View.VISIBLE);
 				touch = new ImageViewTouchListener(this) {
 					
 					@Override
@@ -146,52 +164,48 @@ public class BigPictureActivity extends BaseActivity implements OnClickListener{
 						
 					}
 				};
-				touch.initMatrix(imgView, bitmap);
+				touch.initMatrix(bitImgView, bitmap);
 			}
 		} else {
-			if (findViewById(R.id.big_pic_noimg) != null) {
-				findViewById(R.id.big_pic_noimg).setVisibility(View.VISIBLE);
-				findViewById(R.id.big_pic_noimg).setOnClickListener(this);
+			toast("大图加载失败");
+			if (minImg != null) {
+				minImg.setVisibility(View.VISIBLE);
+				minImg.setOnClickListener(this);
 			}
 		}
 	}
 
 	private class LoadImgTask extends BaseTask {
 		private String url;
-		private String fileName;
+		private String filePath;
 		private Bitmap bitmap;
 
-		public LoadImgTask(BaseActivity activity, String url, String fileName) {
+		private  int SIZE = 1024;
+		
+		public LoadImgTask(BaseActivity activity, String url, String filePath) {
 			super(activity);
 			this.url = url;
-			this.fileName = fileName;
+			this.filePath = filePath;
+			SIZE = (int)(activity.getScreenHeight()*1.5);
 			startTask();
 		}
-
-		private static final int SIZE = 1024;
 
 		@Override
 		protected void doInBackground() {
 			if (url != null && !isCancelled()) {
-				fileName = getActivity().getAppDownloadDir() + fileName;
-				File file = new File(fileName);
+				File file = new File(filePath);
 				if (file.exists()) {
-					bitmap = readBitmapAutoSize(fileName, SIZE, SIZE);
+					bitmap = getActivity().readBitmapAutoSize(filePath, SIZE, SIZE);
 					if (bitmap == null) {
-						try {
-							file.delete();
-						} catch (Exception e) {
-
-						}
-						getImage(url, fileName);
+						getImage(url, filePath);
 					} else {
 						sendMessage(100);
 					}
 				} else {
-					getImage(url, fileName);
+					getImage(url, filePath);
 				}
 				if (bitmap == null) {
-					bitmap = readBitmapAutoSize(fileName, SIZE, SIZE);
+					bitmap = getActivity().readBitmapAutoSize(filePath, SIZE, SIZE);
 				}
 			}
 			sendMessage(100);
@@ -202,10 +216,10 @@ public class BigPictureActivity extends BaseActivity implements OnClickListener{
 			showImg(bitmap);
 		}
 
-		private void readStream(InputStream inStream, String fileName) {
+		private void readStream(InputStream inStream, String filePath) {
 			if (!isCancelled()) {
 				try {
-					outStream = new FileOutputStream(fileName);
+					outStream = new FileOutputStream(filePath);
 					byte[] buffer = new byte[1024];
 					int len = -1;
 					sendMessage(1);
@@ -232,18 +246,23 @@ public class BigPictureActivity extends BaseActivity implements OnClickListener{
 			}
 		}
 
-		private void getImage(String path, String fileName) {
+		private void getImage(String urlStr, String filePath) {
 			if (!isCancelled()) {
 				try {
-					URL url = new URL(path);
+					URL url = new URL(urlStr);
 					conn = (HttpURLConnection) url.openConnection();
 					conn.setConnectTimeout(5 * 1000);
 					conn.setRequestMethod("GET");
 					inStream = conn.getInputStream();
 					fileSize = conn.getContentLength();
+					File file = new File(filePath);
+					if(file.exists()){
+						file.delete();
+					}
+					file.createNewFile();
 					System.out.println("文件总大小：" + fileSize);
 					if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-						readStream(inStream, fileName);
+						readStream(inStream, filePath);
 					}
 				} catch (Exception e) {
 

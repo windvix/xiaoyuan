@@ -64,7 +64,6 @@ public abstract class PostListAdapterHelper implements OnRefreshListener<ListVie
 				refreshView.findViewById(R.id.pull_to_refresh_sub_text).setVisibility(View.VISIBLE);
 			}
 		});
-
 		// 加载上次的数据
 		loadLastData();
 	}
@@ -113,6 +112,7 @@ public abstract class PostListAdapterHelper implements OnRefreshListener<ListVie
 			List<String> strList = (List<String>) act.convert(data, ArrayList.class);
 			for (String oneStr : strList) {
 				Post post = (Post) act.convert(oneStr, Post.class);
+				act.saveDataString(post.getId(), oneStr);
 				postLst.add(post);
 			}
 		}
