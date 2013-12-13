@@ -304,6 +304,15 @@ public class MainActivityTab01 implements OnClickListener , ListPostTaskHelper{
 					tab03.refresh();
 				}
 			}else{
+				if(cur!=0){
+					tab01.stopAllTask();
+				}
+				if(cur!=1){
+					tab02.stopAllTask();
+				}
+				if(cur!=2){
+					tab03.stopAllTask();
+				}
 				viewpager.setCurrentItem(index, false);
 			}
 		}
@@ -329,6 +338,12 @@ public class MainActivityTab01 implements OnClickListener , ListPostTaskHelper{
 		}
 	}
 	
+	
+	public void stopAllTask(){
+		tab01.stopAllTask();
+		tab02.stopAllTask();
+		tab03.stopAllTask();
+	}
 	
 	public void refresh(){
 		int cur = viewpager.getCurrentItem();

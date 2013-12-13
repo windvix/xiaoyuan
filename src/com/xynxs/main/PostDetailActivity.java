@@ -49,6 +49,8 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 	
 	
 	private User user;
+	
+	private int canVisitHome = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +79,14 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 				currentPost.setOwner_head_img(user.getHead_img());
 				currentPost.setOwner_name(user.getName());
 				currentPost.setOwner_score(user.getScore());
+			}else{
+				int gender = getIntent().getIntExtra(Const.GENDER_KEY,1);
+				String owner_id = getIntent().getStringExtra(Const.POST_OWNER_ID_KEY);
+				currentPost.setOwner_gender(gender);
+				currentPost.setOwner_id(owner_id);
 			}
 		}
+
 		
 		super.onCreate(savedInstanceState);
 

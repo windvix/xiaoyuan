@@ -243,9 +243,15 @@ public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, O
 			List<Post> postList = new ArrayList<Post>();
 			for (String oneStr : strList) {
 				Post post = (Post) act.convert(oneStr, Post.class);
-				
+				post.setOwner_city_name(user.getCity_name());
+				post.setOwner_college_name(user.getCollege_name());
+				post.setOwner_gender(user.getGender());
+				post.setOwner_head_img(user.getHead_img());
+				post.setOwner_id(user.getId());
+				post.setOwner_name(user.getName());
+				post.setOwner_score(user.getScore());
 				//保存一条
-				act.saveDataString(post.getId(), oneStr);
+				act.saveDataString(post.getId(), new Gson().toJson(post));
 				postList.add(post);
 			}
 			if (index >= PAGE_SIZE) {
@@ -459,5 +465,15 @@ public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, O
 	@Override
 	public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 		refresh();
+	}
+	
+	public void stopAllTask(){
+		if(postCountTask!=null){
+			postCountTask.stopTask();
+		}
+		if(userPostTask!=null){
+			userPostTask.stopTask();
+		}
+		scrollView.onRefreshComplete();
 	}
 }

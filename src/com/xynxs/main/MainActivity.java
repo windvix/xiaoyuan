@@ -332,6 +332,13 @@ public class MainActivity extends BaseActivity {
 						tab03.loadData();
 					}
 				}
+				
+				if(cur!=0){
+					tab01.stopAllTask();
+				}
+				if(cur!=2){
+					tab03.stopAllTask();
+				}
 				viewpager.setCurrentItem(index, false);
 			}else{
 				if(index==0){
