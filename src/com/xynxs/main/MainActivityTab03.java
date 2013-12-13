@@ -68,7 +68,7 @@ public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, O
 
 		scrollView.setOnRefreshListener(this);
 
-		initData();
+		initData(user);
 
 		root.findViewById(R.id.title_bar_left_btn).setOnClickListener(this);
 		root.findViewById(R.id.title_bar_right_btn).setOnClickListener(this);
@@ -89,7 +89,7 @@ public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, O
 	private LinearLayout contentLayout;
 
 	@SuppressWarnings("unchecked")
-	private void initData() {
+	private void initData(User user) {
 		View view = root;
 		theColege = (TextView) view.findViewById(R.id.main_bottom_tab_03_college);
 		nameTv = (TextView) view.findViewById(R.id.main_bottom_tab_03_name);
@@ -140,7 +140,7 @@ public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, O
 
 		head.setTag(user.getId() + Const.MIN_JPG);
 
-		theColege.setText(user.getCollege_name());
+		theColege.setText(user.getCollege_name()); 
 		fav.setText("-");
 
 		act.setGenderText(gender, user.getGender());
@@ -150,7 +150,7 @@ public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, O
 			inr = "";
 		}
 		if (inr.equals("")) {
-			inr = "这个人很懒， 什么也没留下...";
+			inr = ".........";
 		}
 		if (inr.length() > 24) {
 			inr = inr.substring(0, 23) + "......";

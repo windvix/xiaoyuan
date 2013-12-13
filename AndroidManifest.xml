@@ -108,6 +108,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         
+        
+        <!-- 用户中心界面 -->
+        <activity
+            android:name="com.xynxs.main.UserCenterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        
 	    <!-- 关于界面 -->
         <activity
             android:name="com.xynxs.main.BigPictureActivity"
