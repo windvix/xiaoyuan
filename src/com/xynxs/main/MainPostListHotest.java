@@ -29,10 +29,10 @@ public class MainPostListHotest extends PostListAdapterHelper{
 	 */
 	@Override
 	public void refresh() {
-		listView.setRefreshing();
 		if (task != null) {
 			task.stopTask();
 		}
+		listView.setRefreshing();
 		task = new ListPostTask(main, aTAB, topicTv.getText().toString(), scopeBtn.getText().toString(), 0, COUNT, timeBtn.getText().toString());
 		task.startTask();
 	}

@@ -24,10 +24,10 @@ public class MainPostListFocus extends PostListAdapterHelper{
 	 * 刷新当前列表
 	 */
 	public void refresh() {
-		listView.setRefreshing();
 		if (task != null) {
 			task.stopTask();
 		}
+		listView.setRefreshing();
 		task = new ListPostTask(main, aTAB, topicTv.getText().toString(), "", 0, COUNT, "");
 		task.startTask();
 	}

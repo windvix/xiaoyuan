@@ -82,9 +82,9 @@ public abstract class PostListAdapterHelper implements OnRefreshListener<ListVie
 			act.toast("网络不给力，请稍后再试");
 		} else {
 			postList = convertPostList(data);
+			savePostList(postList);
 			adapter = new PostListAdapter(this, R.layout.list_no_data, postList, topicTv.getText().toString(), COUNT);
 			listView.setAdapter(adapter);
-			savePostList(postList);
 		}
 	}
 	
@@ -159,9 +159,7 @@ public abstract class PostListAdapterHelper implements OnRefreshListener<ListVie
 
 	@Override
 	public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-		if(!listView.isRefreshing()){
-			refresh();
-		}
+		refresh();
 	}
 	
 	public void stopAllTask(){

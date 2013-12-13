@@ -196,9 +196,20 @@ public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, O
 	}
 
 	public void refresh() {
-		if(!scrollView.isRefreshing()){
-			scrollView.setRefreshing();
+		if(scrollView.isRefreshing()){
+			scrollView.onRefreshComplete();
 		}
+		if(userPostTask!=null){
+			userPostTask.stopTask();
+		}
+		if(postCountTask!=null){
+			postCountTask.stopTask();
+		}
+		scrollView.setRefreshing();
+		userPostTask = new ListUserPostTask(MainActivityTab03.this, user.getId(), 0, PAGE_SIZE);
+		userPostTask.startTask();
+		postCountTask = new GetUserPostCountTask(MainActivityTab03.this, user.getId());
+		postCountTask.startTask();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -398,7 +409,7 @@ public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, O
 		}
 		long count = -1;
 		try {
-			Long.parseLong(result.toString());
+			count = Long.parseLong(result.toString());
 		} catch (Exception e) {
 
 		}
@@ -431,11 +442,6 @@ public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, O
 
 	@Override
 	public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-		if (!scrollView.isRefreshing()) {
-			userPostTask = new ListUserPostTask(MainActivityTab03.this, user.getId(), 0, PAGE_SIZE);
-			userPostTask.startTask();
-			postCountTask = new GetUserPostCountTask(MainActivityTab03.this, user.getId());
-			postCountTask.startTask();
-		}
+		refresh();
 	}
 }

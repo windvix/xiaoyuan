@@ -44,6 +44,21 @@ public class DBHelper extends SQLiteOpenHelper {
 			db.endTransaction(); // 结束事务
 		}
 	}
+	
+	/**
+	 * 删除所有内容
+	 */
+	public void deleteAllKeyVal(){
+		SQLiteDatabase db = getWritableDatabase();
+		db.beginTransaction();
+		try {
+			db.execSQL("DELETE FROM SHARE_PRE");
+			db.setTransactionSuccessful(); // 设置事务成功完成
+		} finally {
+			db.endTransaction(); // 结束事务
+		}
+	}
+	
 
 	/**
 	 * 获取 val
@@ -61,5 +76,4 @@ public class DBHelper extends SQLiteOpenHelper {
 		c.close();
 		return val;
 	}
-
 }

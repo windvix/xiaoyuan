@@ -35,6 +35,7 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.SyncStateContract.Helpers;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,6 +99,12 @@ public class BaseActivity extends Activity {
 		}
 		return dir;
 	}
+	
+	
+	public Handler getHandler(){
+		return new Handler();
+	}
+	
 	
 	// 创建Handler对象，用来处理消息
 	Handler mHandler = new Handler() {
@@ -215,6 +222,8 @@ public class BaseActivity extends Activity {
 		// 清除所有数据
 		getPreference().edit().clear().commit();
 		BaiduSocialShare share = getSocailShare();
+		DBHelper db = getDbhelper();
+		db.deleteAllKeyVal();
 		share.cleanAllAccessToken();
 		share.cleanAccessToken(Utility.SHARE_TYPE_SINA_WEIBO);
 		share.cleanAccessToken(Utility.SHARE_TYPE_QZONE);

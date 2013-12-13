@@ -73,12 +73,24 @@ public class PostListAdapter extends ArrayAdapter<Post> implements ListPostTaskH
 		if (hasMore) {
 			index = page_size;
 		}
-		isLoadingMore  = false;
+		isLoadingMore = false;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		final Post post = getItem(position);
+		Post tempPost = getItem(position);
+
+		if (tempPost.getId() != null) {
+			String postStr = act.getDataString(tempPost.getId());
+			if (!StringUtil.isEmpty(postStr)) {
+				Post temp = (Post) act.convert(postStr, Post.class);
+				if (temp.getId() != null) {
+					tempPost = temp;
+				}
+			}
+		}
+
+		final Post post = tempPost;
 
 		boolean hasData = true;
 		if (getCount() == 1) {
@@ -88,9 +100,9 @@ public class PostListAdapter extends ArrayAdapter<Post> implements ListPostTaskH
 			}
 		}
 		if (hasData) {
-			
-			//非最后一条
-			if (position < (getCount() - 1) && post!=null && post.getId()!=null) {
+
+			// 非最后一条
+			if (position < (getCount() - 1) && post != null && post.getId() != null) {
 				if (convertView == null) {
 					convertView = act.createView(R.layout.list_post_template);
 				} else if (convertView.findViewById(R.id.post_user_img) == null) {
@@ -227,7 +239,7 @@ public class PostListAdapter extends ArrayAdapter<Post> implements ListPostTaskH
 	}
 
 	private View loadView;
-	
+
 	private void nextPage(final View loadView) {
 		this.loadView = loadView;
 		loadView.setOnClickListener(new OnClickListener() {
@@ -246,22 +258,22 @@ public class PostListAdapter extends ArrayAdapter<Post> implements ListPostTaskH
 	@Override
 	public void setPostList(String data) {
 		isLoadingMore = false;
-		if(StringUtil.isEmpty(data)){
+		if (StringUtil.isEmpty(data)) {
 			act.toast("网络不给力，请稍后再试");
-			if(loadView!=null && loadView.findViewById(R.id.loadmore_tv)!=null){
+			if (loadView != null && loadView.findViewById(R.id.loadmore_tv) != null) {
 				TextView msg = (TextView) loadView.findViewById(R.id.loadmore_tv);
 				msg.setText("加载更多");
 				loadView.findViewById(R.id.loadmore_icon).setVisibility(View.GONE);
 				loadView.findViewById(R.id.refreshable_view_loadmore_layout).setClickable(true);
 			}
-		}else{
+		} else {
 			List<Post> pList = helper.convertPostList(data);
-			if(pList.size()>=page_size){
+			if (pList.size() >= page_size) {
 				hasMore = true;
 			}
-			
+
 			TextView msg = (TextView) loadView.findViewById(R.id.loadmore_tv);
-			
+
 			if (hasMore) {
 				msg.setText("加载更多");
 				loadView.findViewById(R.id.loadmore_icon).setVisibility(View.GONE);
@@ -271,19 +283,17 @@ public class PostListAdapter extends ArrayAdapter<Post> implements ListPostTaskH
 				loadView.findViewById(R.id.loadmore_icon).setVisibility(View.GONE);
 				loadView.findViewById(R.id.refreshable_view_loadmore_layout).setClickable(false);
 			}
-			
-			
-			//删除adapter最后的空post
-			this.remove(getItem(getCount()-1));
-			for(Post post: pList){
+
+			// 删除adapter最后的空post
+			this.remove(getItem(getCount() - 1));
+			for (Post post : pList) {
 				this.add(post);
 			}
-			index+=page_size;
-			//告诉数据已变化
+			index += page_size;
+			// 告诉数据已变化
 			this.notifyDataSetChanged();
 		}
 	}
-	
 
 	private View getNoDataView() {
 		View view = act.createView(R.layout.list_no_data);
@@ -299,7 +309,5 @@ public class PostListAdapter extends ArrayAdapter<Post> implements ListPostTaskH
 	public MainActivity getActivity() {
 		return act;
 	}
-
-
 
 }

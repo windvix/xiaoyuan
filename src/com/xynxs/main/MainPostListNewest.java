@@ -21,16 +21,14 @@ public class MainPostListNewest extends PostListAdapterHelper {
 		super(main, root, aTAB, topicTv);
 		this.scopeBtn = scopeBtn;
 
-		
-		
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				
-				long lastUpdate =  act.getDataLong(Const.LAST_REFRESH_TIME_KEY + aTAB);
-				
-				if(System.currentTimeMillis()-lastUpdate>(Const.REFRESH_PERIOD)){
-					listView.setRefreshing();
+
+				long lastUpdate = act.getDataLong(Const.LAST_REFRESH_TIME_KEY + aTAB);
+
+				if (System.currentTimeMillis() - lastUpdate > (Const.REFRESH_PERIOD)) {
+					refresh("");
 				}
 			}
 		}, 2000);
@@ -40,11 +38,11 @@ public class MainPostListNewest extends PostListAdapterHelper {
 	 * 刷新当前列表
 	 */
 	public void refresh(String keyword) {
-		this.keyword = keyword;
-		listView.setRefreshing();
 		if (task != null) {
 			task.stopTask();
 		}
+		this.keyword = keyword;
+		listView.setRefreshing();
 		task = new ListPostTask(main, aTAB, topicTv.getText().toString(), scopeBtn.getText().toString(), 0, COUNT, keyword);
 		task.startTask();
 	}
@@ -52,7 +50,7 @@ public class MainPostListNewest extends PostListAdapterHelper {
 	@Override
 	public ListPostTask nextPage(int index) {
 		stopAllTask();
-		task = new ListPostTask(adapter, aTAB, topicTv.getText().toString(), scopeBtn.getText().toString(), index, COUNT, keyword);		
+		task = new ListPostTask(adapter, aTAB, topicTv.getText().toString(), scopeBtn.getText().toString(), index, COUNT, keyword);
 		task.startTask();
 		return task;
 	}

@@ -372,6 +372,7 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 		}else if(id==R.id.title_bar_right_btn){
 			if(!scrollview.isRefreshing()){
 				scrollview.setRefreshing();
+				doRefresh();
 			}else{
 				toast("正在刷新中");
 			}
@@ -396,6 +397,11 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 
 	@Override
 	public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+		doRefresh();
+	}
+
+	
+	private void doRefresh(){
 		if(detailTask!=null){
 			detailTask.stopTask();
 		}
@@ -408,12 +414,14 @@ public class PostDetailActivity extends BaseActivity implements OnClickListener,
 		}
 		listCommentTask = new ListCommentTask(this, currentPost.getId(), 0, COUNT);
 		listCommentTask.startTask();
-		
 	}
-
+	
 	@Override
 	public void commentSuccess() {
-		scrollview.setRefreshing();
+		if(!scrollview.isRefreshing()){
+			scrollview.setRefreshing();
+			doRefresh();
+		}
 	}
 
 	@Override
