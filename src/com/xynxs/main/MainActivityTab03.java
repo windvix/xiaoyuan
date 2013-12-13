@@ -166,6 +166,16 @@ public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, O
 			List<Post> postList = new ArrayList<Post>();
 			for (String one : strList) {
 				Post post = (Post) act.convert(one, Post.class);
+				
+				String tempOne = act.getDataString(post.getId());
+				if(!StringUtil.isEmpty(tempOne)){
+					Post tempPost = (Post) act.convert(tempOne, Post.class);
+					if(!StringUtil.isEmpty(tempPost.getId())){
+						post = tempPost;
+					}
+				}
+				
+				
 				postList.add(post);
 			}
 			long lastUpt = act.getDataLong(Const.MY_POST_LIST_TIME_KEY);
@@ -196,9 +206,6 @@ public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, O
 	}
 
 	public void refresh() {
-		if(scrollView.isRefreshing()){
-			scrollView.onRefreshComplete();
-		}
 		if(userPostTask!=null){
 			userPostTask.stopTask();
 		}
@@ -236,6 +243,9 @@ public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, O
 			List<Post> postList = new ArrayList<Post>();
 			for (String oneStr : strList) {
 				Post post = (Post) act.convert(oneStr, Post.class);
+				
+				//保存一条
+				act.saveDataString(post.getId(), oneStr);
 				postList.add(post);
 			}
 			if (index >= PAGE_SIZE) {
@@ -437,7 +447,13 @@ public class MainActivityTab03 implements ListUserPostHelper, OnClickListener, O
 
 	@Override
 	public void onClick(View v) {
-
+		int id = v.getId();
+		if(id==R.id.title_bar_left_btn){
+			Intent intent = new Intent(act, MyInfoActivity.class);
+			act.startActivity(intent);
+		}else if(id==R.id.title_bar_right_btn){
+			refresh();
+		}
 	}
 
 	@Override
